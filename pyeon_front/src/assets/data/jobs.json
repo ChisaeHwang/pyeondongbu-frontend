@@ -1,0 +1,319 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "title": "편집자 구인",
+      "content": "게임 컨텐츠 편집자를 구합니다. 주 2회 영상 제작, 월 고정 급여 협의.",
+      "publisher": {
+        "name": "핑맨",
+        "image": "https://pyeon.s3.ap-northeast-2.amazonaws.com/images/ff58e47e464def2e0014c788b69d7e9aa149875a59a3252dd4381d32b5330a35.png",
+        "link": "",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로", "에프터 이펙트"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-20",
+      "platform": "youtube"
+    },
+    {
+      "id": 2,
+      "title": "편집자 모집",
+      "content": "게임 컨텐츠 편집자 구인합니다. 치지직 하이라이트 및 유튜브 영상 제작.",
+      "publisher": {
+        "name": "로퍼",
+        "image": "",
+        "link": "",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-20",
+      "platform": "youtube"
+    },
+    {
+      "id": 3,
+      "title": "편집자 구합니다",
+      "content": "게임 컨텐츠 편집자 구합니다. 센스있는 편집 필수.",
+      "publisher": {
+        "name": "검정콩국수",
+        "image": "",
+        "link": "",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-20",
+      "platform": "x"
+    },
+    {
+      "id": 4,
+      "title": "게임 컨텐츠 편집자 모집",
+      "content": "게임 하이라이트 편집 가능하신 분 구합니다. 월 8개 영상 기준.",
+      "publisher": {
+        "name": "미라주",
+        "image": "",
+        "link": "",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로", "에프터 이펙트"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-19",
+      "platform": "youtube"
+    },
+    {
+      "id": 5,
+      "title": "편집자 구인합니다",
+      "content": "게임 컨텐츠 편집자 구합니다. 급여 협의 가능.",
+      "publisher": {
+        "name": "도화비",
+        "image": "",
+        "link": "",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-19",
+      "platform": "x"
+    },
+    {
+      "id": 6,
+      "title": "편집자 구인",
+      "content": "게임 컨텐츠 편집자 구합니다. 장기적으로 함께하실 분.",
+      "publisher": {
+        "name": "검열",
+        "image": "",
+        "link": "",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로", "에프터 이펙트"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-18",
+      "platform": "youtube"
+    },
+    {
+      "id": 7,
+      "title": "편집자 모집",
+      "content": "게임 컨텐츠 편집자 구합니다. 경력자 우대.",
+      "publisher": {
+        "name": "그림프로덕션",
+        "image": "",
+        "link": "",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-18",
+      "platform": "x"
+    },
+    {
+      "id": 8,
+      "title": "편집자 구인",
+      "content": "게임 컨텐츠 편집자 구합니다. 주 3회 영상 제작.",
+      "publisher": {
+        "name": "임재천",
+        "image": "",
+        "link": "",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-17",
+      "platform": "youtube"
+    },
+    {
+      "id": 9,
+      "title": "편집자 모집합니다",
+      "content": "게임 컨텐츠 편집자 구합니다. 급여 협의.",
+      "publisher": {
+        "name": "위젤",
+        "image": "",
+        "link": "",
+        "platform": "soop"
+      },
+      "skills": ["프리미어 프로", "에프터 이펙트"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-17",
+      "platform": "youtube"
+    },
+    {
+      "id": 10,
+      "title": "편집자 구인",
+      "content": "게임 컨텐츠 편집자 구합니다. 유튜브 숏폼 제작 가능하신 분.",
+      "publisher": {
+        "name": "아오",
+        "image": "",
+        "link": "",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-16",
+      "platform": "x"
+    },
+    {
+      "id": 11,
+      "title": "리액트 컨텐츠 편집자 구인",
+      "content": "리액트 관련 컨텐츠 편집자 구합니다. 개발 지식 있으신 분 우대.",
+      "publisher": {
+        "name": "리액트kr",
+        "image": "",
+        "link": "",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "교육",
+      "publishedAt": "2024-03-16",
+      "platform": "youtube"
+    },
+    {
+      "id": 12,
+      "title": "편집자 구인합니다",
+      "content": "게임 컨텐츠 편집자 구합니다. 센스있는 편집 필수.",
+      "publisher": {
+        "name": "이여루",
+        "image": "",
+        "link": "",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로", "에프터 이펙트"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-15",
+      "platform": "youtube"
+    },
+    {
+      "id": 13,
+      "title": "편집자 구인",
+      "content": "게임 컨텐츠 편집자 구합니다. 월 고정급여.",
+      "publisher": {
+        "name": "망내",
+        "image": "",
+        "link": "https://x.com/projecti_kr",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-15",
+      "platform": "x"
+    },
+    {
+      "id": 14,
+      "title": "편집자 모집",
+      "content": "게임 컨텐츠 편집자 구합니다. 급여 협의.",
+      "publisher": {
+        "name": "야힛",
+        "image": "",
+        "link": "https://x.com/yhahit0818",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-14",
+      "platform": "x"
+    },
+    {
+      "id": 15,
+      "title": "작가 모집",
+      "content": "인테리어 컨텐츠 작가 구합니다. 관련 경력자 우대.",
+      "publisher": {
+        "name": "인테리어show",
+        "image": "",
+        "link": "",
+        "platform": "youtube"
+      },
+      "skills": [],
+      "videoType": "인테리어",
+      "publishedAt": "2024-03-14",
+      "platform": "youtube"
+    },
+    {
+      "id": 16,
+      "title": "편집자 구인",
+      "content": "게임 컨텐츠 편집자 구합니다. 유튜브 커뮤니티 참고.",
+      "publisher": {
+        "name": "향아치",
+        "image": "",
+        "link": "https://www.youtube.com/@%ED%96%A5%EC%95%84%EC%B9%98/community",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-13",
+      "platform": "youtube"
+    },
+    {
+      "id": 17,
+      "title": "편집자 구인합니다",
+      "content": "일상 브이로그 편집자 구합니다. 유튜브 커뮤니티 참고.",
+      "publisher": {
+        "name": "김지영",
+        "image": "",
+        "link": "https://www.youtube.com/@iamdiyom/community",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "브이로그",
+      "publishedAt": "2024-03-13",
+      "platform": "youtube"
+    },
+    {
+      "id": 18,
+      "title": "편집자 모집",
+      "content": "과학 컨텐츠 편집자 구합니다. 유튜브 커뮤니티 참고.",
+      "publisher": {
+        "name": "뢴트게늄",
+        "image": "",
+        "link": "https://www.youtube.com/@roentgenium/community",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로", "에프터 이펙트"],
+      "videoType": "교육",
+      "publishedAt": "2024-03-12",
+      "platform": "youtube"
+    },
+    {
+      "id": 19,
+      "title": "편집자 구인",
+      "content": "게임 컨텐츠 편집자 구합니다.",
+      "publisher": {
+        "name": "수잔 헌트",
+        "image": "",
+        "link": "https://x.com/susan_hunt_/status/1871504123952337004",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-12",
+      "platform": "x"
+    },
+    {
+      "id": 20,
+      "title": "편집자 구인합니다",
+      "content": "게임 컨텐츠 편집자 구합니다.",
+      "publisher": {
+        "name": "오르카 에지스",
+        "image": "",
+        "link": "https://x.com/ORCAaegis/status/1870789507731329451",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-03-11",
+      "platform": "x"
+    },
+    {
+      "id": 21,
+      "title": "편집자 구인",
+      "content": "게임 컨텐츠 편집자 구합니다. 1개월 전 게시글 참고.",
+      "publisher": {
+        "name": "네네코 마시로",
+        "image": "",
+        "link": "https://www.youtube.com/post/Ugkx20iKBMy9cbWSo0iSraAaR_DGDZmVGOgp",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": "게임",
+      "publishedAt": "2024-02-20",
+      "platform": "youtube"
+    }
+  ]
+}
