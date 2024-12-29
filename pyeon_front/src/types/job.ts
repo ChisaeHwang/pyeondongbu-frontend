@@ -4,12 +4,16 @@ export interface Job {
   content: string;
   publisher: {
     name: string;
-    image?: string;
-    link?: string;
-    platform: "youtube" | "chzzk" | "soop";
+    image: string;
+    link: string;
+    platform: string;
   };
-  skills?: string[];
-  videoType?: string;
+  skills: string[];
+  videoType: string | string[];
   publishedAt: string;
-  platform: "youtube" | "chzzk" | "soop" | "x";
+  platform: string;
 }
+
+// 실제 사용되는 플랫폼 타입
+export type PublisherPlatform = "youtube" | "chzzk" | "soop";
+export type PostPlatform = "youtube" | "x" | "naver";
