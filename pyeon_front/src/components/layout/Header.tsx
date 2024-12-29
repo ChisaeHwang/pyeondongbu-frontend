@@ -33,16 +33,18 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
               alt="편동부 로고"
               className="h-6 w-6 object-contain"
             />
-            <h1 className="text-2xl font-bold text-gray-100 cursor-pointer hover:text-gray-300 transition-colors">
+            <h1 className="text-lg sm:text-2xl font-bold text-gray-100 cursor-pointer hover:text-gray-300 transition-colors">
               편동부
             </h1>
           </div>
-          <SearchInput
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onSubmit={handleSubmit}
-            placeholder="구인글 검색..."
-          />
+          <div className="w-full max-w-[180px] sm:max-w-[300px] md:max-w-[400px]">
+            <SearchInput
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onSubmit={handleSubmit}
+              placeholder="구인글 검색..."
+            />
+          </div>
         </div>
       </div>
     </header>
