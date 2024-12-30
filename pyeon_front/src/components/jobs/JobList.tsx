@@ -8,9 +8,15 @@ interface JobListProps {
 }
 
 const JobList: React.FC<JobListProps> = ({ jobs, onJobClick }) => {
+  // 날짜 기준 내림차순 정렬
+  const sortedJobs = [...jobs].sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
+
   return (
     <div className="space-y-4">
-      {jobs.map((job, index) => (
+      {sortedJobs.map((job, index) => (
         <div
           key={job.id}
           className="opacity-0 animate-fade-in"

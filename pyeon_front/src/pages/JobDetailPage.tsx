@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import jobsData from "../assets/data/jobs.json";
+import "../styles/jobDetail.css";
 
 const JobDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -59,9 +60,12 @@ const JobDetailPage: React.FC = () => {
           </div>
 
           {/* 컨텐츠 */}
-          <div className="text-gray-300 whitespace-pre-wrap min-h-[200px]">
-            {job.content}
-          </div>
+          <div
+            className="text-gray-300 min-h-[200px] job-content"
+            dangerouslySetInnerHTML={{
+              __html: job.content,
+            }}
+          />
 
           {/* 하단 정보 */}
           <div className="flex items-center justify-between mt-6 pt-6 border-t border-[#2c2d32]">
