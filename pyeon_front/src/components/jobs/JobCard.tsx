@@ -17,7 +17,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, onClick }) => {
       <div className="flex gap-6 sm:gap-5">
         {/* 프로필 이미지 */}
         <div className="flex-shrink-0">
-          <div className="w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden bg-gray-700 border border-gray-600">
+          <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-lg overflow-hidden bg-gray-700 border border-gray-600">
             {job.publisher.image ? (
               <img
                 src={job.publisher.image}
@@ -25,7 +25,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, onClick }) => {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-500 text-base md:text-xl">
+              <div className="w-full h-full flex items-center justify-center text-gray-500 text-base md:text-xl lg:text-4xl">
                 {job.publisher.name[0]}
               </div>
             )}
@@ -60,7 +60,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, onClick }) => {
             </div>
 
             {/* 하단 정보 */}
-            <div className="flex items-center justify-between text-xs md:text-sm mt-3 md:mt-6">
+            <div className="flex items-center justify-between text-xs md:text-sm mt-3">
               <span className="text-gray-400 font-medium">
                 {job.publisher.name}
               </span>
