@@ -5,11 +5,10 @@ export interface Job {
   publisher: {
     name: string;
     image: string;
-    link: string;
     platform: string;
   };
   skills: string[];
-  videoType: string | string[];
+  videoType: string[];
   publishedAt: string;
   platform: string;
 }

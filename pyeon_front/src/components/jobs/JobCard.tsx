@@ -39,12 +39,15 @@ const JobCard: React.FC<JobCardProps> = ({ job, onClick }) => {
               <h2 className="text-xl font-bold text-gray-100 mb-3 line-clamp-1">
                 {job.title}
               </h2>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {job.videoType && (
-                  <span className="inline-block bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">
-                    {job.videoType}
+              <div className="flex flex-wrap gap-2">
+                {job.videoType?.map((type) => (
+                  <span
+                    key={type}
+                    className="inline-block bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30"
+                  >
+                    {type}
                   </span>
-                )}
+                ))}
                 {job.skills?.map((skill) => (
                   <span
                     key={skill}
