@@ -26,6 +26,7 @@ const CategoryFilters: React.FC<CategoryFiltersProps> = ({
 
   const videoTypes = [
     "게임",
+    "저스트 채팅",
     "브이로그",
     "음식",
     "일상",
