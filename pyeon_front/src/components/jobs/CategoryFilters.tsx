@@ -29,8 +29,8 @@ const CategoryFilters: React.FC<CategoryFiltersProps> = ({
               onClick={() => onSkillChange(skill)}
               className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
                 selectedSkills.includes(skill)
-                  ? "bg-blue-500 text-white"
-                  : "bg-[#2c2d32] text-gray-300 hover:bg-[#3a3b40]"
+                  ? "bg-cyan-500 text-white"
+                  : "bg-[#1a1b1e] text-cyan-300/90 hover:bg-[#2b2b2b]"
               }`}
             >
               {skill}
@@ -48,8 +48,8 @@ const CategoryFilters: React.FC<CategoryFiltersProps> = ({
               onClick={() => onTypeChange(type)}
               className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
                 selectedTypes.includes(type)
-                  ? "bg-blue-500 text-white"
-                  : "bg-[#2c2d32] text-gray-300 hover:bg-[#3a3b40]"
+                  ? "bg-fuchsia-500 text-white"
+                  : "bg-[#1a1b1e] text-fuchsia-300/90 hover:bg-[#2b2b2b]"
               }`}
             >
               {type}
@@ -67,8 +67,8 @@ const CategoryFilters: React.FC<CategoryFiltersProps> = ({
               onClick={() => onPlatformChange(platform)}
               className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
                 selectedPlatforms.includes(platform)
-                  ? "bg-blue-500 text-white"
-                  : "bg-[#2c2d32] text-gray-300 hover:bg-[#3a3b40]"
+                  ? "bg-emerald-500 text-white"
+                  : "bg-[#1a1b1e] text-emerald-300/90 hover:bg-[#2b2b2b]"
               }`}
             >
               {platform}
