@@ -10,7 +10,7 @@ const NoticeListPage: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 max-w-5xl mt-8">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-100 mb-6">공지사항</h1>
         <div className="space-y-4">
