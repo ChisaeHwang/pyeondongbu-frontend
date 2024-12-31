@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import jobsData from "../assets/data/jobs.json";
-import "../styles/jobDetail.css";
+import jobsData from "../../assets/data/jobs.json";
+import "../../styles/jobDetail.css";
 
 const JobDetailPage: React.FC = () => {
   const { id } = useParams();
