@@ -22,8 +22,8 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
 
   return (
     <header className="bg-[#25262b] border-b border-[#2c2d32] sticky top-0 z-50 shadow-lg">
-      <div className="container mx-auto max-w-5xl">
-        <div className="flex items-center justify-between h-14 px-4">
+      <div className="container mx-auto max-w-5xl px-4">
+        <div className="flex items-center justify-between h-14">
           <div
             className="flex items-center gap-2 cursor-pointer"
             onClick={handleLogoClick}
