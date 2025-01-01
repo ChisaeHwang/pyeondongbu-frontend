@@ -10,6 +10,7 @@ import NotFoundPage from "./pages/legal/NotFoundPage";
 import TermsPage from "./pages/legal/TermsPage";
 import PrivacyPage from "./pages/legal/PrivacyPage";
 import ContactPage from "./pages/legal/ContactPage";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -20,9 +21,10 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-[#1a1b1e] flex flex-col">
         <Header onSearch={handleSearch} />
-        <main className="flex-grow">
+        <main className="flex-grow pb-16">
           <Routes>
             <Route
               path="/"
