@@ -1,94 +1,126 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Job } from "../../types/job";
 import { formatDate } from "../../utils/dateUtils";
 
 interface JobCardProps {
   job: Job;
-  onClick: () => void;
   index: number;
+  onClick?: () => void;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ job, onClick }) => {
+const JobCard: React.FC<JobCardProps> = ({ job, index, onClick }) => {
+  const contentPreview =
+    job.content.replace(/<[^>]*>/g, "").slice(0, 100) +
+    (job.content.length > 100 ? "..." : "");
+
+  // 태그 제한 함수
+  const getDisplayTags = <T,>(
+    tags: T[] | undefined,
+    isMobile: boolean
+  ): T[] => {
+    if (!tags) return [];
+    if (isMobile) {
+      return tags.slice(0, 1);
+    }
+    return tags;
+  };
+
+  // 플랫폼 표시 텍스트
+  const getPlatformText = (platform: string): string => {
+    if (platform === "youtube") return "YouTube";
+    if (platform === "x") return "X";
+    return "카페";
+  };
+
+  // 플랫폼 스타일
+  const getPlatformStyle = (platform: string): string => {
+    if (platform === "youtube") {
+      return "bg-red-500/20 text-red-300 border border-red-500/30";
+    }
+    if (platform === "x") {
+      return "bg-[#2c2d32] text-white border border-[#404040]";
+    }
+    return "bg-green-500/20 text-green-300 border border-green-500/30";
+  };
+
+  const isMobile = window.innerWidth < 768;
+  const videoTypeTags = getDisplayTags(job.videoType, isMobile);
+  const skillTags = getDisplayTags(job.skills, isMobile);
+
   return (
-    <div
+    <Link
+      to={`/jobs/${job.id}`}
+      className="block bg-[#25262b] rounded-lg border border-[#2c2d32] overflow-hidden hover:border-[#3a3b40] transition-colors"
       onClick={onClick}
-      className="bg-[#25262b] p-6 rounded-lg cursor-pointer hover:bg-[#2c2d32] transition-all border border-[#2c2d32] shadow-sm hover:shadow-md md:min-h-[130px]"
     >
-      <div className="flex gap-6 sm:gap-5">
-        {/* 프로필 이미지 */}
-        <div className="flex-shrink-0">
-          <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-lg overflow-hidden bg-gray-700 border border-gray-600">
-            {job.publisher.image ? (
+      <div className="p-4">
+        {/* 상단: 이미지와 제목/내용 */}
+        <div className="flex gap-4">
+          {/* 왼쪽: 이미지 */}
+          <div className="flex flex-col gap-2">
+            <div className="w-[120px] h-[67.5px] md:w-[180px] md:h-[101.25px] bg-[#1a1b1e] rounded overflow-hidden">
               <img
                 src={job.publisher.image}
                 alt={job.publisher.name}
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-500 text-base md:text-xl lg:text-4xl">
-                {job.publisher.name[0]}
-              </div>
-            )}
+            </div>
+          </div>
+
+          {/* 오른쪽: 제목과 내용 */}
+          <div className="flex-1 min-w-0">
+            <h3 className="text-gray-100 font-medium mb-2 line-clamp-1 text-base md:text-lg">
+              {job.title}
+            </h3>
+            <p className="text-gray-400 text-sm md:text-base line-clamp-2 md:w-[70%]">
+              {contentPreview}
+            </p>
           </div>
         </div>
 
-        {/* 컨텐츠 */}
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-col h-full">
-            <div className="mb-auto">
-              <h2 className="text-lg md:text-xl font-bold text-gray-100 mb-2 md:mb-3 line-clamp-1">
-                {job.title}
-              </h2>
-              <div className="flex flex-wrap gap-1.5 md:gap-2 mb-3 md:mb-4">
-                {job.videoType?.map((type) => (
-                  <span
-                    key={type}
-                    className="inline-block bg-blue-500/20 text-blue-300 px-2 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm border border-blue-500/30"
-                  >
-                    {type}
-                  </span>
-                ))}
-                {job.skills?.map((skill) => (
-                  <span
-                    key={skill}
-                    className="inline-block bg-[#3a3b40] text-gray-300 px-2 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* 하단 정보 */}
-            <div className="flex items-center justify-between text-xs md:text-sm mt-3">
-              <span className="text-gray-400 font-medium">
-                {job.publisher.name}
+        {/* 하단: 태그와 정보 */}
+        <div className="mt-3 mb-0.5 flex justify-between items-end">
+          {/* 왼쪽: 태그들 (모바일: 최대 2개, 데스크탑: 전체 표시) */}
+          <div className="flex flex-wrap gap-1.5 max-w-[50%] md:max-w-[60%]">
+            {/* 영상 타입 태그 (모바일: 1개, 데스크탑: 전체) */}
+            {videoTypeTags.map((type) => (
+              <span
+                key={type}
+                className="inline-block bg-blue-500/20 text-blue-300 px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-[14px] border border-blue-500/30"
+              >
+                {type}
               </span>
-              <div className="flex items-center gap-2 md:gap-3">
-                <span className="text-gray-500">
-                  {formatDate(job.publishedAt)}
-                </span>
-                <span
-                  className={`px-2 py-0.5 rounded text-[10px] md:text-xs ${
-                    job.platform === "youtube"
-                      ? "bg-red-500/20 text-red-300 border border-red-500/30"
-                      : job.platform === "x"
-                      ? "bg-[#2c2d32] text-white border border-[#404040]"
-                      : "bg-green-500/20 text-green-300 border border-green-500/30"
-                  }`}
-                >
-                  {job.platform === "youtube"
-                    ? "YouTube"
-                    : job.platform === "x"
-                    ? "X"
-                    : "카페"}
-                </span>
-              </div>
-            </div>
+            ))}
+            {/* 스킬 태그 (모바일: 1개, 데스크탑: 전체) */}
+            {skillTags.map((skill) => (
+              <span
+                key={skill}
+                className="inline-block bg-[#3a3b40] text-gray-300 px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-[14px]"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+
+          {/* 오른쪽: 하단 정보 */}
+          <div className="flex items-center gap-2 text-xs md:text-sm text-gray-400">
+            <span className="font-medium">{job.publisher.name}</span>
+            <span className="text-gray-500">•</span>
+            <span className="text-gray-500">{formatDate(job.publishedAt)}</span>
+            <span className="text-gray-500">•</span>
+            <span
+              className={`px-2 py-0.5 md:px-2.5 md:py-1 rounded text-[10px] md:text-sm ${getPlatformStyle(
+                job.platform
+              )}`}
+            >
+              {getPlatformText(job.platform)}
+            </span>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
