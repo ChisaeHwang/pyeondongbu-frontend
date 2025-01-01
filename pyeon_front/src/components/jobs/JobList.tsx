@@ -4,7 +4,7 @@ import JobCard from "./JobCard";
 
 interface JobListProps {
   jobs: Job[];
-  onJobClick: (jobId: number) => void;
+  onJobClick?: (jobId: number) => void;
 }
 
 const JobList: React.FC<JobListProps> = ({ jobs, onJobClick }) => {
@@ -25,7 +25,7 @@ const JobList: React.FC<JobListProps> = ({ jobs, onJobClick }) => {
             animationFillMode: "forwards",
           }}
         >
-          <JobCard job={job} index={index} onClick={() => onJobClick(job.id)} />
+          <JobCard job={job} index={index} />
         </div>
       ))}
     </div>

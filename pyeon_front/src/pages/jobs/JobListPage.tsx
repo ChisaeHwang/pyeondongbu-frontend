@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import jobsData from "../../assets/data/jobs.json";
 import JobBanner from "../../components/jobs/JobBanner";
 import CategoryFilters from "../../components/jobs/CategoryFilters";
@@ -16,8 +15,6 @@ interface JobListPageProps {
 }
 
 const JobListPage: React.FC<JobListPageProps> = ({ searchQuery }) => {
-  const navigate = useNavigate();
-
   const {
     selectedSkills,
     selectedTypes,
@@ -54,10 +51,7 @@ const JobListPage: React.FC<JobListPageProps> = ({ searchQuery }) => {
         />
       </div>
 
-      <JobList
-        jobs={currentJobs}
-        onJobClick={(jobId) => navigate(`/jobs/${jobId}`)}
-      />
+      <JobList jobs={currentJobs} />
 
       {filteredJobs.length > 0 && (
         <Pagination
