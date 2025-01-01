@@ -8,6 +8,10 @@ interface JobContentProps {
 }
 
 const JobContent = memo(({ job, onBack }: JobContentProps) => {
+  const handleBackClick = () => {
+    onBack();
+  };
+
   return (
     <div className="my-8">
       <div className="bg-[#25262b] rounded-lg p-6 border border-[#2c2d32] shadow-sm">
@@ -63,7 +67,7 @@ const JobContent = memo(({ job, onBack }: JobContentProps) => {
         {/* 하단 정보 */}
         <div className="flex items-center justify-between mt-6 pt-6 border-t border-[#2c2d32]">
           <button
-            onClick={onBack}
+            onClick={handleBackClick}
             className="bg-[#3a3b40] text-gray-200 px-4 py-2 rounded-lg hover:bg-[#434449] transition-colors"
           >
             뒤로 가기

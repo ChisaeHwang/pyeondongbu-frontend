@@ -6,10 +6,9 @@ import { formatDate } from "../../utils/dateUtils";
 interface JobCardProps {
   job: Job;
   index: number;
-  onClick?: () => void;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ job, index, onClick }) => {
+const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
   const contentPreview =
     job.content.replace(/<[^>]*>/g, "").slice(0, 100) +
     (job.content.length > 100 ? "..." : "");
@@ -52,7 +51,6 @@ const JobCard: React.FC<JobCardProps> = ({ job, index, onClick }) => {
     <Link
       to={`/jobs/${job.id}`}
       className="block bg-[#25262b] rounded-lg border border-[#2c2d32] overflow-hidden hover:border-[#3a3b40] transition-colors"
-      onClick={onClick}
     >
       <div className="p-4">
         {/* 상단: 이미지와 제목/내용 */}
@@ -71,7 +69,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index, onClick }) => {
 
           {/* 오른쪽: 제목과 내용 */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-gray-100 font-medium mb-2 line-clamp-1 text-base md:text-lg">
+            <h3 className="text-gray-100 font-medium mb-2 line-clamp-1 text-base md:text-xl">
               {job.title}
             </h3>
             <p className="text-gray-400 text-sm md:text-base line-clamp-2 md:w-[70%]">

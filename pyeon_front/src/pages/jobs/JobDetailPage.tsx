@@ -1,15 +1,16 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import jobsData from "../../assets/data/jobs.json";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
-
-// JobContent 컴포넌트 분리
-const JobContent = React.lazy(() => import("../../components/jobs/JobContent"));
+import JobContent from "../../components/jobs/JobContent";
 
 const JobDetailPage: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const job = jobsData.jobs.find((job) => job.id === Number(id));
+
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   if (!job) {
     return (
@@ -21,15 +22,7 @@ const JobDetailPage: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)]">
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center h-[50vh]">
-            <LoadingSpinner />
-          </div>
-        }
-      >
-        <JobContent job={job} onBack={() => navigate(-1)} />
-      </Suspense>
+      <JobContent job={job} onBack={handleBack} />
     </div>
   );
 };
