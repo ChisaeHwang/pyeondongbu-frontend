@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Job } from "../types/job";
 
 interface UseJobFiltersProps {
@@ -44,41 +44,49 @@ export const useJobFilters = ({ jobs, searchQuery }: UseJobFiltersProps) => {
     setCurrentPage(1);
   }, []);
 
-  const filteredJobs = jobs.filter((job: Job) => {
-    const searchMatch =
-      searchQuery === "" ||
-      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.content.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredJobs = useMemo(() => {
+    return jobs
+      .filter((job: Job) => {
+        const searchMatch =
+          searchQuery === "" ||
+          job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          job.content.toLowerCase().includes(searchQuery.toLowerCase());
 
-    const skillMatch =
-      selectedSkills.length === 0 ||
-      selectedSkills.some((selectedSkill) =>
-        job.skills.some(
-          (jobSkill) => jobSkill.toLowerCase() === selectedSkill.toLowerCase()
-        )
+        const skillMatch =
+          selectedSkills.length === 0 ||
+          selectedSkills.every((selectedSkill) =>
+            job.skills.some(
+              (jobSkill) =>
+                jobSkill.toLowerCase() === selectedSkill.toLowerCase()
+            )
+          );
+
+        const typeMatch =
+          selectedTypes.length === 0 ||
+          selectedTypes.every((selectedType) => {
+            const jobTypes = Array.isArray(job.videoType)
+              ? job.videoType
+              : [job.videoType];
+            return jobTypes.some(
+              (type) => type.toLowerCase() === selectedType.toLowerCase()
+            );
+          });
+
+        const platformMatch =
+          selectedPlatforms.length === 0 ||
+          selectedPlatforms.every(
+            (selectedPlatform) =>
+              job.publisher.platform.toLowerCase() ===
+              selectedPlatform.toLowerCase()
+          );
+
+        return searchMatch && skillMatch && typeMatch && platformMatch;
+      })
+      .sort(
+        (a, b) =>
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       );
-
-    const typeMatch =
-      selectedTypes.length === 0 ||
-      selectedTypes.some((selectedType) => {
-        const jobTypes = Array.isArray(job.videoType)
-          ? job.videoType
-          : [job.videoType];
-        return jobTypes.some(
-          (type) => type.toLowerCase() === selectedType.toLowerCase()
-        );
-      });
-
-    const platformMatch =
-      selectedPlatforms.length === 0 ||
-      selectedPlatforms.some(
-        (selectedPlatform) =>
-          job.publisher.platform.toLowerCase() ===
-          selectedPlatform.toLowerCase()
-      );
-
-    return searchMatch && skillMatch && typeMatch && platformMatch;
-  });
+  }, [jobs, searchQuery, selectedSkills, selectedTypes, selectedPlatforms]);
 
   return {
     selectedSkills,
