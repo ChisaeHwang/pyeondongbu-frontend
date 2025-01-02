@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,25 +8,20 @@ import {
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/common/ScrollToTop";
-import LoadingSpinner from "./components/common/LoadingSpinner";
+import JobListPage from "./pages/jobs/JobListPage";
+import JobDetailPage from "./pages/jobs/JobDetailPage";
+import NoticeListPage from "./pages/notices/NoticeListPage";
+import NoticeDetailPage from "./pages/notices/NoticeDetailPage";
+import NotFoundPage from "./pages/legal/NotFoundPage";
+import TermsPage from "./pages/legal/TermsPage";
+import PrivacyPage from "./pages/legal/PrivacyPage";
+import ContactPage from "./pages/legal/ContactPage";
 import { initGA, logPageView } from "./utils/analytics";
 
-// Lazy loading for routes
-const JobListPage = React.lazy(() => import("./pages/jobs/JobListPage"));
-const JobDetailPage = React.lazy(() => import("./pages/jobs/JobDetailPage"));
-const NoticeListPage = React.lazy(
-  () => import("./pages/notices/NoticeListPage")
-);
-const NoticeDetailPage = React.lazy(
-  () => import("./pages/notices/NoticeDetailPage")
-);
-const NotFoundPage = React.lazy(() => import("./pages/legal/NotFoundPage"));
-const TermsPage = React.lazy(() => import("./pages/legal/TermsPage"));
-const PrivacyPage = React.lazy(() => import("./pages/legal/PrivacyPage"));
-const ContactPage = React.lazy(() => import("./pages/legal/ContactPage"));
-
-function App() {
-  const [searchQuery, setSearchQuery] = useState<string>("");
+// Analytics wrapper component
+const AnalyticsWrapper: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const location = useLocation();
 
   useEffect(() => {
@@ -37,23 +32,23 @@ function App() {
     logPageView(location.pathname);
   }, [location]);
 
+  return <>{children}</>;
+};
+
+function App() {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
   const handleSearch = (query: string) => {
     setSearchQuery(query);
   };
 
   return (
     <Router>
-      <ScrollToTop />
-      <div className="min-h-screen bg-[#1a1b1e] flex flex-col">
-        <Header onSearch={handleSearch} />
-        <main className="flex-grow pb-16">
-          <Suspense
-            fallback={
-              <div className="flex items-center justify-center h-[50vh]">
-                <LoadingSpinner />
-              </div>
-            }
-          >
+      <AnalyticsWrapper>
+        <ScrollToTop />
+        <div className="min-h-screen bg-[#1a1b1e] flex flex-col">
+          <Header onSearch={handleSearch} />
+          <main className="flex-grow pb-16">
             <Routes>
               <Route
                 path="/"
@@ -71,10 +66,10 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-      </div>
+          </main>
+          <Footer />
+        </div>
+      </AnalyticsWrapper>
     </Router>
   );
 }
