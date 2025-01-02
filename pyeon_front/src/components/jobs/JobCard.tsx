@@ -95,7 +95,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
             {skillTags.map((skill) => (
               <span
                 key={skill}
-                className="inline-block bg-[#3a3b40] text-gray-300 px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-[14px]"
+                className="inline-block bg-[#3a3b40] text-gray-300 px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-[14px] border border-[#3a3b40]/30"
               >
                 {skill}
               </span>

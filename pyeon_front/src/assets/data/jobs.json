@@ -1,6 +1,34 @@
 {
   "jobs": [
     {
+      "id": 17,
+      "title": "츄르 유튜브 편집자 모집",
+      "content": "<p><strong>츄르 영상 편집자</strong>를 구합니다.</p><ul><li>만 19세 이상 성인</li><li>최소 분당 1만 ▲</li><li>최소 월 2회 8~15분 롱폼 영상</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/churluv/status/1874117102887739428' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "츄르",
+        "image": "https://ifh.cc/g/5DYnWJ.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["저스트 채팅"],
+      "publishedAt": "2025-01-01",
+      "platform": "x"
+    },
+    {
+      "id": 16,
+      "title": "리스텔라 2기생 유튜브 편집자 모집",
+      "content": "<p><strong>리스텔라 영상 편집자</strong>를 구합니다.</p><ul><li>모집 기간 : 구인 시 게시글 삭제 예정</li><li>모집 인원 : 각 스텔라별 1분씩</li><li>급여: 영상 당 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/listella_on/status/1874088023459303484' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "리스텔라",
+        "image": "https://ifh.cc/g/CMlt2k.jpg",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["저스트 채팅"],
+      "publishedAt": "2024-12-31",
+      "platform": "x"
+    },
+    {
       "id": 15,
       "title": "채널 편집자 구인",
       "content": "<p><strong>영상 편집자</strong>를 구합니다.</p><ul><li>최소 주2회 영상 편집 및 썸네일 제작</li><li>모집 마감 전까지</li><li>급여: 영상 당 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/Ugkx6eTHbVaVPh_z7tsm-kWqAqHzdHrI9oQ5' target='_blank'>구인글 바로가기</a></p>",
@@ -20,7 +48,7 @@
       "content": "<p><strong>영상 편집자 & 쇼츠 편집자</strong>를 구합니다.</p><ul><li>1월 4일까지</li><li>2차 과제 있음</li><li>급여: 영상 당 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/watch?v=CUPmKsRQqfA&t' target='_blank'>구인글 바로가기</a></p>",
       "publisher": {
         "name": "명예훈장",
-        "image": "https://ifh.cc/g/o6XoxF.webp",
+        "image": "https://ifh.cc/g/a3hl6x.jpg",
         "platform": "chzzk"
       },
       "skills": ["프리미어 프로"],
@@ -62,7 +90,7 @@
       "content": "<p><strong>유튜브 작업자 모집</strong>를 모집하고 있습니다.</p><ul><li>[모집기간] ~ 구인 완료 시까지</li><li>월 2회 이상 작업</li><li>게임, 토크</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/Taecho831/status/1873661141794296037' target='_blank'>구인글 바로가기</a></p>",
       "publisher": {
         "name": "태초",
-        "image": "https://ifh.cc/g/2rDDjx.jpg",
+        "image": "https://ifh.cc/g/qLzVnG.jpg",
         "platform": "chzzk"
       },
       "skills": ["프리미어 프로"],
@@ -76,7 +104,7 @@
       "content": "<p><strong>유튜브 작업자 모집</strong>를 모집하고 있습니다.</p><ul><li>[모집기간] ~ 구인 완료 시까지</li><li>편집자</li><li>쇼츠편집자</li><li>썸네일러(다시보기채널)</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/Aesther_Arisa/status/1873705241163747518' target='_blank'>구인글 바로가기</a></p>",
       "publisher": {
         "name": "아리사",
-        "image": "https://ifh.cc/g/8rON45.webp",
+        "image": "https://ifh.cc/g/hdfgwY.jpg",
         "platform": "chzzk"
       },
       "skills": ["프리미어 프로", "애프터 이펙트"],
@@ -90,7 +118,7 @@
       "content": "<p><strong>게임 컨텐츠 편집자</strong>를 모집합니다.</p><ul><li>주1회 3~8분 내외 영상</li><li>만 18세 이상</li><li>급여: 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/susan_hunt_/status/1871504123952337004' target='_blank'>구인글 바로가기</a></p>",
       "publisher": {
         "name": "수잔 헌트",
-        "image": "https://ifh.cc/g/lFD9DS.jpg",
+        "image": "https://ifh.cc/g/oz3Ayv.jpg",
         "platform": "chzzk"
       },
       "skills": ["프리미어 프로", "애프터 이펙트"],
