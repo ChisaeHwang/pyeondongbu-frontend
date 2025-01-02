@@ -22,15 +22,18 @@ const JobContent = memo(({ job, onBack }: JobContentProps) => {
               {job.title}
             </h1>
             <div className="flex flex-wrap gap-2">
-              {job.videoType && (
-                <span className="inline-block bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">
-                  {job.videoType}
+              {job.videoType?.map((type: string) => (
+                <span
+                  key={type}
+                  className="inline-block bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30"
+                >
+                  {type}
                 </span>
-              )}
+              ))}
               {job.skills?.map((skill: string) => (
                 <span
                   key={skill}
-                  className="inline-block bg-[#3a3b40] text-gray-300 px-3 py-1 rounded-full text-sm"
+                  className="inline-block bg-[#3a3b40] text-gray-300 px-3 py-1 rounded-full text-sm border border-[#3a3b40]/30"
                 >
                   {skill}
                 </span>

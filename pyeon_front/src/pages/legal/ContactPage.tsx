@@ -2,7 +2,7 @@ import React from "react";
 import LegalLayout from "./LegalLayout";
 
 const ContactPage: React.FC = () => {
-  const email = "contact@pyeongdongbu.com"; // 실제 이메일 주소로 변경해주세요
+  const email = "pyeondongbu@gmail.com"; // 실제 이메일 주소로 변경해주세요
 
   const handleEmailClick = () => {
     window.location.href = `mailto:${email}`;
