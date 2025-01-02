@@ -1,9 +1,15 @@
-import React, { Suspense, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { Suspense, useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/common/ScrollToTop";
 import LoadingSpinner from "./components/common/LoadingSpinner";
+import { initGA, logPageView } from "./utils/analytics";
 
 // Lazy loading for routes
 const JobListPage = React.lazy(() => import("./pages/jobs/JobListPage"));
@@ -21,6 +27,15 @@ const ContactPage = React.lazy(() => import("./pages/legal/ContactPage"));
 
 function App() {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const location = useLocation();
+
+  useEffect(() => {
+    initGA();
+  }, []);
+
+  useEffect(() => {
+    logPageView(location.pathname);
+  }, [location]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);

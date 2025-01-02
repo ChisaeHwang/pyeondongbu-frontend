@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Job } from "../../types/job";
 import { formatDate } from "../../utils/dateUtils";
+import { trackJobClick } from "../../utils/analytics";
 
 interface JobCardProps {
   job: Job;
@@ -47,10 +48,16 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
   const videoTypeTags = getDisplayTags(job.videoType, isMobile);
   const skillTags = getDisplayTags(job.skills, isMobile);
 
+  const handleClick = () => {
+    trackJobClick(job.title);
+    // ... 다른 로직
+  };
+
   return (
     <Link
       to={`/jobs/${job.id}`}
       className="block bg-[#25262b] rounded-lg border border-[#2c2d32] overflow-hidden hover:border-[#3a3b40] transition-colors"
+      onClick={handleClick}
     >
       <div className="p-4">
         {/* 상단: 이미지와 제목/내용 */}
