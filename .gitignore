@@ -1,0 +1,23 @@
+# dependencies
+/pyeon_front/node_modules
+/pyeon_front/.pnp
+/pyeon_front/.pnp.js
+
+# testing
+/pyeon_front/coverage
+
+# production
+/pyeon_front/build
+
+# misc
+.DS_Store
+/pyeon_front/.env.local
+/pyeon_front/.env.development.local
+/pyeon_front/.env.test.local
+/pyeon_front/.env.production.local
+
+/pyeon_front/npm-debug.log*
+/pyeon_front/yarn-debug.log*
+/pyeon_front/yarn-error.log*
+
+/pyeon_front/.env
