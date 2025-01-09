@@ -1,9 +1,149 @@
 {
   "jobs": [
     {
-      "id": 20,
+      "id": 32,
+      "title": "지요 유튜브 편집자 모집",
+      "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>모집 기간 : 모집 시 까지</li><li>한 달 기준 롱폼 2~3건 숏폼 6 ~ 8건 이상 (조율)</li><li>토크, 게임, 핫클립 등</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/aeongziyo/status/1877280108307951646' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "지요",
+        "image": "https://ifh.cc/g/yPd4Rr.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["버츄얼", "게임"],
+      "publishedAt": "2025-01-10",
+      "platform": "x"
+    },
+    {
+      "id": 31,
+      "title": "레이 유튜브 채널 편집자를 구합니다 ♥",
+      "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>모집 기간 : 모집 시 까지</li><li>비정기적으로 진행 (조율)</li><li>도파민 중독자 우대</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/x_ray_xoxo/status/1877267761187139652' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "서벌캣 레이",
+        "image": "https://ifh.cc/g/VrBvFM.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["저스트 채팅", "버츄얼"],
+      "publishedAt": "2025-01-09",
+      "platform": "x"
+    },
+    {
+      "id": 29,
+      "title": "아카메 시아 유튜브 편집자 모집",
+      "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>모집 기간 : 모집 시 게시물 삭제</li><li>2주에 1영상</li><li>토크, 게임 영상 포트폴리오</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/Re_AcT_KR/status/1876526368231674103' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "아카메 시아",
+        "image": "https://ifh.cc/g/DKJahC.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["저스트 채팅", "버츄얼"],
+      "publishedAt": "2025-01-07",
+      "platform": "x"
+    },
+    {
+      "id": 28,
+      "title": "🔥 쇼츠 편집자 모집합니다",
+      "content": "<p><strong>유튜브 쇼츠 편집자</strong>를 구합니다.</p><ul><li>모집 기간 : 모집 시 까지</li><li>2일 1영상 ~ 3일 1영상 (조율)</li><li>페이는 건당 지급</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxxosB8UkhTpaq0_gKb96I-Z6smnkWVeDC' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "머독",
+        "image": "https://ifh.cc/g/dS2jTX.jpg",
+        "platform": "Soop"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["저스트 채팅", "게임"],
+      "publishedAt": "2025-01-10",
+      "platform": "youtube"
+    },
+    {
+      "id": 27,
+      "title": "남궁혁 유튜브 롱폼 편집자를 모집",
+      "content": "<p><strong>유튜브 롱폼 편집자</strong>를 구합니다.</p><ul><li>모집 기간 : 모집 시 까지</li><li>최소 주 1회 이상</li><li>3D 멀미가 없는 자</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxI8_d7MzDebHd_Lq_7KZmkNCvQpsbmgYK' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "남궁혁",
+        "image": "https://ifh.cc/g/M1s7HZ.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["저스트 채팅", "버츄얼"],
+      "publishedAt": "2025-01-08",
+      "platform": "youtube"
+    },
+    {
+      "id": 26,
+      "title": "자진노비장단의 멤버를 모집합니다 !",
+      "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>모집 기간 : 1월 13일까지</li><li>주 1~2회 8m 이상 영상</li><li>그림 소스 이용한 모핑 편집에 능하신 분</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/Ugkx_KXeiY8Cpa3illwx0UZjlbR8YGK5nCBT' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "이오몽",
+        "image": "https://ifh.cc/g/0zMR60.jpg",
+        "platform": "Soop"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임", "버츄얼"],
+      "publishedAt": "2025-01-09",
+      "platform": "youtube"
+    },
+    {
+      "id": 25,
+      "title": "햄쿠비 유튜브 편집자 모집",
+      "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>모집 기간 : 모집 시 까지</li><li>주 2회 이상</li><li>컨텐츠, 핫클립 둘 다 작업 가능한 분</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxE1TaHkjetusIREBVR1u6UdUeBwKo9JYl' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "햄쿠비",
+        "image": "https://ifh.cc/g/G9t0Vc.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["저스트 채팅", "버츄얼"],
+      "publishedAt": "2025-01-06",
+      "platform": "youtube"
+    },
+    {
+      "id": 24,
+      "title": "박사장 유튜브 채널 영상 편집 및 썸네일 제작",
+      "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>모집 기간 : 구인 시 마감</li><li>박사장 유튜브 채널 영상 편집 및 썸네일 제작</li><li>광고영상제작</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/Ugkx-x-hOPRg498X_M9oaZp65nTEbwtJl1lw' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "박사장",
+        "image": "https://ifh.cc/g/ZOOxXy.jpg",
+        "platform": "Soop"
+      },
+      "skills": ["프리미어 프로", "포토샵"],
+      "videoType": ["저스트 채팅", "게임"],
+      "publishedAt": "2025-01-07",
+      "platform": "youtube"
+    },
+    {
+      "id": 23,
+      "title": "2명 이상 유튜브 편집자 모집",
+      "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>1월 24일 오후12시까지</li><li>페이 : 협의</li><li>자막, 연출, 컷편집 3분야에대한 이해도와 편집 영상 퀄리티가 좋은 분</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxJoLM2k5Jnhi3XibOQESQNctxdgvc9I9b' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "고차비",
+        "image": "https://ifh.cc/g/ZRTKv7.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["저스트 채팅", "게임"],
+      "publishedAt": "2025-01-09",
+      "platform": "youtube"
+    },
+    {
+      "id": 22,
+      "title": "해튜브 편집자 모집",
+      "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>1월 25일까지</li><li>롤 1개, 토크 캠방 1개 포트폴리오</li><li>썸네일 병행</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxnnzH2YbgnBczoinFNghZBkDLKE1hq4JA' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "해기",
+        "image": "https://ifh.cc/g/7FDR7k.jpg",
+        "platform": "Soop"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["저스트 채팅", "게임"],
+      "publishedAt": "2025-01-05",
+      "platform": "youtube"
+    },
+    {
+      "id": 21,
       "title": "유튜브 편집자를 1분 모집",
-      "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>'이터널 리턴' 영상 제작</li><li>주 1회 이상 작업</li><li>버츄얼에 대한 이해가 있는</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='http://youtube.com/post/Ugkx0tVocznfdPIv-9B1IV9k4a0c9zPKx2lw?si=GwB3qjHkD7bqCrZm' target='_blank'>구인글 바로가기</a></p>",
+      "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>'이터널 리턴' 영상 제작</li><li>주 1회 이상 작업</li><li>버츄얼에 대한 이해가 있는</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/Lu_rang1/status/1875020293108019577' target='_blank'>구인글 바로가기</a></p>",
       "publisher": {
         "name": "루랑",
         "image": "https://ifh.cc/g/vocG0O.jpg",
@@ -12,10 +152,10 @@
       "skills": ["프리미어 프로"],
       "videoType": ["저스트 채팅", "게임"],
       "publishedAt": "2025-01-05",
-      "platform": "youtube"
+      "platform": "x"
     },
     {
-      "id": 19,
+      "id": 20,
       "title": "유튜브 편집자를 추가 모집",
       "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>만 19세 이상 성인</li><li>월 2회 이상 작업</li><li>버츄얼에 대한 이해가 있는</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='http://youtube.com/post/Ugkx0tVocznfdPIv-9B1IV9k4a0c9zPKx2lw?si=GwB3qjHkD7bqCrZm' target='_blank'>구인글 바로가기</a></p>",
       "publisher": {
