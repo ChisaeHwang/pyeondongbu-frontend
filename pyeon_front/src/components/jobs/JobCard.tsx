@@ -109,12 +109,10 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
             ))}
           </div>
 
-          {/* 오른쪽: 하단 정보 */}
+          {/* 오른쪽: 하단 정보 */} 
           <div className="flex items-center gap-2 text-xs md:text-sm text-gray-400">
             <span className="font-medium">{job.publisher.name}</span>
-            <span className="text-gray-500">•</span>
             <span className="text-gray-500">{formatDate(job.publishedAt)}</span>
-            <span className="text-gray-500">•</span>
             <span
               className={`px-2 py-0.5 md:px-2.5 md:py-1 rounded text-[10px] md:text-sm ${getPlatformStyle(
                 job.platform
