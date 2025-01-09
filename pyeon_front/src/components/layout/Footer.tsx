@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
             자유롭게 접근 가능한 공개 데이터에 한합니다.
           </p>
           <p className="text-gray-500 text-xs mt-2">
-            © 2024 편동부. All rights reserved.
+            © 2025 편동부. All rights reserved.
           </p>
         </div>
       </div>

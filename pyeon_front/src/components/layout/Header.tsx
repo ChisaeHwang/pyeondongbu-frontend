@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SearchInput } from "../common/SearchInput";
 import { useNavigate } from "react-router-dom";
+import Logo from "../common/Logo";
 
 interface HeaderProps {
   onSearch: (query: string) => void;
@@ -28,14 +29,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
             className="flex items-center gap-2 cursor-pointer"
             onClick={handleLogoClick}
           >
-            <img
-              src="https://ifh.cc/g/PDRy1k.png"
-              alt="편동부 로고"
-              className="h-6 w-6 object-contain"
-            />
-            <h1 className="text-lg sm:text-2xl font-bold text-gray-100 cursor-pointer hover:text-gray-300 transition-colors">
-              편동부
-            </h1>
+            <Logo className="h-6 w-auto" />
           </div>
           <div className="w-full max-w-[180px] sm:max-w-[300px] md:max-w-[400px]">
             <SearchInput
