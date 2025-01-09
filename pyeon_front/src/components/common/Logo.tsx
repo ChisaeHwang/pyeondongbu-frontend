@@ -13,9 +13,9 @@ const Logo: React.FC<LogoProps> = ({
   return (
     <Link to="/" className="flex items-center gap-2">
       <img
-        src="https://ifh.cc/g/PDRy1k.png"
+        src="https://pyeon.s3.ap-northeast-2.amazonaws.com/images/%ED%8E%B8%EB%8F%99%EB%B6%80+%EB%A1%9C%EA%B3%A0+4.png"
         alt="편동부 로고"
-        className={`object-contain ${className}`}
+        className="h-7 w-7 object-contain"
       />
       {showText && (
         <span className="text-lg sm:text-2xl font-bold text-gray-100">
