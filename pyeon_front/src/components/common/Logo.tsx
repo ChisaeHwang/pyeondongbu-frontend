@@ -14,7 +14,7 @@ const Logo: React.FC<LogoProps> = ({
     <Link to="/" className="flex items-center gap-2">
       <img
         src="https://pyeon.s3.ap-northeast-2.amazonaws.com/images/%ED%8E%B8%EB%8F%99%EB%B6%80+%EB%A1%9C%EA%B3%A0+4.png"
-        alt="편동부 로고"
+        alt="편동부 - 유튜브 편집자 구인구직 플랫폼 로고"
         className="h-7 w-7 object-contain"
       />
       {showText && (
