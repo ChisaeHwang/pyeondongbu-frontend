@@ -1,4 +1,4 @@
-편동부 리뉴얼 페이지
+편동부 프론트 리뉴얼 페이지
 
 https://www.pyeondongbu.com/
 
