@@ -1,3 +1,6 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# 두 버전 모두 사이트맵 등록
+Sitemap: https://pyeondongbu.com/sitemap.xml
+Sitemap: https://www.pyeondongbu.com/sitemap.xml
