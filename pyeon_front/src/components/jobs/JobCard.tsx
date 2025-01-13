@@ -30,7 +30,8 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
   const getPlatformText = (platform: string): string => {
     if (platform === "youtube") return "YouTube";
     if (platform === "x") return "X";
-    return "카페";
+    if (platform === "cafe") return "카페";
+    return "없음";
   };
 
   // 플랫폼 스타일
@@ -109,7 +110,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
             ))}
           </div>
 
-          {/* 오른쪽: 하단 정보 */} 
+          {/* 오른쪽: 하단 정보 */}
           <div className="flex items-center gap-2 text-xs md:text-sm text-gray-400">
             <span className="font-medium">{job.publisher.name}</span>
             <span className="text-gray-500">{formatDate(job.publishedAt)}</span>
