@@ -1,6 +1,20 @@
 {
   "jobs": [
     {
+      "id": 37,
+      "title": "리제 채팅매니저, pd. 작가 모집공고",
+      "content": "<p><strong>채팅매니저, pd. 작가 모집공고 편집자</strong>를 구합니다.</p><ul><li>기간 : 1월 22일 수 21:00까지</li><li>아카네 리제의 방송에 흥미가 깊고 모니터에 적극적이신 분</li><li>업무 관련 작업 툴 사용법을 알고 있거나, 이해도가 있으신 분</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://cafe.naver.com/tteokbokk1/704285' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "아카네 리제",
+        "image": "https://ifh.cc/g/mJ9njC.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임", "버츄얼"],
+      "publishedAt": "2025-01-10",
+      "platform": "naver"
+    },
+    {
       "id": 36,
       "title": "편집자 1분을 모십니다",
       "content": "<p><strong>유튜브 편집자</strong>를 구합니다.</p><ul><li>브롤스타즈 잘 아시거나 하시는 분 우대</li><li>숏폼 및 롱폼 모두 가능</li><li>페이 : 채용 과정에서 협의</li><li>Discord: kogi_nyom</li></ul></p>",
