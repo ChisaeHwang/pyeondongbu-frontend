@@ -30,7 +30,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
   const getPlatformText = (platform: string): string => {
     if (platform === "youtube") return "YouTube";
     if (platform === "x") return "X";
-    if (platform === "cafe") return "카페";
+    if (platform === "naver") return "카페";
     return "없음";
   };
 
@@ -42,7 +42,10 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
     if (platform === "x") {
       return "bg-[#2c2d32] text-white border border-[#404040]";
     }
-    return "bg-green-500/20 text-green-300 border border-green-500/30";
+    if (platform === "naver") {
+      return "bg-green-500/20 text-green-300 border border-green-500/30";
+    }
+    return "bg-black-500/20 text-white-300 border border-green-500/30";
   };
 
   const isMobile = window.innerWidth < 768;
