@@ -1,0 +1,13 @@
+## Directory Structure
+- src
+- src/app: Next.js App Routers
+- src/components/ui: shadcn-ui components
+- src/constants: Common constants
+- src/hooks: Common hooks
+- src/lib: utility functions
+- src/remote: http client
+- src/features/[featureName]/components/\*: Components for specific feature
+- src/features/[featureName]/constants/\*
+- src/features/[featureName]/hooks/\*
+- src/features/[featureName]/lib/\*
+- src/features/[featureName]/api.ts: api fetch functions
