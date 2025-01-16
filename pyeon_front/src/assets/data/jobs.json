@@ -1,6 +1,34 @@
 {
   "jobs": [
     {
+      "id": 45,
+      "title": "따효니님 채널의 편집자 한 분을 추가로 구인",
+      "content": "<p><strong>편집자 한 분</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>최소 주 2회 방송 영상 편집 후 업로드</li><li>페이 : 기본급 + 프로모션 관련 인센티브</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxBMwh5I0I0Ry6KZaI33PfqbXAbfvR-u0z' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "따효니",
+        "image": "https://ifh.cc/g/Qt7MAJ.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임"],
+      "publishedAt": "2025-01-16",
+      "platform": "youtube"
+    },
+    {
+      "id": 44,
+      "title": "홍동부에서 고정 편집자를 모집합니다!",
+      "content": "<p><strong>고정 편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>월 2~3회 롱폼, 숏폼 제작</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/jinhong_0827/status/1879464494302363865' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "진홍 아씨",
+        "image": "https://ifh.cc/g/q48oZ1.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임", "버츄얼"],
+      "publishedAt": "2025-01-15",
+      "platform": "x"
+    },
+    {
       "id": 43,
       "title": "리온 유튜브에서 편집자 구인합니다",
       "content": "<p><strong>롱폼 편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>최소 주 1회 롱폼 영상 편집</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxjtyfNOOoVrY5EUy5mT8wGbFExsaSSC-n' target='_blank'>구인글 바로가기</a></p>",
@@ -10,7 +38,7 @@
         "platform": "chzzk"
       },
       "skills": ["프리미어 프로"],
-      "videoType": ["게임", "버츄얼"],
+      "videoType": ["버츄얼"],
       "publishedAt": "2025-01-15",
       "platform": "youtube"
     },
