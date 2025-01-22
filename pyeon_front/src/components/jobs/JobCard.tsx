@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Job } from "../../types/job";
 import { formatDate } from "../../utils/dateUtils";
 import { trackJobClick } from "../../utils/analytics";
+import OptimizedImage from "../common/OptimizedImage";
 
 interface JobCardProps {
   job: Job;
@@ -69,11 +70,11 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
           {/* 왼쪽: 이미지 */}
           <div className="flex flex-col gap-2">
             <div className="w-[120px] h-[67.5px] md:w-[180px] md:h-[101.25px] bg-[#1a1b1e] rounded overflow-hidden">
-              <img
+              <OptimizedImage
                 src={job.publisher.image}
                 alt={job.publisher.name}
                 className="w-full h-full object-cover"
-                loading="lazy"
+                isPriority={index < 3}
               />
             </div>
           </div>

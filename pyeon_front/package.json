@@ -5,14 +5,18 @@
   "dependencies": {
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "@types/react-lazy-load-image-component": "^1.6.4",
+    "axios": "^1.7.9",
     "cra-template-typescript": "1.2.0",
     "date-fns": "^4.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-ga4": "^2.1.0",
     "react-icons": "^5.4.0",
+    "react-lazy-load-image-component": "^1.6.3",
     "react-router-dom": "^7.1.1",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "sharp": "^0.33.5"
   },
   "scripts": {
     "start": "react-scripts start",
