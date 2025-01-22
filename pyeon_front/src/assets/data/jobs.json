@@ -1,6 +1,48 @@
 {
   "jobs": [
     {
+      "id": 58,
+      "title": "푸린 채널과 함께 성장하실 편집자분을 모집합니다.",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>한 달 최소 4~5개이상 작업</li><li>페이 : 최소 분당 1.5이상 추후 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxLmHeP-7n3dvLKLEo0no0bc5lFRTq9m6G' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "푸린",
+        "image": "https://ifh.cc/g/xyrmVJ.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임"],
+      "publishedAt": "2025-01-22",
+      "platform": "youtube"
+    },
+    {
+      "id": 57,
+      "title": "💙카시루시 유튜브 편집자 구인💜",
+      "content": "<p><strong>쇼츠 편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>월 2~3회 10분 내외의 영상 제작</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/Ugkx0Zuz26jvaG1kENpwUnuEs-94TGOQ5uVd' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "카시루시",
+        "image": "https://ifh.cc/g/sQXb9C.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["저스트 채팅"],
+      "publishedAt": "2025-01-22",
+      "platform": "youtube"
+    },
+    {
+      "id": 56,
+      "title": "✝️ 테동부의 그림 썸네일러를 모집합니다!",
+      "content": "<p><strong>썸네일러를</strong>를 구합니다.</p><ul><li>기간 : 1월 31일까지</li><li>주 2~3회 그림 썸네일 제작</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxEor_ks-xhe-YtotL0scfcTNUpzaO5yj5' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "테리눈나",
+        "image": "https://ifh.cc/g/5O64oZ.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["버츄얼"],
+      "publishedAt": "2025-01-22",
+      "platform": "youtube"
+    },
+    {
       "id": 55,
       "title": "『슬오리 쇼츠 편집자 구인 ! 』",
       "content": "<p><strong>쇼츠 편집자</strong>를 구합니다.</p><ul><li>기간 : 1월 20일 ~ 27일</li><li>숏폼 주 3~4회 제작</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/seul_ori/status/1881265247883030608' target='_blank'>구인글 바로가기</a></p>",
