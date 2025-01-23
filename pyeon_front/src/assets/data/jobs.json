@@ -1,6 +1,20 @@
 {
   "jobs": [
     {
+      "id": 59,
+      "title": "핀동부 영상편집자 구인합니다",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/Ugkx7zhIc-kU03rxPBlDHRYfrbzuOiAxvHwh' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "꽃핀",
+        "image": "https://ifh.cc/g/wFz5dM.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["버츄얼"],
+      "publishedAt": "2025-01-22",
+      "platform": "youtube"
+    },
+    {
       "id": 58,
       "title": "푸린 채널과 함께 성장하실 편집자분을 모집합니다.",
       "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>한 달 최소 4~5개이상 작업</li><li>페이 : 최소 분당 1.5이상 추후 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxLmHeP-7n3dvLKLEo0no0bc5lFRTq9m6G' target='_blank'>구인글 바로가기</a></p>",
@@ -17,7 +31,7 @@
     {
       "id": 57,
       "title": "💙카시루시 유튜브 편집자 구인💜",
-      "content": "<p><strong>쇼츠 편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>월 2~3회 10분 내외의 영상 제작</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/Ugkx0Zuz26jvaG1kENpwUnuEs-94TGOQ5uVd' target='_blank'>구인글 바로가기</a></p>",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>월 2~3회 10분 내외의 영상 제작</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/Ugkx0Zuz26jvaG1kENpwUnuEs-94TGOQ5uVd' target='_blank'>구인글 바로가기</a></p>",
       "publisher": {
         "name": "카시루시",
         "image": "https://ifh.cc/g/sQXb9C.jpg",
