@@ -1,6 +1,34 @@
 {
   "jobs": [
     {
+      "id": 71,
+      "title": "썸네일러 모집합니다",
+      "content": "<p><strong>썸네일러</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/Ugkxy-4xbXxoBigF7vXcqOKZVhQseTiGIHMY' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "치야미",
+        "image": "https://ifh.cc/g/PaP08a.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["버츄얼"],
+      "publishedAt": "2025-02-01",
+      "platform": "youtube"
+    },
+    {
+      "id": 70,
+      "title": "이번에 해마티엘 채널의 편집자를 모집하고자 합니다!!",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li> 타르코프 이해도가 높으신 분</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxeNOnVCTAA-TmAo1ly8Zu2IW6kUg4gbHy' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "해마티엘",
+        "image": "https://ifh.cc/g/sJWocF.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임"],
+      "publishedAt": "2025-02-01",
+      "platform": "youtube"
+    },
+    {
       "id": 69,
       "title": "유루리 유튜브에서 함께 하실 분들을 찾습니다!",
       "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>최소 주 1회 이상 작업</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/yururi_krv/status/1885210782948090328' target='_blank'>구인글 바로가기</a></p>",
