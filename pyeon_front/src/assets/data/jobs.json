@@ -1,21 +1,36 @@
 {
   "jobs": [
     {
-      "id": 80,
-      "title": "커버곡 인력 구인합니다! ",
-      "content": "<p><strong>커버곡 인력</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>맵 제작자, 아트 디렉터, 시네머신, 모델러 등</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/hangyeol8008/status/1886791729925513363' target='_blank'>구인글 바로가기</a></p>",
+      "id": 81,
+      "title": "뮤동부 모집!",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>롱폼 편집자 모집</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/baleine0501/status/1887064867074683353' target='_blank'>구인글 바로가기</a></p>",
       "publisher": {
-        "name": "한결",
-        "image": "https://ifh.cc/g/nHvN1y.jpg",
+        "name": "뮤리벨렌",
+        "image": "https://ifh.cc/g/RyPfL2.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["버츄얼"],
+      "publishedAt": "2025-02-06",
+      "platform": "x"
+    },
+    {
+      "id": 80,
+      "title": "이번에 빙동부를 추가 모집하고자 글을 작성합니다 !!",
+      "content": "<p><strong>썸네일러</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>썸네일러 한 분 ( 3D/2D 무관 )</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxF7El2ffqq4mU8l0tR_cL8wNR6BDUZLVd' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "빙밍",
+        "image": "https://ifh.cc/g/K8lYZZ.jpg",
         "platform": "Soop"
       },
       "skills": ["프리미어 프로"],
       "videoType": ["버츄얼"],
-      "publishedAt": "2025-02-05",
-      "platform": "x"
+      "publishedAt": "2025-02-06",
+      "platform": "youtube"
     },
     {
       "id": 79,
+
       "title": "삐부 웹툰을 그려주실 웹툰 작가님을 모십니다!",
       "content": "<p><strong>웹툰 작가</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>일주일 최대 1~2번 삐부 웹툰</li><li>페이 : 채용 시 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxAWODFj8wtxLK2YUzDzn_JVrhCXDtdwvP' target='_blank'>구인글 바로가기</a></p>",
       "publisher": {
