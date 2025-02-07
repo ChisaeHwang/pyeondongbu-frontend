@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import jobsData from "../../assets/data/jobs.json";
 import JobBanner from "../../components/jobs/JobBanner";
 import CategoryFilters from "../../components/jobs/CategoryFilters";
@@ -10,11 +10,9 @@ import { Job } from "../../types/job";
 
 const ITEMS_PER_PAGE = 10;
 
-interface JobListPageProps {
-  searchQuery: string;
-}
+const JobListPage: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState("");
 
-const JobListPage: React.FC<JobListPageProps> = ({ searchQuery }) => {
   const {
     selectedSkills,
     selectedTypes,
@@ -29,6 +27,10 @@ const JobListPage: React.FC<JobListPageProps> = ({ searchQuery }) => {
     jobs: jobsData.jobs as Job[],
     searchQuery,
   });
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
 
   const totalPages = Math.ceil(filteredJobs.length / ITEMS_PER_PAGE);
   const currentJobs = filteredJobs.slice(
@@ -45,6 +47,8 @@ const JobListPage: React.FC<JobListPageProps> = ({ searchQuery }) => {
           selectedSkills={selectedSkills}
           selectedTypes={selectedTypes}
           selectedPlatforms={selectedPlatforms}
+          searchQuery={searchQuery}
+          onSearch={handleSearch}
           onSkillChange={handleSkillChange}
           onTypeChange={handleTypeChange}
           onPlatformChange={handlePlatformChange}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,6 +17,8 @@ import TermsPage from "./pages/legal/TermsPage";
 import PrivacyPage from "./pages/legal/PrivacyPage";
 import ContactPage from "./pages/legal/ContactPage";
 import { initGA, logPageView } from "./utils/analytics";
+import { AuthCallback } from "./pages/auth/AuthCallback";
+import { AuthProvider } from "./contexts/AuthContext";
 
 // Analytics wrapper component
 const AnalyticsWrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -36,41 +38,35 @@ const AnalyticsWrapper: React.FC<{ children: React.ReactNode }> = ({
 };
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState<string>("");
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-  };
-
   return (
-    <Router>
-      <AnalyticsWrapper>
-        <ScrollToTop />
-        <div className="min-h-screen bg-[#1a1b1e] flex flex-col">
-          <Header onSearch={handleSearch} />
-          <main className="flex-grow pb-16">
-            <Routes>
-              <Route
-                path="/"
-                element={<JobListPage searchQuery={searchQuery} />}
-              />
-              <Route
-                path="/jobs"
-                element={<JobListPage searchQuery={searchQuery} />}
-              />
-              <Route path="/jobs/:id" element={<JobDetailPage />} />
-              <Route path="/notices" element={<NoticeListPage />} />
-              <Route path="/notices/:id" element={<NoticeDetailPage />} />
-              <Route path="/terms" element={<TermsPage />} />
-              <Route path="/privacy" element={<PrivacyPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </AnalyticsWrapper>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <AnalyticsWrapper>
+          <ScrollToTop />
+          <div className="min-h-screen bg-[#1a1b1e] flex flex-col">
+            <Header />
+            <main className="flex-grow pb-16">
+              <Routes>
+                <Route path="/" element={<JobListPage />} />
+                <Route path="/jobs" element={<JobListPage />} />
+                <Route path="/jobs/:id" element={<JobDetailPage />} />
+                <Route path="/notices" element={<NoticeListPage />} />
+                <Route path="/notices/:id" element={<NoticeDetailPage />} />
+                <Route path="/terms" element={<TermsPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route
+                  path="/api/auth/login/google/callback"
+                  element={<AuthCallback />}
+                />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </AnalyticsWrapper>
+      </Router>
+    </AuthProvider>
   );
 }
 

@@ -1,24 +1,17 @@
-import React, { useState } from "react";
-import { SearchInput } from "../common/SearchInput";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../common/Logo";
+import { useAuth } from "../../contexts/AuthContext";
+import UserMenu from "./UserMenu";
+import LoginButton from "./LoginButton";
 
-interface HeaderProps {
-  onSearch: (query: string) => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ onSearch }) => {
+const Header: React.FC = () => {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
+  const { user, isLoading } = useAuth();
 
   const handleLogoClick = () => {
     navigate("/");
     window.location.reload();
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSearch(searchQuery);
   };
 
   return (
@@ -31,14 +24,8 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
           >
             <Logo className="h-6 w-auto" />
           </div>
-          <div className="w-full max-w-[180px] sm:max-w-[300px] md:max-w-[400px]">
-            <SearchInput
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onSubmit={handleSubmit}
-              placeholder="구인글 검색..."
-            />
-          </div>
+
+          {!isLoading && (user ? <UserMenu user={user} /> : <LoginButton />)}
         </div>
       </div>
     </header>
