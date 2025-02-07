@@ -9,6 +9,7 @@
     "axios": "^1.7.9",
     "cra-template-typescript": "1.2.0",
     "date-fns": "^4.1.0",
+    "js-cookie": "^3.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-ga4": "^2.1.0",
@@ -43,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17"

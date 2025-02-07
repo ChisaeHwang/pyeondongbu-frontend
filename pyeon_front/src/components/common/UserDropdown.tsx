@@ -10,8 +10,12 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ user }) => {
   const { logout } = useAuth();
 
   const handleLogout = async () => {
-    await logout();
-    window.location.reload();
+    try {
+      await logout(); // 백엔드 API를 호출하여 쿠키 제거
+      window.location.reload();
+    } catch (error) {
+      console.error("로그아웃 중 오류 발생:", error);
+    }
   };
 
   return (
