@@ -40,17 +40,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  // 앱 시작시 사용자 정보 확인
   useEffect(() => {
-    const initAuth = async () => {
-      try {
-        await refreshUser();
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    initAuth();
+    setIsLoading(false);
+    setUser(null);
   }, []);
 
   return (

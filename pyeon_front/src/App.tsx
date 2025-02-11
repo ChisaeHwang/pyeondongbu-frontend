@@ -55,10 +55,7 @@ function App() {
                 <Route path="/terms" element={<TermsPage />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="/contact" element={<ContactPage />} />
-                <Route
-                  path="/api/auth/login/google/callback"
-                  element={<AuthCallback />}
-                />
+                <Route path="/auth/callback" element={<AuthCallback />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </main>
