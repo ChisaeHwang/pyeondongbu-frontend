@@ -7,7 +7,7 @@ import LoginButton from "./LoginButton";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, isAuthenticated } = useAuth();
 
   const handleLogoClick = () => {
     navigate("/");
@@ -25,7 +25,12 @@ const Header: React.FC = () => {
             <Logo className="h-6 w-auto" />
           </div>
 
-          {!isLoading && (user ? <UserMenu user={user} /> : <LoginButton />)}
+          {!isLoading &&
+            (isAuthenticated && user ? (
+              <UserMenu user={user} />
+            ) : (
+              <LoginButton />
+            ))}
         </div>
       </div>
     </header>

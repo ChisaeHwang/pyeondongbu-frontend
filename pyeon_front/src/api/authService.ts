@@ -30,21 +30,19 @@ export const authService = {
     });
   },
 
-  getCurrentUser: async (): Promise<AuthUserResponse | null> => {
-    try {
-      const response = await fetch(`${API_CONFIG.baseURL}/api/auth/me`, {
-        credentials: "include",
-      });
+  getCurrentUser: async (): Promise<AuthUserResponse> => {
+    const response = await fetch(`${API_CONFIG.baseURL}/api/auth/me`, {
+      credentials: "include",
+    });
 
-      if (!response.ok) {
-        throw new Error("인증 정보를 가져오는데 실패했습니다.");
+    if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error("unauthorized");
       }
-
-      const result: ApiResponse<AuthUserResponse> = await response.json();
-      return result.data;
-    } catch (error) {
-      console.error("사용자 정보 조회 실패:", error);
-      return null;
+      throw new Error("사용자 정보를 가져오는데 실패했습니다.");
     }
+
+    const result: ApiResponse<AuthUserResponse> = await response.json();
+    return result.data;
   },
 };
