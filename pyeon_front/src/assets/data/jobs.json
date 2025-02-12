@@ -1,6 +1,20 @@
 {
   "jobs": [
     {
+      "id": 91,
+      "title": "[청묘 유튜브 메인 편집자 구인]",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>주 2~4회 유튜브 영상(롱폼) 업로드 (횟수 조절은 협의)</li><li>월 최소 200만원 이상 (영상 편집 횟수, 경력 , 포트폴리오에 따라 상향 가능)</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/channel/UCCL77mfaS0LwgJqry7ph_zA/community?lb=UgkxleA0yaGqlGnAcV-KDVaJy3LSy-1Pf8v-' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "청묘",
+        "image": "https://ifh.cc/g/h4pzgj.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임"],
+      "publishedAt": "2025-02-12",
+      "platform": "youtube"
+    },
+    {
       "id": 90,
       "title": "편집자님을 구합니다!",
       "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>주 쇼츠 3개 / 격주 롱폼 1개</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/hajinseos22/status/1889159021283995990' target='_blank'>구인글 바로가기</a></p>",
@@ -82,20 +96,6 @@
       "skills": ["프리미어 프로"],
       "videoType": ["게임"],
       "publishedAt": "2025-02-10",
-      "platform": "youtube"
-    },
-    {
-      "id": 84,
-      "title": "[청묘 유튜브 메인 편집자 구인]",
-      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>주 2~4회 유튜브 영상(롱폼) 업로드 (횟수 조절은 협의)</li><li>월 최소 200만원 이상 (영상 편집 횟수, 경력 , 포트폴리오에 따라 상향 가능)</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/post/UgkxKqmK6BTRu2rwxI6VREVaVufmHchcJt96' target='_blank'>구인글 바로가기</a></p>",
-      "publisher": {
-        "name": "청묘",
-        "image": "https://ifh.cc/g/h4pzgj.jpg",
-        "platform": "chzzk"
-      },
-      "skills": ["프리미어 프로"],
-      "videoType": ["게임"],
-      "publishedAt": "2025-02-08",
       "platform": "youtube"
     },
     {
