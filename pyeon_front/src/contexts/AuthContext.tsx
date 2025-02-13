@@ -15,7 +15,6 @@ interface AuthContextType {
   login: () => void;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
-  setAuthenticated: (value: boolean) => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -23,38 +22,30 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<AuthUserResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return sessionStorage.getItem("auth_status") === "authenticated";
+  const [user, setUser] = useState<AuthUserResponse | null>(() => {
+    const savedUser = sessionStorage.getItem("user_data");
+    return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  const setAuthenticated = useCallback((value: boolean) => {
-    setIsAuthenticated(value);
-    if (value) {
-      sessionStorage.setItem("auth_status", "authenticated");
-    } else {
-      sessionStorage.removeItem("auth_status");
-    }
-  }, []);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    return sessionStorage.getItem("user_data") !== null;
+  });
 
   const refreshUser = useCallback(async () => {
-    if (!isAuthenticated) {
-      setUser(null);
-      setIsLoading(false);
-      return;
-    }
-
     try {
       const userData = await authService.getCurrentUser();
       setUser(userData);
+      setIsAuthenticated(true);
+      sessionStorage.setItem("user_data", JSON.stringify(userData));
     } catch (error) {
-      if (error instanceof Error && error.message === "unauthorized") {
-        setUser(null);
-        setAuthenticated(false);
-      }
+      setUser(null);
+      setIsAuthenticated(false);
+      sessionStorage.removeItem("user_data");
+    } finally {
+      setIsLoading(false);
     }
-  }, [isAuthenticated, setAuthenticated]);
+  }, []);
 
   const login = () => {
     window.location.href = authService.getGoogleLoginUrl();
@@ -64,28 +55,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       await authService.logout();
       setUser(null);
-      setAuthenticated(false);
+      setIsAuthenticated(false);
+      sessionStorage.removeItem("user_data");
     } catch (error) {
       console.error("로그아웃 실패:", error);
     }
   };
 
   useEffect(() => {
-    const initializeAuth = async () => {
-      const authStatus = sessionStorage.getItem("auth_status");
-
-      if (authStatus === "authenticated") {
-        try {
-          await refreshUser();
-        } catch (error) {
-          setAuthenticated(false);
-        }
-      }
+    if (!sessionStorage.getItem("user_data")) {
+      refreshUser();
+    } else {
       setIsLoading(false);
-    };
-
-    initializeAuth();
-  }, [refreshUser, setAuthenticated]);
+    }
+  }, [refreshUser]);
 
   return (
     <AuthContext.Provider
@@ -96,7 +79,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         login,
         logout,
         refreshUser,
-        setAuthenticated,
       }}
     >
       {children}
@@ -111,3 +93,5 @@ export const useAuth = () => {
   }
   return context;
 };
+
+export default AuthProvider;

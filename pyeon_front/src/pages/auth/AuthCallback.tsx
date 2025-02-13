@@ -4,22 +4,20 @@ import { useAuth } from "../../contexts/AuthContext";
 
 export const AuthCallback = () => {
   const navigate = useNavigate();
-  const { refreshUser, setAuthenticated } = useAuth();
+  const { refreshUser } = useAuth();
 
   useEffect(() => {
     const processAuth = async () => {
       try {
-        setAuthenticated(true);
         await refreshUser();
         navigate("/", { replace: true });
       } catch (error) {
-        setAuthenticated(false);
         navigate("/");
       }
     };
 
     processAuth();
-  }, [navigate, refreshUser, setAuthenticated]);
+  }, [navigate, refreshUser]);
 
   return (
     <div className="flex justify-center items-center h-screen">
