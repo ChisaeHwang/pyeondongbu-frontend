@@ -32,6 +32,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
     if (platform === "youtube") return "YouTube";
     if (platform === "x") return "X";
     if (platform === "naver") return "카페";
+    if (platform === "Soop") return "Soop";
     return "없음";
   };
 
@@ -45,6 +46,9 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
     }
     if (platform === "naver") {
       return "bg-green-500/20 text-green-300 border border-green-500/30";
+    }
+    if (platform === "Soop") {
+      return "bg-blue-500/20 text-blue-300 border border-blue-500/30";
     }
     return "bg-black-500/20 text-white-300 border border-green-500/30";
   };
