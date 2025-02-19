@@ -1,6 +1,34 @@
 {
   "jobs": [
     {
+      "id": 102,
+      "title": "📎 브이로그 콘텐츠 편집자 모집 !!",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>VLOG 콘텐츠 편집 경험자</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/mill_staff/status/1891708907221025056' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "mill",
+        "image": "https://ifh.cc/g/7q00MM.jpg",
+        "platform": "youtube"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["브이로그"],
+      "publishedAt": "2025-02-18",
+      "platform": "x"
+    },
+    {
+      "id": 101,
+      "title": "[꽉녀 채널 편집자 모집]",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>작업량 : 협의</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/channel/UC4lSeVjstOVHhzILvWZhg5A/community?lb=UgkxayYcaGY39EVyYIpvNRDyXEe-HlMoMKAZ' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "꽉녀",
+        "image": "https://ifh.cc/g/6LZSF8.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임"],
+      "publishedAt": "2025-02-18",
+      "platform": "youtube"
+    },
+    {
       "id": 100,
       "title": "🍀 붓찌부에서 쇼츠 편집자 분을 모집 합니다!",
       "content": "<p><strong>쇼츠 편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>주 1회 쇼츠 영상 편집</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/B_tmozzi/status/1891190202317582643' target='_blank'>구인글 바로가기</a></p>",
@@ -63,7 +91,7 @@
       "publisher": {
         "name": "이라333",
         "image": "https://ifh.cc/g/P8bsDK.jpg",
-        "platform": "youtube"
+        "platform": "Soop"
       },
       "skills": ["프리미어 프로"],
       "videoType": ["게임"],
