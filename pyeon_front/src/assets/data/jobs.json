@@ -1,6 +1,76 @@
 {
   "jobs": [
     {
+      "id": 107,
+      "title": "[운타라 유튜브 편집자 구인 공고]",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>운타라 개인 방송 하이라이트 영상 제작</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/channel/UCsRiYH-VrZ2mYsohk7GhLdQ/community?lb=UgkxrEccI2YFtIRfw68n0_RXO2bSInDGpT5J' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "운타라",
+        "image": "https://ifh.cc/g/Fm3nZj.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임"],
+      "publishedAt": "2025-02-20",
+      "platform": "youtube"
+    },
+    {
+      "id": 106,
+      "title": "늘동부 썸네일러분 모집합니다!!!! ",
+      "content": "<p><strong>썸네일러</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>주 1~2회 썸네일 제작</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/good_todayy/status/1892228793307394051' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "오늘",
+        "image": "https://ifh.cc/g/rGwAqs.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["버츄얼"],
+      "publishedAt": "2025-02-19",
+      "platform": "x"
+    },
+    {
+      "id": 105,
+      "title": "호시아의 유튜브 편집자를 추가로 구인합니다! ",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>월 1~2회 롱폼</li><li>페이 : 분당 1.5 (협의가능)</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/Hoshia_Vtuber/status/1892126471944126585' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "호시아",
+        "image": "https://ifh.cc/g/3thO6q.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["버츄얼"],
+      "publishedAt": "2025-02-19",
+      "platform": "x"
+    },
+    {
+      "id": 104,
+      "title": "브이아이 버츄얼 아이돌 유튜브 편집자 모집",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 2월19일 ~ 2월 25일까지</li><li>각 채널 당 주 1회, 약 3분 내외 영상</li><li>페이 : 월 70만 원</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/vi_production_/status/1892043124710703441' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "브이아이",
+        "image": "https://ifh.cc/g/VNCNq6.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["버츄얼"],
+      "publishedAt": "2025-02-19",
+      "platform": "x"
+    },
+    {
+      "id": 103,
+      "title": "🍷스텔라이브 아카네 리제! 리동부 추가모집🍷",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 2025.02.28 오후 9시까지</li><li>주 1~2회 영상 편집</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/AkaneLize/status/1892046196136411385' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "아카네 리제",
+        "image": "https://ifh.cc/g/711Cyj.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["버츄얼"],
+      "publishedAt": "2025-02-19",
+      "platform": "x"
+    },
+    {
       "id": 102,
       "title": "📎 브이로그 콘텐츠 편집자 모집 !!",
       "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>VLOG 콘텐츠 편집 경험자</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/mill_staff/status/1891708907221025056' target='_blank'>구인글 바로가기</a></p>",
