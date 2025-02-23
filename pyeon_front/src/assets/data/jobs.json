@@ -1,6 +1,20 @@
 {
   "jobs": [
     {
+      "id": 111,
+      "title": "< 유튜브 편집자 모집 공고 >",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>작업량 : 협의</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://chzzk.naver.com/cc8aa73302fe94920f48b434ce3ba6b6/community/detail/18146774' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "우 야",
+        "image": "https://ifh.cc/g/MbyOtx.png",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임"],
+      "publishedAt": "2025-02-23",
+      "platform": "naver"
+    },
+    {
       "id": 110,
       "title": "[솔동부 편집자 모집]",
       "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 25.03.22까지</li><li>한 달 기준 롱폼 2 ~ 3건</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/h4soll/status/1893226631562735952' target='_blank'>구인글 바로가기</a></p>",
