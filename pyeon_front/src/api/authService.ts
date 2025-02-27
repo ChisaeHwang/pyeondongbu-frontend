@@ -35,6 +35,7 @@ export const authService = {
       credentials: "include",
     });
 
+    // 클라이언트가 콘솔에서 이걸 확인해도 되는지 여부 체크
     if (!response.ok) {
       if (response.status === 401) {
         throw new Error("unauthorized");
