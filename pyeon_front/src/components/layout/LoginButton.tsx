@@ -1,19 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { useAuth } from "../../contexts/AuthContext";
 
 const LoginButton: React.FC = () => {
-  const { login } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <button
-      onClick={login}
-      className="bg-white text-gray-800 px-3 py-1.5 rounded-md 
-      hover:bg-gray-100 transition-colors flex items-center gap-2 
-      border border-transparent hover:border-gray-300 font-pretendard font-semibold text-sm"
+      onClick={() => navigate("/login")}
+      className="flex items-center h-9 gap-1 bg-white hover:bg-gray-100 text-gray-800 pl-3 pr-4 rounded-md transition-colors duration-200"
     >
-      <span>구글 로그인</span>
-      <FcGoogle size={18} className="inline-block" />
+      <FcGoogle className="text-lg" />
+      <span className="font-medium text-sm">로그인</span>
     </button>
   );
 };
