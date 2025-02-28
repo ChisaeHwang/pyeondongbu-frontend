@@ -1,4 +1,5 @@
 import React from "react";
+import { PiPencilSimpleLine } from "react-icons/pi";
 
 const CommunityPage: React.FC = () => {
   return (
@@ -6,8 +7,9 @@ const CommunityPage: React.FC = () => {
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-white">커뮤니티</h1>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200">
-            글쓰기
+          <button className="flex items-center bg-[#313338] hover:bg-[#383A40] text-[#E5E7EB] pl-4 pr-3 py-2 rounded-md transition-colors duration-200">
+            <span className="font-bold">글쓰기</span>
+            <PiPencilSimpleLine className="ml-1 text-lg" />
           </button>
         </div>
 

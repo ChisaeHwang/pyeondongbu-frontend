@@ -6,9 +6,18 @@ const LoginPage: React.FC = () => {
   return (
     <div className="container mx-auto max-w-5xl px-4 py-16">
       <div className="max-w-md mx-auto bg-[#25262b] rounded-lg p-8 shadow-lg">
-        <h1 className="text-2xl font-bold text-white text-center mb-8">
-          로그인
-        </h1>
+        <div className="flex items-center justify-center mb-8 -ml-3">
+          <div className="flex items-center gap-2">
+            <img
+              src="https://pyeon.s3.ap-northeast-2.amazonaws.com/images/%ED%8E%B8%EB%8F%99%EB%B6%80+%EB%A1%9C%EA%B3%A0+4.png"
+              alt="편동부 로고"
+              className="h-10 w-10 object-contain"
+            />
+            <span className="text-3xl font-bold text-white -ml-0.5">
+              편동부
+            </span>
+          </div>
+        </div>
 
         <div className="space-y-6">
           {/* 약관 안내 */}
@@ -52,7 +61,10 @@ const LoginPage: React.FC = () => {
 
           {/* 구글 로그인 버튼 */}
           <button
-            onClick={() => (window.location.href = "/api/auth/google")}
+            onClick={() =>
+              (window.location.href =
+                "http://localhost:8080/oauth2/authorization/google")
+            }
             className="w-full flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-gray-800 font-medium py-3 px-4 rounded-md transition-colors duration-200"
           >
             <FcGoogle className="text-xl" />

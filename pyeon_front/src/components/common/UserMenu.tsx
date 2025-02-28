@@ -30,7 +30,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
       <button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className="w-8 h-8 rounded-full bg-white flex items-center justify-center 
-        overflow-hidden border-2 border-transparent hover:border-gray-300 transition-colors"
+        overflow-hidden border-2 border-transparent hover:border-gray-300 
+        transition-all duration-200 hover:scale-105"
       >
         <ProfileImage user={user} />
       </button>
