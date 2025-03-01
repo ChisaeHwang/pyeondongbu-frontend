@@ -6,20 +6,41 @@ import Pagination from "../../components/jobs/Pagination";
 import axiosInstance from "../../utils/axios";
 import { getRelativeTime } from "../../utils/dateUtils";
 
+// 백엔드 API의 PostSummaryResponse와 일치하는 인터페이스
 interface Post {
   id: number;
   title: string;
-  content: string;
+  content: string; // 목록에서는 사용하지 않지만 기존 코드 호환성을 위해 유지
   memberNickname: string;
   viewCount: number;
   likeCount: number;
   commentCount: number;
   createdAt: string;
-  category: {
-    mainCategory: string;
-    subCategory: string;
-  };
+  modifiedAt: string;
+  mainCategory: string;
+  subCategory: string;
 }
+
+// MainCategory enum 값 정의
+enum MainCategory {
+  HIRE = "RECRUITMENT",
+  RECRUIT = "JOB_SEEKING",
+  COMMUNITY = "COMMUNITY",
+}
+
+// 서브 카테고리를 백엔드 enum 형식으로 변환
+const convertSubCategoryToEnum = (subCategory: string) => {
+  switch (subCategory) {
+    case "자유":
+      return "FREE";
+    case "질문":
+      return "QUESTION";
+    case "정보":
+      return "INFORMATION";
+    default:
+      return null;
+  }
+};
 
 const CommunityPage: React.FC = () => {
   const navigate = useNavigate();
@@ -35,14 +56,22 @@ const CommunityPage: React.FC = () => {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        const response = await axiosInstance.get("/api/community/posts", {
+
+        // 모든 카테고리에 대해 동일한 엔드포인트 사용, 인기 카테고리는 onlyPopular 파라미터로 처리
+        const response = await axiosInstance.get("/api/posts", {
           params: {
+            mainCategory: MainCategory.COMMUNITY,
+            subCategory:
+              activeCategory !== "전체" && activeCategory !== "인기"
+                ? convertSubCategoryToEnum(activeCategory)
+                : null,
+            onlyPopular: activeCategory === "인기",
             page: currentPage - 1,
             size: 10,
-            subCategory: activeCategory !== "전체" ? activeCategory : null,
           },
         });
 
+        // 백엔드 API 응답 형식에 맞게 처리
         setPosts(response.data.content);
         setTotalPages(response.data.totalPages);
       } catch (error) {
@@ -63,14 +92,16 @@ const CommunityPage: React.FC = () => {
 
     try {
       setLoading(true);
-      const response = await axiosInstance.get("/api/community/posts/search", {
+      const response = await axiosInstance.get("/api/posts", {
         params: {
-          keyword: query,
+          mainCategory: MainCategory.COMMUNITY,
+          searchText: query,
           page: 0,
           size: 10,
         },
       });
 
+      // 백엔드 API 응답 형식에 맞게 처리
       setPosts(response.data.content);
       setTotalPages(response.data.totalPages);
       setCurrentPage(1);
@@ -114,7 +145,7 @@ const CommunityPage: React.FC = () => {
           placeholder="커뮤니티 글을 검색해보세요..."
         />
 
-        {/* 게시글 카테고리 */}
+        {/* 커뮤니티 카테고리 */}
         <div className="flex space-x-4 border-b border-[#2c2d32] pb-4">
           <button
             className={`transition-colors duration-200 ${
@@ -193,17 +224,17 @@ const CommunityPage: React.FC = () => {
                       {post.title}
                     </h3>
                     <p className="text-gray-400 text-sm truncate">
-                      {post.content.replace(/<[^>]*>/g, "")}
+                      {post.content?.replace(/<[^>]*>/g, "")}
                     </p>
                     <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
                       <span>{post.memberNickname}</span>
                       <span>•</span>
                       <span>{getRelativeTime(post.createdAt)}</span>
-                      {post.category.subCategory && (
+                      {post.subCategory && (
                         <>
                           <span>•</span>
                           <span className="text-purple-400/80">
-                            {post.category.subCategory}
+                            {post.subCategory}
                           </span>
                         </>
                       )}

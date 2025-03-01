@@ -54,7 +54,7 @@ const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
 const CreatePostPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // URL에서 초기 카테고리 가져오기 (예: /create?category=구인)
@@ -180,20 +180,16 @@ const CreatePostPage: React.FC = () => {
     }
 
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("image", file);
 
     try {
-      const response = await axiosInstance.post(
-        "/api/images/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axiosInstance.post("/api/images", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-      const imageUrl = response.data.replace("Uploaded: ", "").trim();
+      const imageUrl = response.data.imageUrl;
 
       // 이미지 URL 저장
       setUploadedImages((prev) => [...prev, imageUrl]);
@@ -203,6 +199,53 @@ const CreatePostPage: React.FC = () => {
     } catch (error) {
       console.error("이미지 업로드 실패:", error);
       setError("이미지 업로드에 실패했습니다.");
+    }
+  };
+
+  // 메인 카테고리를 백엔드 enum 형식으로 변환
+  const convertMainCategoryToEnum = (category: string) => {
+    switch (category) {
+      case "구인":
+        return "RECRUITMENT";
+      case "구직":
+        return "JOB_SEEKING";
+      case "커뮤니티":
+        return "COMMUNITY";
+      default:
+        return "COMMUNITY";
+    }
+  };
+
+  // 서브 카테고리를 백엔드 enum 형식으로 변환
+  const convertSubCategoryToEnum = (
+    mainCategory: string,
+    subCategory: string
+  ) => {
+    if (mainCategory === "구인" || mainCategory === "구직") {
+      switch (subCategory) {
+        case "편집자":
+          return "EDITOR";
+        case "썸네일러":
+          return "THUMBNAILER";
+        case "기타":
+          return "OTHER";
+        default:
+          return "OTHER";
+      }
+    } else {
+      // 커뮤니티
+      switch (subCategory) {
+        case "자유":
+          return "FREE";
+        case "질문":
+          return "QUESTION";
+        case "정보":
+          return "INFORMATION";
+        case "전체":
+          return "ALL";
+        default:
+          return "FREE";
+      }
     }
   };
 
@@ -230,22 +273,14 @@ const CreatePostPage: React.FC = () => {
     setError(null);
 
     try {
-      // API 엔드포인트 결정
-      let endpoint = "";
-      if (mainCategory === "구인") {
-        endpoint = "/api/hire/posts";
-      } else if (mainCategory === "구직") {
-        endpoint = "/api/recruit/posts";
-      } else {
-        endpoint = "/api/community/posts";
-      }
+      // 백엔드 API 엔드포인트는 하나로 통일
+      const endpoint = "/api/posts";
 
       const postData = {
         title,
         content,
-        mainCategory,
-        subCategory,
-        authorId: user?.id,
+        mainCategory: convertMainCategoryToEnum(mainCategory),
+        subCategory: convertSubCategoryToEnum(mainCategory, subCategory),
       };
 
       await axiosInstance.post(endpoint, postData);

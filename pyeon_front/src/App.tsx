@@ -27,6 +27,8 @@ import HireDetailPage from "./pages/hire/HireDetailPage";
 import RecruitDetailPage from "./pages/recruit/RecruitDetailPage";
 import CommunityDetailPage from "./pages/community/CommunityDetailPage";
 import LoginPage from "./pages/auth/LoginPage";
+import ProfilePage from "./pages/user/ProfilePage";
+import MyPostsPage from "./pages/user/MyPostsPage";
 
 // Analytics wrapper component
 const AnalyticsWrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -73,6 +75,8 @@ function App() {
                 <Route path="/create" element={<CreatePostPage />} />
                 <Route path="/edit/:id" element={<CreatePostPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/my-posts" element={<MyPostsPage />} />
                 <Route path="/notices" element={<NoticeListPage />} />
                 <Route path="/notices/:id" element={<NoticeDetailPage />} />
                 <Route path="/terms" element={<TermsPage />} />

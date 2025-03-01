@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { PiPencilSimpleLine, PiUserFill } from "react-icons/pi";
-import { Link, useNavigate } from "react-router-dom";
-import SearchBar from "../../components/common/SearchBar";
-import Pagination from "../../components/jobs/Pagination";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import axiosInstance from "../../utils/axios";
 import { getRelativeTime } from "../../utils/dateUtils";
 
-// 백엔드 API의 PostSummaryResponse와 일치하는 인터페이스
 interface Post {
   id: number;
   title: string;
-  content: string; // 목록에서는 사용하지 않지만 기존 코드 호환성을 위해 유지
+  content: string;
   memberNickname: string;
   viewCount: number;
   likeCount: number;
   commentCount: number;
   createdAt: string;
-  modifiedAt: string;
   mainCategory: string;
   subCategory: string;
 }
@@ -28,49 +24,47 @@ enum MainCategory {
   COMMUNITY = "COMMUNITY",
 }
 
-// 서브 카테고리를 백엔드 enum 형식으로 변환
-const convertSubCategoryToEnum = (subCategory: string) => {
-  switch (subCategory) {
-    case "편집자":
-      return "EDITOR";
-    case "썸네일러":
-      return "THUMBNAILER";
-    case "기타":
-      return "OTHER";
-    default:
-      return null;
-  }
+// 한글 표시용 매핑
+const CATEGORY_DISPLAY = {
+  [MainCategory.HIRE]: "구인",
+  [MainCategory.RECRUIT]: "구직",
+  [MainCategory.COMMUNITY]: "커뮤니티",
 };
 
-const HirePage: React.FC = () => {
+const MyPostsPage: React.FC = () => {
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
+
   const [posts, setPosts] = useState<Post[]>([]);
-  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("전체");
 
   // 게시글 데이터 가져오기
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchMyPosts = async () => {
+      if (!isAuthenticated) return;
+
       try {
         setLoading(true);
-        const response = await axiosInstance.get("/api/posts", {
-          params: {
-            mainCategory: MainCategory.HIRE,
-            subCategory:
-              activeCategory !== "전체"
-                ? convertSubCategoryToEnum(activeCategory)
-                : null,
-            page: currentPage - 1,
-            size: 10,
-          },
-        });
 
-        // 백엔드 API 응답 형식에 맞게 처리
-        setPosts(response.data.content);
-        setTotalPages(response.data.totalPages);
+        // API 호출
+        const response = await axiosInstance.get("/api/posts/my");
+        let filteredPosts = response.data.content;
+
+        // 카테고리 필터링
+        if (activeCategory !== "전체") {
+          // 한글 카테고리명을 enum 값으로 변환
+          const categoryEnum = Object.entries(CATEGORY_DISPLAY).find(
+            ([_, value]) => value === activeCategory
+          )?.[0];
+
+          filteredPosts = filteredPosts.filter(
+            (post: Post) => post.mainCategory === categoryEnum
+          );
+        }
+
+        setPosts(filteredPosts);
       } catch (error) {
         console.error("게시글을 불러오는 중 오류가 발생했습니다:", error);
         setError("게시글을 불러오는 중 오류가 발생했습니다.");
@@ -79,70 +73,44 @@ const HirePage: React.FC = () => {
       }
     };
 
-    fetchPosts();
-  }, [currentPage, activeCategory]);
-
-  const handleSearch = async (query: string) => {
-    if (!query.trim()) {
-      return;
-    }
-
-    try {
-      setLoading(true);
-      const response = await axiosInstance.get("/api/posts", {
-        params: {
-          mainCategory: MainCategory.HIRE,
-          searchText: query,
-          page: 0,
-          size: 10,
-        },
-      });
-
-      // 백엔드 API 응답 형식에 맞게 처리
-      setPosts(response.data.content);
-      setTotalPages(response.data.totalPages);
-      setCurrentPage(1);
-    } catch (error) {
-      console.error("검색 중 오류가 발생했습니다:", error);
-      setError("검색 중 오류가 발생했습니다.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchMyPosts();
+  }, [activeCategory, isAuthenticated]);
 
   // 게시글 클릭 시 상세 페이지로 이동
-  const handlePostClick = (postId: number) => {
-    navigate(`/hire/posts/${postId}`);
+  const handlePostClick = (post: Post) => {
+    const { id } = post;
+    const mainCategory = post.mainCategory;
+
+    if (mainCategory === MainCategory.HIRE) {
+      navigate(`/hire/posts/${id}`);
+    } else if (mainCategory === MainCategory.RECRUIT) {
+      navigate(`/recruit/posts/${id}`);
+    } else {
+      navigate(`/community/posts/${id}`);
+    }
   };
 
   // 카테고리 변경
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
-    setCurrentPage(1);
   };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-5xl mx-auto text-center text-gray-400 py-12">
+          로그인이 필요합니다.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto max-w-5xl px-4 py-8">
       <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-white">구인</h1>
-            <PiUserFill className="text-2xl text-cyan-400" />
-          </div>
-          <Link to="/create?category=구인">
-            <button className="flex items-center bg-[#313338] hover:bg-[#383A40] text-[#E5E7EB] pl-4 pr-3 py-2 rounded-md transition-colors duration-200">
-              <span className="font-bold">글쓰기</span>
-              <PiPencilSimpleLine className="ml-1 text-lg" />
-            </button>
-          </Link>
-        </div>
+        <h1 className="text-2xl font-bold text-white">내가 쓴 글</h1>
 
-        <SearchBar
-          onSearch={handleSearch}
-          placeholder="원하는 포지션을 검색해보세요..."
-        />
-
-        {/* 구인 카테고리 */}
+        {/* 카테고리 필터 */}
         <div className="flex space-x-4 border-b border-[#2c2d32] pb-4">
           <button
             className={`transition-colors duration-200 ${
@@ -156,33 +124,33 @@ const HirePage: React.FC = () => {
           </button>
           <button
             className={`transition-colors duration-200 ${
-              activeCategory === "편집자"
+              activeCategory === "구인"
                 ? "text-white"
                 : "text-gray-400 hover:text-white"
             }`}
-            onClick={() => handleCategoryChange("편집자")}
+            onClick={() => handleCategoryChange("구인")}
           >
-            편집자
+            구인
           </button>
           <button
             className={`transition-colors duration-200 ${
-              activeCategory === "썸네일러"
+              activeCategory === "구직"
                 ? "text-white"
                 : "text-gray-400 hover:text-white"
             }`}
-            onClick={() => handleCategoryChange("썸네일러")}
+            onClick={() => handleCategoryChange("구직")}
           >
-            썸네일러
+            구직
           </button>
           <button
             className={`transition-colors duration-200 ${
-              activeCategory === "기타"
+              activeCategory === "커뮤니티"
                 ? "text-white"
                 : "text-gray-400 hover:text-white"
             }`}
-            onClick={() => handleCategoryChange("기타")}
+            onClick={() => handleCategoryChange("커뮤니티")}
           >
-            기타
+            커뮤니티
           </button>
         </div>
 
@@ -203,7 +171,7 @@ const HirePage: React.FC = () => {
               <div
                 key={post.id}
                 className="bg-[#25262b] rounded-lg p-4 hover:bg-[#2c2d32] transition-colors cursor-pointer"
-                onClick={() => handlePostClick(post.id)}
+                onClick={() => handlePostClick(post)}
               >
                 <div className="flex justify-between items-start gap-4">
                   <div className="min-w-0 flex-1">
@@ -211,16 +179,26 @@ const HirePage: React.FC = () => {
                       {post.title}
                     </h3>
                     <p className="text-gray-400 text-sm truncate">
-                      {post.content?.replace(/<[^>]*>/g, "")}
+                      {post.content.replace(/<[^>]*>/g, "")}
                     </p>
                     <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
-                      <span>{post.memberNickname}</span>
-                      <span>•</span>
                       <span>{getRelativeTime(post.createdAt)}</span>
+                      <span>•</span>
+                      <span
+                        className={`${
+                          post.mainCategory === "구인"
+                            ? "text-cyan-400/80"
+                            : post.mainCategory === "구직"
+                            ? "text-fuchsia-400/80"
+                            : "text-purple-400/80"
+                        }`}
+                      >
+                        {post.mainCategory}
+                      </span>
                       {post.subCategory && (
                         <>
                           <span>•</span>
-                          <span className="text-cyan-400/80">
+                          <span className="text-gray-400">
                             {post.subCategory}
                           </span>
                         </>
@@ -235,15 +213,9 @@ const HirePage: React.FC = () => {
             ))
           )}
         </div>
-
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
       </div>
     </div>
   );
 };
 
-export default HirePage;
+export default MyPostsPage;

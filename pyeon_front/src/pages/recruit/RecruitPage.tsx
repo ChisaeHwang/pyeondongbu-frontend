@@ -6,20 +6,41 @@ import Pagination from "../../components/jobs/Pagination";
 import axiosInstance from "../../utils/axios";
 import { getRelativeTime } from "../../utils/dateUtils";
 
+// 백엔드 API의 PostSummaryResponse와 일치하는 인터페이스
 interface Post {
   id: number;
   title: string;
-  content: string;
+  content: string; // 목록에서는 사용하지 않지만 기존 코드 호환성을 위해 유지
   memberNickname: string;
   viewCount: number;
   likeCount: number;
   commentCount: number;
   createdAt: string;
-  category: {
-    mainCategory: string;
-    subCategory: string;
-  };
+  modifiedAt: string;
+  mainCategory: string;
+  subCategory: string;
 }
+
+// MainCategory enum 값 정의
+enum MainCategory {
+  HIRE = "RECRUITMENT",
+  RECRUIT = "JOB_SEEKING",
+  COMMUNITY = "COMMUNITY",
+}
+
+// 서브 카테고리를 백엔드 enum 형식으로 변환
+const convertSubCategoryToEnum = (subCategory: string) => {
+  switch (subCategory) {
+    case "편집자":
+      return "EDITOR";
+    case "썸네일러":
+      return "THUMBNAILER";
+    case "기타":
+      return "OTHER";
+    default:
+      return null;
+  }
+};
 
 const RecruitPage: React.FC = () => {
   const navigate = useNavigate();
@@ -35,14 +56,19 @@ const RecruitPage: React.FC = () => {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        const response = await axiosInstance.get("/api/recruit/posts", {
+        const response = await axiosInstance.get("/api/posts", {
           params: {
+            mainCategory: MainCategory.RECRUIT,
+            subCategory:
+              activeCategory !== "전체"
+                ? convertSubCategoryToEnum(activeCategory)
+                : null,
             page: currentPage - 1,
             size: 10,
-            subCategory: activeCategory !== "전체" ? activeCategory : null,
           },
         });
 
+        // 백엔드 API 응답 형식에 맞게 처리
         setPosts(response.data.content);
         setTotalPages(response.data.totalPages);
       } catch (error) {
@@ -63,14 +89,16 @@ const RecruitPage: React.FC = () => {
 
     try {
       setLoading(true);
-      const response = await axiosInstance.get("/api/recruit/posts/search", {
+      const response = await axiosInstance.get("/api/posts", {
         params: {
-          keyword: query,
+          mainCategory: MainCategory.RECRUIT,
+          searchText: query,
           page: 0,
           size: 10,
         },
       });
 
+      // 백엔드 API 응답 형식에 맞게 처리
       setPosts(response.data.content);
       setTotalPages(response.data.totalPages);
       setCurrentPage(1);
@@ -183,17 +211,17 @@ const RecruitPage: React.FC = () => {
                       {post.title}
                     </h3>
                     <p className="text-gray-400 text-sm truncate">
-                      {post.content.replace(/<[^>]*>/g, "")}
+                      {post.content?.replace(/<[^>]*>/g, "")}
                     </p>
                     <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
                       <span>{post.memberNickname}</span>
                       <span>•</span>
                       <span>{getRelativeTime(post.createdAt)}</span>
-                      {post.category.subCategory && (
+                      {post.subCategory && (
                         <>
                           <span>•</span>
                           <span className="text-fuchsia-400/80">
-                            {post.category.subCategory}
+                            {post.subCategory}
                           </span>
                         </>
                       )}

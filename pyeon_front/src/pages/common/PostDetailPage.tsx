@@ -6,8 +6,9 @@ import PostHeader from "../../components/post/PostHeader";
 import PostContent from "../../components/post/PostContent";
 import PostActions from "../../components/post/PostActions";
 import CommentList from "../../components/post/CommentList";
+import axiosInstance from "../../utils/axios";
 
-// 목 데이터 타입 정의
+// 타입 정의
 interface Comment {
   id: number;
   content: string;
@@ -27,96 +28,28 @@ interface Post {
   likeCount: number;
   createdAt: string;
   modifiedAt: string;
-  category: {
-    mainCategory: string;
-    subCategory: string;
-  };
+  mainCategory: string;
+  subCategory: string;
   comments: Comment[];
   hasLiked: boolean;
 }
 
-// 목 데이터 - 게시글 상세 정보
-const MOCK_POSTS: Record<string, Post> = {
-  "1": {
-    id: 1,
-    title: "편집자 구합니다 - 게임 컨텐츠 전문",
-    content:
-      "안녕하세요! 게임 컨텐츠를 주로 다루는 유튜버입니다. 주 3회 영상 업로드를 목표로 하고 있으며, 편집 스타일은 템포감 있고 밈을 활용한 편집을 선호합니다.\n\n## 요구사항\n- 프리미어 프로 또는 파이널컷 사용 가능하신 분\n- 게임 컨텐츠에 대한 이해도가 높으신 분\n- 주 3회 영상 편집 가능하신 분\n- 빠른 소통과 피드백 반영 가능하신 분\n\n## 급여 조건\n- 월 고정급 협의 (경력에 따라 조정 가능)\n- 영상당 평균 10-15분 분량\n\n관심 있으신 분은 포트폴리오와 함께 연락 부탁드립니다. 감사합니다!",
-    memberEmail: "creator1@example.com",
-    memberNickname: "게임크리에이터",
-    viewCount: 245,
-    likeCount: 18,
-    createdAt: "2023-05-15T14:30:00",
-    modifiedAt: "2023-05-15T14:30:00",
-    category: {
-      mainCategory: "구인",
-      subCategory: "편집자",
-    },
-    comments: [
-      {
-        id: 1,
-        content: "포트폴리오 보내드렸습니다. 확인 부탁드려요!",
-        memberEmail: "editor1@example.com",
-        memberNickname: "게임편집자",
-        createdAt: "2023-05-15T15:45:00",
-        modifiedAt: "2023-05-15T15:45:00",
-      },
-      {
-        id: 2,
-        content:
-          "편집 경력 2년 있습니다. 연락처 남겨주시면 포폴 보내드리겠습니다.",
-        memberEmail: "editor2@example.com",
-        memberNickname: "영상편집전문가",
-        createdAt: "2023-05-15T16:20:00",
-        modifiedAt: "2023-05-15T16:20:00",
-      },
-      {
-        id: 3,
-        content: "월 급여는 어느 정도 생각하고 계신가요?",
-        memberEmail: "curious@example.com",
-        memberNickname: "궁금이",
-        createdAt: "2023-05-15T17:10:00",
-        modifiedAt: "2023-05-15T17:10:00",
-      },
-    ],
-    hasLiked: false,
-  },
-  "2": {
-    id: 2,
-    title: "썸네일러 구인 - 뷰티 채널",
-    content:
-      "30만 구독자를 보유한 뷰티 채널입니다. 주 2회 업로드하는 영상의 썸네일 제작자를 찾고 있습니다.\n\n## 원하는 스타일\n- 트렌디한 디자인\n- 눈에 띄는 컬러감\n- 깔끔하고 세련된 폰트 사용\n\n## 작업 조건\n- 건당 5만원\n- 수정 1회 포함\n- 작업 기한: 요청 후 24시간 이내\n\n지속적인 작업 가능하신 분 연락주세요. 포트폴리오 필수입니다.",
-    memberEmail: "beauty@example.com",
-    memberNickname: "뷰티여신",
-    viewCount: 189,
-    likeCount: 12,
-    createdAt: "2023-05-14T10:15:00",
-    modifiedAt: "2023-05-14T10:15:00",
-    category: {
-      mainCategory: "구인",
-      subCategory: "썸네일러",
-    },
-    comments: [
-      {
-        id: 4,
-        content: "포트폴리오 보내드렸습니다. 메일 확인 부탁드려요.",
-        memberEmail: "designer1@example.com",
-        memberNickname: "디자인고수",
-        createdAt: "2023-05-14T11:30:00",
-        modifiedAt: "2023-05-14T11:30:00",
-      },
-      {
-        id: 5,
-        content: "연락처 남겨주시면 작업물 보내드리겠습니다!",
-        memberEmail: "thumbnailer@example.com",
-        memberNickname: "썸네일장인",
-        createdAt: "2023-05-14T13:45:00",
-        modifiedAt: "2023-05-14T13:45:00",
-      },
-    ],
-    hasLiked: false,
-  },
-};
+// 백엔드 응답 타입
+interface PostResponse {
+  id: number;
+  title: string;
+  content: string;
+  memberEmail: string;
+  memberNickname: string;
+  viewCount: number;
+  likeCount: number;
+  createdAt: string;
+  modifiedAt: string;
+  mainCategory: string;
+  subCategory: string;
+  comments: Comment[];
+  hasLiked: boolean;
+}
 
 const PostDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -145,20 +78,37 @@ const PostDetailPage: React.FC = () => {
 
   const pageType = getPageType();
 
-  // 게시글 데이터 가져오기 (목 데이터 사용)
+  // 게시글 데이터 가져오기
   useEffect(() => {
     const fetchPost = async () => {
+      if (!id) return;
+
       try {
         setLoading(true);
 
-        // 실제 API 호출 대신 목 데이터 사용
-        if (id && MOCK_POSTS[id]) {
-          // 목 데이터에서 게시글 찾기
-          setPost(MOCK_POSTS[id]);
-        } else {
-          // 목 데이터에 없는 경우 에러 처리
-          setError("게시글을 찾을 수 없습니다.");
-        }
+        // API 호출 - withCredentials가 axios 인스턴스에 설정되어 있으므로 쿠키가 자동으로 전송됨
+        const response = await axiosInstance.get<PostResponse>(
+          `/api/posts/${id}`
+        );
+
+        // 백엔드 API 응답 데이터를 Post 타입으로 변환
+        const postData: Post = {
+          id: response.data.id,
+          title: response.data.title,
+          content: response.data.content,
+          memberEmail: response.data.memberEmail,
+          memberNickname: response.data.memberNickname,
+          viewCount: response.data.viewCount,
+          likeCount: response.data.likeCount,
+          createdAt: response.data.createdAt,
+          modifiedAt: response.data.modifiedAt,
+          mainCategory: response.data.mainCategory,
+          subCategory: response.data.subCategory,
+          comments: response.data.comments,
+          hasLiked: response.data.hasLiked,
+        };
+
+        setPost(postData);
       } catch (error) {
         console.error("게시글을 불러오는 중 오류가 발생했습니다:", error);
         setError("게시글을 불러오는 중 오류가 발생했습니다.");
@@ -177,16 +127,26 @@ const PostDetailPage: React.FC = () => {
       return;
     }
 
-    // 목 데이터 업데이트
-    setPost((prev) => {
-      if (!prev) return prev;
+    if (!id || !post) return;
 
-      return {
-        ...prev,
-        hasLiked: !prev.hasLiked,
-        likeCount: prev.hasLiked ? prev.likeCount - 1 : prev.likeCount + 1,
-      };
-    });
+    try {
+      // API 호출 - withCredentials가 axios 인스턴스에 설정되어 있으므로 쿠키가 자동으로 전송됨
+      await axiosInstance.post(`/api/posts/${id}/like`);
+
+      // 상태 업데이트
+      setPost((prev) => {
+        if (!prev) return prev;
+
+        return {
+          ...prev,
+          hasLiked: !prev.hasLiked,
+          likeCount: prev.hasLiked ? prev.likeCount - 1 : prev.likeCount + 1,
+        };
+      });
+    } catch (error) {
+      console.error("좋아요 처리 중 오류가 발생했습니다:", error);
+      alert("좋아요 처리 중 오류가 발생했습니다.");
+    }
   };
 
   // 게시글 삭제
@@ -195,15 +155,25 @@ const PostDetailPage: React.FC = () => {
       return;
     }
 
-    // 목 데이터 삭제 (실제로는 삭제되지 않고 리다이렉트만 수행)
-    alert("게시글이 삭제되었습니다.");
+    if (!id) return;
 
-    if (pageType === "hire") {
-      navigate("/hire");
-    } else if (pageType === "recruit") {
-      navigate("/recruit");
-    } else {
-      navigate("/community");
+    try {
+      // API 호출
+      await axiosInstance.delete(`/api/posts/${id}`);
+
+      alert("게시글이 삭제되었습니다.");
+
+      // 목록 페이지로 이동
+      if (pageType === "hire") {
+        navigate("/hire");
+      } else if (pageType === "recruit") {
+        navigate("/recruit");
+      } else {
+        navigate("/community");
+      }
+    } catch (error) {
+      console.error("게시글 삭제 중 오류가 발생했습니다:", error);
+      alert("게시글 삭제 중 오류가 발생했습니다.");
     }
   };
 
@@ -221,12 +191,19 @@ const PostDetailPage: React.FC = () => {
       return;
     }
 
+    if (!id) return;
+
     try {
       setIsSubmittingComment(true);
 
-      // 목 데이터에 댓글 추가
-      const newCommentObj = {
-        id: Date.now(), // 임시 ID 생성
+      // API 호출
+      const response = await axiosInstance.post(`/api/posts/${id}/comments`, {
+        content: newComment,
+      });
+
+      // 새 댓글 객체 생성
+      const newCommentObj: Comment = {
+        id: response.data, // API가 새 댓글의 ID를 반환
         content: newComment,
         memberEmail: user?.email || "",
         memberNickname: user?.nickname || "사용자",
@@ -272,26 +249,38 @@ const PostDetailPage: React.FC = () => {
       return;
     }
 
-    // 목 데이터 댓글 수정
-    setPost((prev) => {
-      if (!prev) return prev;
+    if (!id) return;
 
-      return {
-        ...prev,
-        comments: prev.comments.map((comment) =>
-          comment.id === commentId
-            ? {
-                ...comment,
-                content: editedCommentContent,
-                modifiedAt: new Date().toISOString(),
-              }
-            : comment
-        ),
-      };
-    });
+    try {
+      // API 호출
+      await axiosInstance.put(`/api/posts/${id}/comments/${commentId}`, {
+        content: editedCommentContent,
+      });
 
-    setEditingCommentId(null);
-    setEditedCommentContent("");
+      // 댓글 목록 업데이트
+      setPost((prev) => {
+        if (!prev) return prev;
+
+        return {
+          ...prev,
+          comments: prev.comments.map((comment) =>
+            comment.id === commentId
+              ? {
+                  ...comment,
+                  content: editedCommentContent,
+                  modifiedAt: new Date().toISOString(),
+                }
+              : comment
+          ),
+        };
+      });
+
+      setEditingCommentId(null);
+      setEditedCommentContent("");
+    } catch (error) {
+      console.error("댓글 수정 중 오류가 발생했습니다:", error);
+      alert("댓글 수정 중 오류가 발생했습니다.");
+    }
   };
 
   // 댓글 삭제
@@ -300,15 +289,25 @@ const PostDetailPage: React.FC = () => {
       return;
     }
 
-    // 목 데이터 댓글 삭제
-    setPost((prev) => {
-      if (!prev) return prev;
+    if (!id) return;
 
-      return {
-        ...prev,
-        comments: prev.comments.filter((comment) => comment.id !== commentId),
-      };
-    });
+    try {
+      // API 호출
+      await axiosInstance.delete(`/api/posts/${id}/comments/${commentId}`);
+
+      // 댓글 목록 업데이트
+      setPost((prev) => {
+        if (!prev) return prev;
+
+        return {
+          ...prev,
+          comments: prev.comments.filter((comment) => comment.id !== commentId),
+        };
+      });
+    } catch (error) {
+      console.error("댓글 삭제 중 오류가 발생했습니다:", error);
+      alert("댓글 삭제 중 오류가 발생했습니다.");
+    }
   };
 
   // 목록으로 돌아가기
@@ -324,7 +323,7 @@ const PostDetailPage: React.FC = () => {
 
   // 게시글 수정 페이지로 이동
   const goToEditPage = () => {
-    navigate(`/edit/${id}?category=${post?.category.mainCategory}`);
+    navigate(`/edit/${id}?category=${post?.mainCategory}`);
   };
 
   // 로그인 페이지로 이동
@@ -374,8 +373,8 @@ const PostDetailPage: React.FC = () => {
           modifiedAt={post.modifiedAt}
           viewCount={post.viewCount}
           commentCount={post.comments.length}
-          mainCategory={post.category.mainCategory}
-          subCategory={post.category.subCategory}
+          mainCategory={post.mainCategory}
+          subCategory={post.subCategory}
         />
 
         {/* 게시글 내용 */}
