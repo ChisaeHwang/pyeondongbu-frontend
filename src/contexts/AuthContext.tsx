@@ -108,6 +108,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     };
 
     checkSession();
+
+    // 주기적인 토큰 검증은 필요한 경우에만 활성화
+    // 현재는 성능 최적화를 위해 비활성화
+    /*
+    const tokenCheckInterval = setInterval(async () => {
+      if (isAuthenticated) {
+        try {
+          const isValid = await authService.validateToken();
+          if (!isValid) {
+            handleLogout();
+          }
+        } catch (error) {
+          handleLogout();
+        }
+      }
+    }, 15 * 60 * 1000); // 15분마다 체크
+
+    return () => clearInterval(tokenCheckInterval);
+    */
   }, [refreshUser, handleLogout, authChecked]);
 
   // context 값을 메모이제이션하여 불필요한 리렌더링 방지

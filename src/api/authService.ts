@@ -1,6 +1,11 @@
 import API_CONFIG from "./api";
 import { TokenResponse, AuthUserResponse, ApiResponse } from "../types/auth";
 
+// API 응답 캐싱을 위한 변수
+let userDataCache: AuthUserResponse | null = null;
+let lastFetchTime = 0;
+const CACHE_DURATION = 60000; // 1분 캐시
+
 export const authService = {
   getGoogleLoginUrl: () => {
     return `${API_CONFIG.baseURL}${API_CONFIG.endpoints.auth.googleLogin}`;
@@ -25,6 +30,10 @@ export const authService = {
 
   logout: async (): Promise<void> => {
     try {
+      // 캐시 초기화
+      userDataCache = null;
+      lastFetchTime = 0;
+
       const response = await fetch(
         `${API_CONFIG.baseURL}${API_CONFIG.endpoints.auth.logout}`,
         {
@@ -43,6 +52,12 @@ export const authService = {
   },
 
   getCurrentUser: async (): Promise<AuthUserResponse> => {
+    // 캐시된 데이터가 있고 캐시 기간이 지나지 않았으면 캐시된 데이터 반환
+    const now = Date.now();
+    if (userDataCache && now - lastFetchTime < CACHE_DURATION) {
+      return userDataCache;
+    }
+
     try {
       const response = await fetch(`${API_CONFIG.baseURL}/api/auth/me`, {
         credentials: "include",
@@ -58,6 +73,11 @@ export const authService = {
       }
 
       const result: ApiResponse<AuthUserResponse> = await response.json();
+
+      // 응답 데이터 캐싱
+      userDataCache = result.data;
+      lastFetchTime = now;
+
       return result.data;
     } catch (error) {
       console.error("사용자 정보 조회 실패:", error);
@@ -65,7 +85,7 @@ export const authService = {
     }
   },
 
-  // 토큰 유효성 검사 - 간소화된 버전
+  // 토큰 유효성 검사 - 최적화 버전
   validateToken: async (): Promise<boolean> => {
     try {
       const response = await fetch(`${API_CONFIG.baseURL}/api/auth/me`, {

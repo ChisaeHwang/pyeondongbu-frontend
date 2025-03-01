@@ -11,7 +11,7 @@ import { MobileMenu } from "./components/MobileMenu";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout, isLoading } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // 스크롤 잠금 훅 사용
@@ -38,6 +38,13 @@ const Header: React.FC = () => {
     }
   };
 
+  // 인증 상태 로딩 중 표시할 컴포넌트
+  const renderAuthLoadingState = () => (
+    <div className="w-8 h-8 flex items-center justify-center">
+      <div className="w-6 h-6 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></div>
+    </div>
+  );
+
   return (
     <header className="bg-[#25262b] border-b border-[#2c2d32] sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto max-w-5xl px-4">
@@ -53,7 +60,9 @@ const Header: React.FC = () => {
           </div>
 
           <div className="hidden md:block">
-            {isAuthenticated && user ? (
+            {isLoading ? (
+              renderAuthLoadingState()
+            ) : isAuthenticated && user ? (
               <UserMenu user={user} />
             ) : (
               <LoginButton />
@@ -71,6 +80,7 @@ const Header: React.FC = () => {
         isOpen={isMobileMenuOpen}
         user={user}
         isAuthenticated={isAuthenticated}
+        isLoading={isLoading}
         onNavigate={handleNavigation}
         onLogout={handleLogout}
         onClose={() => setIsMobileMenuOpen(false)}

@@ -7,6 +7,7 @@ interface MobileMenuProps {
   isOpen: boolean;
   user: AuthUserResponse | null;
   isAuthenticated: boolean;
+  isLoading: boolean;
   onNavigate: (path: string) => void;
   onLogout: () => void;
   onClose: () => void;
@@ -16,10 +17,18 @@ export const MobileMenu = ({
   isOpen,
   user,
   isAuthenticated,
+  isLoading,
   onNavigate,
   onLogout,
   onClose,
 }: MobileMenuProps) => {
+  // 인증 상태 로딩 중 표시할 컴포넌트
+  const renderAuthLoadingState = () => (
+    <div className="px-4 py-6 flex justify-center">
+      <div className="w-8 h-8 rounded-full border-2 border-t-transparent border-gray-400 animate-spin"></div>
+    </div>
+  );
+
   return (
     <>
       {/* 오버레이 */}
@@ -38,7 +47,9 @@ export const MobileMenu = ({
       >
         <div className="h-full overflow-y-auto">
           <div className="container mx-auto px-4 py-6 space-y-6">
-            {isAuthenticated && user ? (
+            {isLoading ? (
+              renderAuthLoadingState()
+            ) : isAuthenticated && user ? (
               <UserProfile user={user} onNavigate={onNavigate} />
             ) : (
               <div className="px-4 py-3">
@@ -65,7 +76,7 @@ export const MobileMenu = ({
               ))}
             </div>
 
-            {isAuthenticated && (
+            {isAuthenticated && !isLoading && (
               <div className="border-t border-[#2c2d32] pt-6">
                 <button
                   onClick={onLogout}
