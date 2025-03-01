@@ -1,14 +1,96 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PiPencilSimpleLine, PiChatCircleTextFill } from "react-icons/pi";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../../components/common/SearchBar";
 import Pagination from "../../components/jobs/Pagination";
+import axiosInstance from "../../utils/axios";
+import { getRelativeTime } from "../../utils/dateUtils";
+
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  memberNickname: string;
+  viewCount: number;
+  likeCount: number;
+  commentCount: number;
+  createdAt: string;
+  category: {
+    mainCategory: string;
+    subCategory: string;
+  };
+}
 
 const CommunityPage: React.FC = () => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>("전체");
 
-  const handleSearch = (query: string) => {
-    console.log("검색어:", query);
-    // TODO: 검색 로직 구현
+  // 게시글 데이터 가져오기
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+        const response = await axiosInstance.get("/api/community/posts", {
+          params: {
+            page: currentPage - 1,
+            size: 10,
+            subCategory: activeCategory !== "전체" ? activeCategory : null,
+          },
+        });
+
+        setPosts(response.data.content);
+        setTotalPages(response.data.totalPages);
+      } catch (error) {
+        console.error("게시글을 불러오는 중 오류가 발생했습니다:", error);
+        setError("게시글을 불러오는 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, [currentPage, activeCategory]);
+
+  const handleSearch = async (query: string) => {
+    if (!query.trim()) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get("/api/community/posts/search", {
+        params: {
+          keyword: query,
+          page: 0,
+          size: 10,
+        },
+      });
+
+      setPosts(response.data.content);
+      setTotalPages(response.data.totalPages);
+      setCurrentPage(1);
+    } catch (error) {
+      console.error("검색 중 오류가 발생했습니다:", error);
+      setError("검색 중 오류가 발생했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 게시글 클릭 시 상세 페이지로 이동
+  const handlePostClick = (postId: number) => {
+    navigate(`/community/posts/${postId}`);
+  };
+
+  // 카테고리 변경
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+    setCurrentPage(1);
   };
 
   return (
@@ -19,10 +101,12 @@ const CommunityPage: React.FC = () => {
             <h1 className="text-2xl font-bold text-white">커뮤니티</h1>
             <PiChatCircleTextFill className="text-2xl text-purple-400" />
           </div>
-          <button className="flex items-center bg-[#313338] hover:bg-[#383A40] text-[#E5E7EB] pl-4 pr-3 py-2 rounded-md transition-colors duration-200">
-            <span className="font-bold">글쓰기</span>
-            <PiPencilSimpleLine className="ml-1 text-lg" />
-          </button>
+          <Link to="/create?category=커뮤니티">
+            <button className="flex items-center bg-[#313338] hover:bg-[#383A40] text-[#E5E7EB] pl-4 pr-3 py-2 rounded-md transition-colors duration-200">
+              <span className="font-bold">글쓰기</span>
+              <PiPencilSimpleLine className="ml-1 text-lg" />
+            </button>
+          </Link>
         </div>
 
         <SearchBar
@@ -32,75 +116,111 @@ const CommunityPage: React.FC = () => {
 
         {/* 게시글 카테고리 */}
         <div className="flex space-x-4 border-b border-[#2c2d32] pb-4">
-          <button className="text-white hover:text-blue-400 transition-colors duration-200">
+          <button
+            className={`transition-colors duration-200 ${
+              activeCategory === "전체"
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
+            }`}
+            onClick={() => handleCategoryChange("전체")}
+          >
             전체
           </button>
-          <button className="text-gray-400 hover:text-white transition-colors duration-200">
+          <button
+            className={`transition-colors duration-200 ${
+              activeCategory === "인기"
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
+            }`}
+            onClick={() => handleCategoryChange("인기")}
+          >
             인기
           </button>
-          <button className="text-gray-400 hover:text-white transition-colors duration-200">
+          <button
+            className={`transition-colors duration-200 ${
+              activeCategory === "자유"
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
+            }`}
+            onClick={() => handleCategoryChange("자유")}
+          >
             자유
           </button>
-          <button className="text-gray-400 hover:text-white transition-colors duration-200">
+          <button
+            className={`transition-colors duration-200 ${
+              activeCategory === "질문"
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
+            }`}
+            onClick={() => handleCategoryChange("질문")}
+          >
             질문
           </button>
-          <button className="text-gray-400 hover:text-white transition-colors duration-200">
+          <button
+            className={`transition-colors duration-200 ${
+              activeCategory === "정보"
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
+            }`}
+            onClick={() => handleCategoryChange("정보")}
+          >
             정보
           </button>
         </div>
 
-        {/* 임시 컨텐츠 */}
+        {/* 게시글 목록 */}
         <div className="space-y-3">
-          <div className="bg-[#25262b] rounded-lg p-4 hover:bg-[#2c2d32] transition-colors cursor-pointer">
-            <div className="flex justify-between items-start gap-4">
-              <div className="min-w-0 flex-1">
-                <h3 className="text-white font-medium mb-1 truncate">
-                  프리미어 프로 vs 베가스 프로, 어떤 걸 배워야 할까요?
-                </h3>
-                <p className="text-gray-400 text-sm truncate">
-                  편집 입문자입니다. 어떤 프로그램으로 시작하는 게 좋을까요...
-                </p>
-              </div>
-              <div className="text-xs text-gray-500 whitespace-nowrap shrink-0">
-                조회 342 • 댓글 28
-              </div>
+          {loading ? (
+            <div className="text-center py-10 text-gray-400">
+              게시글을 불러오는 중...
             </div>
-          </div>
-          <div className="bg-[#25262b] rounded-lg p-4 hover:bg-[#2c2d32] transition-colors cursor-pointer">
-            <div className="flex justify-between items-start gap-4">
-              <div className="min-w-0 flex-1">
-                <h3 className="text-white font-medium mb-1 truncate">
-                  초보 편집자의 취업 성공기
-                </h3>
-                <p className="text-gray-400 text-sm truncate">
-                  6개월간의 독학 후 취업까지 성공한 과정을 공유합니다...
-                </p>
-              </div>
-              <div className="text-xs text-gray-500 whitespace-nowrap shrink-0">
-                조회 256 • 댓글 21
-              </div>
+          ) : error ? (
+            <div className="text-center py-10 text-red-400">{error}</div>
+          ) : posts.length === 0 ? (
+            <div className="text-center py-10 text-gray-400">
+              게시글이 없습니다.
             </div>
-          </div>
-          <div className="bg-[#25262b] rounded-lg p-4 hover:bg-[#2c2d32] transition-colors cursor-pointer">
-            <div className="flex justify-between items-start gap-4">
-              <div className="min-w-0 flex-1">
-                <h3 className="text-white font-medium mb-1 truncate">
-                  쇼츠 편집 꿀팁 공유
-                </h3>
-                <p className="text-gray-400 text-sm truncate">
-                  제가 쇼츠 편집하면서 알게 된 유용한 팁들을 공유합니다...
-                </p>
+          ) : (
+            posts.map((post) => (
+              <div
+                key={post.id}
+                className="bg-[#25262b] rounded-lg p-4 hover:bg-[#2c2d32] transition-colors cursor-pointer"
+                onClick={() => handlePostClick(post.id)}
+              >
+                <div className="flex justify-between items-start gap-4">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-white font-medium mb-1 truncate">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm truncate">
+                      {post.content.replace(/<[^>]*>/g, "")}
+                    </p>
+                    <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
+                      <span>{post.memberNickname}</span>
+                      <span>•</span>
+                      <span>{getRelativeTime(post.createdAt)}</span>
+                      {post.category.subCategory && (
+                        <>
+                          <span>•</span>
+                          <span className="text-purple-400/80">
+                            {post.category.subCategory}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <div className="text-xs text-gray-500 whitespace-nowrap shrink-0">
+                    조회 {post.viewCount} • 댓글 {post.commentCount || 0}
+                  </div>
+                </div>
               </div>
-              <div className="text-xs text-gray-500 whitespace-nowrap shrink-0">
-                조회 198 • 댓글 15
-              </div>
-            </div>
-          </div>
+            ))
+          )}
         </div>
 
         <Pagination
           currentPage={currentPage}
-          totalPages={1}
+          totalPages={totalPages}
           onPageChange={setCurrentPage}
         />
       </div>

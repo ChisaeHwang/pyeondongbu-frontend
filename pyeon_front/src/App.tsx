@@ -21,7 +21,11 @@ import { AuthCallback } from "./pages/auth/AuthCallback";
 import { AuthProvider } from "./contexts/AuthContext";
 import RecruitPage from "./pages/recruit/RecruitPage";
 import CommunityPage from "./pages/community/CommunityPage";
+import CreatePostPage from "./pages/common/CreatePostPage";
 import HirePage from "./pages/hire/HirePage";
+import HireDetailPage from "./pages/hire/HireDetailPage";
+import RecruitDetailPage from "./pages/recruit/RecruitDetailPage";
+import CommunityDetailPage from "./pages/community/CommunityDetailPage";
 import LoginPage from "./pages/auth/LoginPage";
 
 // Analytics wrapper component
@@ -55,8 +59,19 @@ function App() {
                 <Route path="/jobs" element={<JobListPage />} />
                 <Route path="/jobs/:id" element={<JobDetailPage />} />
                 <Route path="/hire" element={<HirePage />} />
+                <Route path="/hire/posts/:id" element={<HireDetailPage />} />
                 <Route path="/recruit" element={<RecruitPage />} />
+                <Route
+                  path="/recruit/posts/:id"
+                  element={<RecruitDetailPage />}
+                />
                 <Route path="/community" element={<CommunityPage />} />
+                <Route
+                  path="/community/posts/:id"
+                  element={<CommunityDetailPage />}
+                />
+                <Route path="/create" element={<CreatePostPage />} />
+                <Route path="/edit/:id" element={<CreatePostPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/notices" element={<NoticeListPage />} />
                 <Route path="/notices/:id" element={<NoticeDetailPage />} />
