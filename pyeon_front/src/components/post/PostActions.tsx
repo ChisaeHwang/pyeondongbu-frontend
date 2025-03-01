@@ -18,32 +18,44 @@ const PostActions: React.FC<PostActionsProps> = ({
   onEditClick,
   onDeleteClick,
 }) => {
-  return (
-    <div className="flex justify-between items-center border-t border-[#2c2d32] pt-4">
-      <div className="flex items-center gap-4">
-        <button
-          onClick={onLikeClick}
-          className={`flex items-center gap-1 ${
-            hasLiked ? "text-red-500" : "text-gray-400 hover:text-red-500"
-          } transition-colors`}
-        >
-          {hasLiked ? <FaHeart /> : <FaRegHeart />}
-          <span>{likeCount}</span>
-        </button>
-      </div>
+  // 수정 버튼 클릭 핸들러
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    console.log("수정 버튼 클릭됨");
+    onEditClick();
+  };
 
+  // 삭제 버튼 클릭 핸들러
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    console.log("삭제 버튼 클릭됨");
+    onDeleteClick();
+  };
+
+  return (
+    <div className="flex items-center justify-between mt-6 pt-4 border-t border-[#404249]">
+      {/* 좋아요 버튼 */}
+      <button
+        onClick={onLikeClick}
+        className="flex items-center gap-1.5 text-gray-400 hover:text-gray-300"
+      >
+        {hasLiked ? <FaHeart className="text-red-500" /> : <FaRegHeart />}
+        <span>{likeCount}</span>
+      </button>
+
+      {/* 작성자만 볼 수 있는 수정/삭제 버튼 */}
       {isAuthor && (
-        <div className="flex items-center gap-2">
+        <div className="flex gap-3">
           <button
-            onClick={onEditClick}
-            className="flex items-center gap-1 text-gray-400 hover:text-blue-500 transition-colors"
+            onClick={handleEditClick}
+            className="flex items-center gap-1.5 text-gray-400 hover:text-gray-300"
           >
             <FaEdit />
             <span>수정</span>
           </button>
           <button
-            onClick={onDeleteClick}
-            className="flex items-center gap-1 text-gray-400 hover:text-red-500 transition-colors"
+            onClick={handleDeleteClick}
+            className="flex items-center gap-1.5 text-gray-400 hover:text-red-400"
           >
             <FaTrash />
             <span>삭제</span>

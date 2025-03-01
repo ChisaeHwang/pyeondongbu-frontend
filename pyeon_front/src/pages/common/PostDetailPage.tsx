@@ -158,7 +158,7 @@ const PostDetailPage: React.FC = () => {
     if (!id) return;
 
     try {
-      // API 호출
+      // API 호출 - URL 파라미터의 id 사용
       await axiosInstance.delete(`/api/posts/${id}`);
 
       alert("게시글이 삭제되었습니다.");
@@ -323,7 +323,29 @@ const PostDetailPage: React.FC = () => {
 
   // 게시글 수정 페이지로 이동
   const goToEditPage = () => {
-    navigate(`/edit/${id}?category=${post?.mainCategory}`);
+    if (!post || !id) {
+      console.error("게시글 정보가 없어 수정 페이지로 이동할 수 없습니다.");
+      return;
+    }
+
+    console.log("수정 페이지로 이동:", {
+      id,
+      category: post.mainCategory,
+      path: location.pathname,
+    });
+
+    // 카테고리에 따라 적절한 URL로 이동
+    try {
+      if (post.mainCategory === "RECRUITMENT") {
+        navigate(`/edit/hire/${id}`);
+      } else if (post.mainCategory === "JOB_SEEKING") {
+        navigate(`/edit/recruit/${id}`);
+      } else {
+        navigate(`/edit/community/${id}`);
+      }
+    } catch (error) {
+      console.error("수정 페이지 이동 중 오류 발생:", error);
+    }
   };
 
   // 로그인 페이지로 이동

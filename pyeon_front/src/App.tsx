@@ -29,6 +29,7 @@ import CommunityDetailPage from "./pages/community/CommunityDetailPage";
 import LoginPage from "./pages/auth/LoginPage";
 import ProfilePage from "./pages/user/ProfilePage";
 import MyPostsPage from "./pages/user/MyPostsPage";
+import EditPostPage from "./pages/common/EditPostPage";
 
 // Analytics wrapper component
 const AnalyticsWrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -73,7 +74,10 @@ function App() {
                   element={<CommunityDetailPage />}
                 />
                 <Route path="/create" element={<CreatePostPage />} />
-                <Route path="/edit/:id" element={<CreatePostPage />} />
+                <Route path="/edit/hire/:id" element={<EditPostPage />} />
+                <Route path="/edit/recruit/:id" element={<EditPostPage />} />
+                <Route path="/edit/community/:id" element={<EditPostPage />} />
+                <Route path="/edit/:id" element={<EditPostPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/my-posts" element={<MyPostsPage />} />
