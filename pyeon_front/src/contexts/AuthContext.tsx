@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { authService } from "../api/authService";
 import { AuthUserResponse } from "../types/auth";
+import API_CONFIG from "../api/api";
 
 interface AuthContextType {
   user: AuthUserResponse | null;
@@ -49,8 +50,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const refreshUser = useCallback(async () => {
     try {
       setIsLoading(true);
-      const userData = await authService.getCurrentUser();
-      setUser(userData);
+      // auth/me 대신 members/me 엔드포인트 사용
+      const response = await fetch(`${API_CONFIG.baseURL}/api/members/me`, {
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          handleLogout();
+          throw new Error("unauthorized");
+        }
+        throw new Error(
+          `사용자 정보를 가져오는데 실패했습니다. 상태 코드: ${response.status}`
+        );
+      }
+
+      const userData = await response.json();
+
+      // 상태 업데이트
+      setUser({
+        id: userData.id,
+        email: userData.email,
+        nickname: userData.nickname,
+        profileImageUrl: userData.profileImageUrl,
+        authority: userData.authority,
+      });
       setIsAuthenticated(true);
       sessionStorage.setItem(LOGIN_STATUS_KEY, "true");
     } catch (error) {

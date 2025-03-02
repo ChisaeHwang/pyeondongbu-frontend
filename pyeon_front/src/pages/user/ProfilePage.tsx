@@ -90,7 +90,7 @@ const ProfilePage: React.FC = () => {
       alert("프로필이 성공적으로 업데이트되었습니다.");
 
       // 홈으로 리다이렉트
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (error) {
       console.error("프로필 업데이트 중 오류가 발생했습니다:", error);
       setError("프로필 업데이트 중 오류가 발생했습니다.");
