@@ -21,14 +21,12 @@ const PostActions: React.FC<PostActionsProps> = ({
   // 수정 버튼 클릭 핸들러
   const handleEditClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log("수정 버튼 클릭됨");
     onEditClick();
   };
 
   // 삭제 버튼 클릭 핸들러
   const handleDeleteClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log("삭제 버튼 클릭됨");
     onDeleteClick();
   };
 
