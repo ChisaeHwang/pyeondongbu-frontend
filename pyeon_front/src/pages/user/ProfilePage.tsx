@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { FaCamera } from "react-icons/fa";
+import axiosInstance from "../../utils/axios";
 
 const ProfilePage: React.FC = () => {
   const { user, refreshUser } = useAuth();
@@ -58,19 +59,35 @@ const ProfilePage: React.FC = () => {
       setIsSubmitting(true);
       setError(null);
 
-      // 실제 API 호출 대신 목 데이터 사용 (실제 구현 시 주석 해제)
-      // const formData = new FormData();
-      // formData.append("nickname", nickname);
-      // if (profileImage) {
-      //   formData.append("profileImage", profileImage);
-      // }
-      // await axiosInstance.put("/api/members/profile", formData);
+      // 프로필 이미지가 있다면 먼저 업로드
+      let newProfileImageUrl = user?.profileImageUrl;
+      if (profileImage) {
+        const formData = new FormData();
+        formData.append("image", profileImage);
 
-      // 성공 메시지 표시
-      alert("프로필이 성공적으로 업데이트되었습니다.");
+        const imageResponse = await axiosInstance.post(
+          "/api/images",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        newProfileImageUrl = imageResponse.data.imageUrl;
+      }
+
+      // 프로필 정보 업데이트
+      await axiosInstance.put("/api/members/me", {
+        nickname,
+        profileImageUrl: newProfileImageUrl,
+      });
 
       // 사용자 정보 새로고침
       await refreshUser();
+
+      // 성공 메시지 표시
+      alert("프로필이 성공적으로 업데이트되었습니다.");
 
       // 홈으로 리다이렉트
       navigate("/");

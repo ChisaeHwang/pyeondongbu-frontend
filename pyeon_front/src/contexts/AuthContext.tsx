@@ -47,13 +47,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const refreshUser = useCallback(async () => {
-    // 이미 인증 상태 확인이 완료되었고, 인증되지 않은 상태라면 API 호출 스킵
-    if (authChecked && !isAuthenticated) {
-      setIsLoading(false);
-      return;
-    }
-
     try {
+      setIsLoading(true);
       const userData = await authService.getCurrentUser();
       setUser(userData);
       setIsAuthenticated(true);
@@ -66,7 +61,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading(false);
       setAuthChecked(true);
     }
-  }, [handleLogout, authChecked, isAuthenticated]);
+  }, [handleLogout]);
 
   const login = useCallback(() => {
     window.location.href = authService.getGoogleLoginUrl();

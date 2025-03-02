@@ -24,13 +24,6 @@ enum MainCategory {
   COMMUNITY = "COMMUNITY",
 }
 
-// 한글 표시용 매핑
-const CATEGORY_DISPLAY = {
-  [MainCategory.HIRE]: "구인",
-  [MainCategory.RECRUIT]: "구직",
-  [MainCategory.COMMUNITY]: "커뮤니티",
-};
-
 const MyPostsPage: React.FC = () => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -50,17 +43,18 @@ const MyPostsPage: React.FC = () => {
 
         // API 호출
         const response = await axiosInstance.get("/api/posts/my");
-        let filteredPosts = response.data.content;
+        let filteredPosts = response.data.content.map((post: any) => ({
+          ...post,
+          content: post.content || "",
+          commentCount: post.commentCount || 0,
+          mainCategory: convertMainCategoryToDisplay(post.mainCategory),
+          subCategory: convertSubCategoryToDisplay(post.subCategory),
+        }));
 
         // 카테고리 필터링
         if (activeCategory !== "전체") {
-          // 한글 카테고리명을 enum 값으로 변환
-          const categoryEnum = Object.entries(CATEGORY_DISPLAY).find(
-            ([_, value]) => value === activeCategory
-          )?.[0];
-
           filteredPosts = filteredPosts.filter(
-            (post: Post) => post.mainCategory === categoryEnum
+            (post: Post) => post.mainCategory === activeCategory
           );
         }
 
@@ -75,6 +69,41 @@ const MyPostsPage: React.FC = () => {
 
     fetchMyPosts();
   }, [activeCategory, isAuthenticated]);
+
+  // 백엔드 enum을 프론트엔드 표시용으로 변환
+  const convertMainCategoryToDisplay = (category: string) => {
+    switch (category) {
+      case "RECRUITMENT":
+        return "구인";
+      case "JOB_SEEKING":
+        return "구직";
+      case "COMMUNITY":
+        return "커뮤니티";
+      default:
+        return "커뮤니티";
+    }
+  };
+
+  const convertSubCategoryToDisplay = (category: string) => {
+    switch (category) {
+      case "EDITOR":
+        return "편집자";
+      case "THUMBNAILER":
+        return "썸네일러";
+      case "OTHER":
+        return "기타";
+      case "FREE":
+        return "자유";
+      case "QUESTION":
+        return "질문";
+      case "INFORMATION":
+        return "정보";
+      case "ALL":
+        return "전체";
+      default:
+        return "기타";
+    }
+  };
 
   // 게시글 클릭 시 상세 페이지로 이동
   const handlePostClick = (post: Post) => {
@@ -179,7 +208,7 @@ const MyPostsPage: React.FC = () => {
                       {post.title}
                     </h3>
                     <p className="text-gray-400 text-sm truncate">
-                      {post.content.replace(/<[^>]*>/g, "")}
+                      {post.content?.replace(/<[^>]*>/g, "") || ""}
                     </p>
                     <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
                       <span>{getRelativeTime(post.createdAt)}</span>
