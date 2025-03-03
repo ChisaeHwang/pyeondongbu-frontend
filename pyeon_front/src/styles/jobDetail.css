@@ -1,4 +1,5 @@
 .job-content {
+  padding: 0.5rem;
   color: #d1d5db;
 }
 
@@ -10,9 +11,25 @@
   list-style-type: disc;
   margin-left: 1.5rem;
   margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+.job-content ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
 }
 
 .job-content li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+/* 중첩된 리스트 스타일 */
+.job-content li > ul,
+.job-content li > ol {
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -38,4 +55,71 @@
 
 .job-content br {
   margin-bottom: 0.5rem;
+}
+
+.job-content img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+/* 마크다운 체크리스트 스타일 */
+.job-content input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+/* 마크다운 헤더 스타일 */
+.job-content h1,
+.job-content h2,
+.job-content h3,
+.job-content h4,
+.job-content h5,
+.job-content h6 {
+  color: #f3f4f6;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.job-content h1 {
+  font-size: 1.5rem;
+}
+
+.job-content h2 {
+  font-size: 1.25rem;
+}
+
+.job-content h3 {
+  font-size: 1.125rem;
+}
+
+/* 마크다운 코드 블록 스타일 */
+.job-content code {
+  background-color: rgba(31, 41, 55, 0.5);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+}
+
+.job-content pre {
+  background-color: rgba(31, 41, 55, 0.5);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.job-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* 마크다운 인용구 스타일 */
+.job-content blockquote {
+  border-left: 4px solid #4b5563;
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+  font-style: italic;
+  color: #9ca3af;
 }
