@@ -5,7 +5,7 @@ export const MAIN_CATEGORIES = ["구인", "구직", "커뮤니티"];
 export const SUB_CATEGORIES: Record<string, string[]> = {
   구인: ["편집자", "썸네일러", "기타"],
   구직: ["편집자", "썸네일러", "기타"],
-  커뮤니티: ["전체", "자유", "질문", "정보"],
+  커뮤니티: ["자유", "질문", "정보"],
 };
 
 // 카테고리별 색상 정의
@@ -66,8 +66,6 @@ export const convertSubCategoryToEnum = (
         return "QUESTION";
       case "정보":
         return "INFORMATION";
-      case "전체":
-        return "ALL";
       default:
         return "FREE";
     }
@@ -113,8 +111,6 @@ export const convertEnumToSubCategory = (
         return "질문";
       case "INFORMATION":
         return "정보";
-      case "ALL":
-        return "전체";
       default:
         return "자유";
     }

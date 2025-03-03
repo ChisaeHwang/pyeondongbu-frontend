@@ -29,7 +29,7 @@ const JobListPage: React.FC = () => {
   });
 
   const handleSearch = (query: string) => {
-    setSearchQuery(query);
+    setSearchQuery(query.trim() ? query : "");
   };
 
   const totalPages = Math.ceil(filteredJobs.length / ITEMS_PER_PAGE);

@@ -42,6 +42,20 @@ const convertSubCategoryToEnum = (subCategory: string) => {
   }
 };
 
+// 서브 카테고리를 한글로 변환하는 함수
+const convertSubCategoryToKorean = (category: string): string => {
+  switch (category) {
+    case "EDITOR":
+      return "편집자";
+    case "THUMBNAILER":
+      return "썸네일러";
+    case "OTHER":
+      return "기타";
+    default:
+      return category;
+  }
+};
+
 const RecruitPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -84,6 +98,30 @@ const RecruitPage: React.FC = () => {
 
   const handleSearch = async (query: string) => {
     if (!query.trim()) {
+      // 공백 검색 시 초기 페이지 상태로 돌아가기
+      try {
+        setLoading(true);
+        const response = await axiosInstance.get("/api/posts", {
+          params: {
+            mainCategory: MainCategory.RECRUIT,
+            subCategory:
+              activeCategory !== "전체"
+                ? convertSubCategoryToEnum(activeCategory)
+                : null,
+            page: 0,
+            size: 10,
+          },
+        });
+
+        setPosts(response.data.content);
+        setTotalPages(response.data.totalPages);
+        setCurrentPage(1);
+      } catch (error) {
+        console.error("게시글을 불러오는 중 오류가 발생했습니다:", error);
+        setError("게시글을 불러오는 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
       return;
     }
 
@@ -220,15 +258,18 @@ const RecruitPage: React.FC = () => {
                       {post.subCategory && (
                         <>
                           <span>•</span>
-                          <span className="text-fuchsia-400/80">
-                            {post.subCategory}
+                          <span className="text-cyan-400/80">
+                            {convertSubCategoryToKorean(post.subCategory)}
                           </span>
                         </>
                       )}
                     </div>
                   </div>
                   <div className="text-xs text-gray-500 whitespace-nowrap shrink-0">
-                    조회 {post.viewCount} • 댓글 {post.commentCount || 0}
+                    조회 {post.viewCount} • 댓글 {post.commentCount || 0} •{" "}
+                    <span className="text-red-400">
+                      좋아요 {post.likeCount || 0}
+                    </span>
                   </div>
                 </div>
               </div>

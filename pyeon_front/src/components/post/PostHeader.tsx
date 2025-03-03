@@ -12,6 +12,40 @@ interface PostHeaderProps {
   subCategory: string;
 }
 
+// 메인 카테고리를 한글로 변환하는 함수
+const convertMainCategoryToKorean = (category: string): string => {
+  switch (category) {
+    case "RECRUITMENT":
+      return "구인";
+    case "JOB_SEEKING":
+      return "구직";
+    case "COMMUNITY":
+      return "커뮤니티";
+    default:
+      return category;
+  }
+};
+
+// 서브 카테고리를 한글로 변환하는 함수
+const convertSubCategoryToKorean = (category: string): string => {
+  switch (category) {
+    case "EDITOR":
+      return "편집자";
+    case "THUMBNAILER":
+      return "썸네일러";
+    case "OTHER":
+      return "기타";
+    case "FREE":
+      return "자유";
+    case "QUESTION":
+      return "질문";
+    case "INFORMATION":
+      return "정보";
+    default:
+      return category;
+  }
+};
+
 const PostHeader: React.FC<PostHeaderProps> = ({
   title,
   memberNickname,
@@ -42,13 +76,17 @@ const PostHeader: React.FC<PostHeaderProps> = ({
         {mainCategory && (
           <>
             <span>•</span>
-            <span className="text-purple-400">{mainCategory}</span>
+            <span className="text-purple-400">
+              {convertMainCategoryToKorean(mainCategory)}
+            </span>
           </>
         )}
         {subCategory && (
           <>
             <span>•</span>
-            <span className="text-fuchsia-400">{subCategory}</span>
+            <span className="text-fuchsia-400">
+              {convertSubCategoryToKorean(subCategory)}
+            </span>
           </>
         )}
       </div>
