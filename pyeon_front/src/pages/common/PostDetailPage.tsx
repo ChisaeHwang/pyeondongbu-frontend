@@ -7,49 +7,7 @@ import PostContent from "../../components/post/PostContent";
 import PostActions from "../../components/post/PostActions";
 import CommentList from "../../components/post/CommentList";
 import axiosInstance from "../../utils/axios";
-
-// 타입 정의
-interface Comment {
-  id: number;
-  content: string;
-  memberEmail: string;
-  memberNickname: string;
-  createdAt: string;
-  modifiedAt: string;
-}
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-  memberEmail: string;
-  memberNickname: string;
-  viewCount: number;
-  likeCount: number;
-  createdAt: string;
-  modifiedAt: string;
-  mainCategory: string;
-  subCategory: string;
-  comments: Comment[];
-  hasLiked: boolean;
-}
-
-// 백엔드 응답 타입
-interface PostResponse {
-  id: number;
-  title: string;
-  content: string;
-  memberEmail: string;
-  memberNickname: string;
-  viewCount: number;
-  likeCount: number;
-  createdAt: string;
-  modifiedAt: string;
-  mainCategory: string;
-  subCategory: string;
-  comments: Comment[];
-  hasLiked: boolean;
-}
+import { Post, Comment, PostResponse } from "../../types/post";
 
 const PostDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
