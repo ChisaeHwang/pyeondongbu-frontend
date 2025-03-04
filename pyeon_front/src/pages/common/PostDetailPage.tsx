@@ -12,6 +12,7 @@ import {
   PostDetailSkeleton,
   CommentSkeletonList,
 } from "../../components/common/Skeleton";
+import toast from "react-hot-toast";
 
 const PostDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -85,7 +86,7 @@ const PostDetailPage: React.FC = () => {
   // 좋아요 토글
   const toggleLike = async () => {
     if (!isAuthenticated) {
-      alert("로그인이 필요합니다.");
+      toast.error("로그인이 필요합니다.");
       return;
     }
 
@@ -107,7 +108,7 @@ const PostDetailPage: React.FC = () => {
       });
     } catch (error) {
       console.error("좋아요 처리 중 오류가 발생했습니다:", error);
-      alert("좋아요 처리 중 오류가 발생했습니다.");
+      toast.error("좋아요 처리 중 오류가 발생했습니다.");
     }
   };
 
@@ -123,7 +124,7 @@ const PostDetailPage: React.FC = () => {
       // API 호출 - URL 파라미터의 id 사용
       await axiosInstance.delete(`/api/posts/${id}`);
 
-      alert("게시글이 삭제되었습니다.");
+      toast.success("게시글이 삭제되었습니다.");
 
       // 목록 페이지로 이동
       if (pageType === "hire") {
@@ -135,7 +136,7 @@ const PostDetailPage: React.FC = () => {
       }
     } catch (error) {
       console.error("게시글 삭제 중 오류가 발생했습니다:", error);
-      alert("게시글 삭제 중 오류가 발생했습니다.");
+      toast.error("게시글 삭제 중 오류가 발생했습니다.");
     }
   };
 
@@ -144,12 +145,12 @@ const PostDetailPage: React.FC = () => {
     e.preventDefault();
 
     if (!isAuthenticated) {
-      alert("로그인이 필요합니다.");
+      toast.error("로그인이 필요합니다.");
       return;
     }
 
     if (!newComment.trim()) {
-      alert("댓글 내용을 입력해주세요.");
+      toast.error("댓글 내용을 입력해주세요.");
       return;
     }
 
@@ -186,7 +187,7 @@ const PostDetailPage: React.FC = () => {
       setNewComment("");
     } catch (error) {
       console.error("댓글 작성 중 오류가 발생했습니다:", error);
-      alert("댓글 작성 중 오류가 발생했습니다.");
+      toast.error("댓글 작성 중 오류가 발생했습니다.");
     } finally {
       setIsSubmittingComment(false);
     }
@@ -207,7 +208,7 @@ const PostDetailPage: React.FC = () => {
   // 댓글 수정 제출
   const submitEditComment = async (commentId: number) => {
     if (!editedCommentContent.trim()) {
-      alert("댓글 내용을 입력해주세요.");
+      toast.error("댓글 내용을 입력해주세요.");
       return;
     }
 
@@ -239,9 +240,10 @@ const PostDetailPage: React.FC = () => {
 
       setEditingCommentId(null);
       setEditedCommentContent("");
+      toast.success("댓글이 수정되었습니다.");
     } catch (error) {
       console.error("댓글 수정 중 오류가 발생했습니다:", error);
-      alert("댓글 수정 중 오류가 발생했습니다.");
+      toast.error("댓글 수정 중 오류가 발생했습니다.");
     }
   };
 
@@ -266,9 +268,11 @@ const PostDetailPage: React.FC = () => {
           comments: prev.comments.filter((comment) => comment.id !== commentId),
         };
       });
+
+      toast.success("댓글이 삭제되었습니다.");
     } catch (error) {
       console.error("댓글 삭제 중 오류가 발생했습니다:", error);
-      alert("댓글 삭제 중 오류가 발생했습니다.");
+      toast.error("댓글 삭제 중 오류가 발생했습니다.");
     }
   };
 

@@ -25,7 +25,7 @@ interface TextEditorProps {
   setContent: React.Dispatch<React.SetStateAction<string>>;
   uploadedImages: string[];
   setUploadedImages: React.Dispatch<React.SetStateAction<string[]>>;
-  setError: (error: string | null) => void;
+  setError?: (error: string | null) => void;
 }
 
 const TextEditor: React.FC<TextEditorProps> = ({
@@ -112,7 +112,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
 
     // 이미지 개수 제한 확인
     if (uploadedImages.length >= MAX_IMAGES) {
-      setError(`이미지는 최대 ${MAX_IMAGES}장까지만 업로드할 수 있습니다.`);
+      setError?.(`이미지는 최대 ${MAX_IMAGES}장까지만 업로드할 수 있습니다.`);
       return;
     }
 
@@ -120,7 +120,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
 
     // 파일 크기 확인
     if (file.size > MAX_IMAGE_SIZE) {
-      setError(`이미지 크기는 최대 5MB까지 가능합니다.`);
+      setError?.(`이미지 크기는 최대 5MB까지 가능합니다.`);
       return;
     }
 
@@ -143,7 +143,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
       setContent((prev: string) => prev + `\n![이미지](${imageUrl})\n`);
     } catch (error) {
       console.error("이미지 업로드 실패:", error);
-      setError("이미지 업로드에 실패했습니다.");
+      setError?.("이미지 업로드에 실패했습니다.");
     }
   };
 

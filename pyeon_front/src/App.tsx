@@ -5,6 +5,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/common/ScrollToTop";
@@ -92,6 +93,29 @@ function App() {
             </main>
             <Footer />
           </div>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: "#313338",
+                color: "#fff",
+                border: "1px solid #404249",
+              },
+              success: {
+                iconTheme: {
+                  primary: "#10b981",
+                  secondary: "#fff",
+                },
+              },
+              error: {
+                iconTheme: {
+                  primary: "#ef4444",
+                  secondary: "#fff",
+                },
+              },
+            }}
+          />
         </AnalyticsWrapper>
       </Router>
     </AuthProvider>

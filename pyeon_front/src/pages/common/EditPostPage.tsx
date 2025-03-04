@@ -5,6 +5,7 @@ import axiosInstance from "../../utils/axios";
 import { useAuth } from "../../contexts/AuthContext";
 import TextEditor from "../../components/editor/TextEditor";
 import CategorySelector from "../../components/editor/CategorySelector";
+import toast from "react-hot-toast";
 import {
   SUB_CATEGORIES,
   CATEGORY_COLORS,
@@ -83,7 +84,6 @@ const EditPostPage: React.FC = () => {
   const [subCategory, setSubCategory] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [redirectToLogin, setRedirectToLogin] = useState(false);
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
   const [originalPost, setOriginalPost] = useState<PostResponse | null>(null);
@@ -93,7 +93,7 @@ const EditPostPage: React.FC = () => {
     const fetchPost = async () => {
       if (!postId) {
         console.error("게시글 ID를 찾을 수 없습니다.");
-        setError("게시글 ID를 찾을 수 없습니다.");
+        toast.error("게시글 ID를 찾을 수 없습니다.");
         return;
       }
 
@@ -135,14 +135,14 @@ const EditPostPage: React.FC = () => {
 
         // 작성자 확인
         if (user?.email !== response.data.memberEmail) {
-          setError("게시글 작성자만 수정할 수 있습니다.");
+          toast.error("게시글 작성자만 수정할 수 있습니다.");
           setTimeout(() => {
             navigate(-1);
           }, 2000);
         }
       } catch (error) {
         console.error("게시글을 불러오는 중 오류가 발생했습니다:", error);
-        setError("게시글을 불러오는 중 오류가 발생했습니다.");
+        toast.error("게시글을 불러오는 중 오류가 발생했습니다.");
       } finally {
         setIsLoading(false);
       }
@@ -154,7 +154,7 @@ const EditPostPage: React.FC = () => {
   // 로그인 체크
   useEffect(() => {
     if (!isAuthenticated) {
-      setError("로그인이 필요합니다. 3초 후 로그인 페이지로 이동합니다.");
+      toast.error("로그인이 필요합니다. 3초 후 로그인 페이지로 이동합니다.");
       setRedirectToLogin(true);
 
       const timer = setTimeout(() => {
@@ -179,29 +179,28 @@ const EditPostPage: React.FC = () => {
     e.preventDefault();
 
     if (!isAuthenticated) {
-      setError("로그인이 필요합니다.");
+      toast.error("로그인이 필요합니다.");
       setRedirectToLogin(true);
       return;
     }
 
     if (!postId) {
       console.error("게시글 ID를 찾을 수 없습니다.");
-      setError("게시글 ID를 찾을 수 없습니다.");
+      toast.error("게시글 ID를 찾을 수 없습니다.");
       return;
     }
 
     if (!title.trim()) {
-      setError("제목을 입력해주세요.");
+      toast.error("제목을 입력해주세요.");
       return;
     }
 
     if (!content.trim()) {
-      setError("내용을 입력해주세요.");
+      toast.error("내용을 입력해주세요.");
       return;
     }
 
     setIsSubmitting(true);
-    setError(null);
 
     try {
       // 백엔드 API 엔드포인트
@@ -219,7 +218,7 @@ const EditPostPage: React.FC = () => {
       console.log("게시글 수정 성공:", response.data);
 
       // 성공 메시지 표시
-      alert("게시글이 성공적으로 수정되었습니다.");
+      toast.success("게시글이 성공적으로 수정되었습니다.");
 
       // 성공 시 해당 게시글 상세 페이지로 이동
       const mainCategoryEnum = convertMainCategoryToEnum(mainCategory);
@@ -236,19 +235,19 @@ const EditPostPage: React.FC = () => {
         const axiosError = error as AxiosError<ExceptionResponse>;
         if (axiosError.response) {
           if (axiosError.response.status === 401) {
-            setError("로그인 세션이 만료되었습니다. 다시 로그인해 주세요.");
+            toast.error("로그인 세션이 만료되었습니다. 다시 로그인해 주세요.");
             setRedirectToLogin(true);
           } else {
-            setError(
+            toast.error(
               axiosError.response.data?.message ||
                 "게시글 수정 중 오류가 발생했습니다."
             );
           }
         } else {
-          setError("서버와의 통신 중 오류가 발생했습니다.");
+          toast.error("서버와의 통신 중 오류가 발생했습니다.");
         }
       } else {
-        setError("알 수 없는 오류가 발생했습니다.");
+        toast.error("알 수 없는 오류가 발생했습니다.");
       }
     } finally {
       setIsSubmitting(false);
@@ -273,12 +272,6 @@ const EditPostPage: React.FC = () => {
         <h1 className="text-2xl font-bold text-white mb-6">
           {getPageTitle(mainCategory, true)}
         </h1>
-
-        {error && (
-          <div className="bg-red-500 bg-opacity-20 border border-red-500 text-red-500 px-4 py-3 rounded mb-4">
-            {error}
-          </div>
-        )}
 
         {!redirectToLogin && originalPost && (
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -311,7 +304,6 @@ const EditPostPage: React.FC = () => {
               setContent={setContent}
               uploadedImages={uploadedImages}
               setUploadedImages={setUploadedImages}
-              setError={setError}
             />
 
             {/* 버튼 */}

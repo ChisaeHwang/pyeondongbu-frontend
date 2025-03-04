@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { FaCamera } from "react-icons/fa";
 import axiosInstance from "../../utils/axios";
+import toast from "react-hot-toast";
 
 const ProfilePage: React.FC = () => {
   const { user, refreshUser } = useAuth();
@@ -26,12 +27,14 @@ const ProfilePage: React.FC = () => {
     // 파일 크기 제한 (5MB)
     if (file.size > 5 * 1024 * 1024) {
       setError("이미지 크기는 5MB 이하여야 합니다.");
+      toast.error("이미지 크기는 5MB 이하여야 합니다.");
       return;
     }
 
     // 이미지 파일 타입 확인
     if (!file.type.startsWith("image/")) {
       setError("이미지 파일만 업로드 가능합니다.");
+      toast.error("이미지 파일만 업로드 가능합니다.");
       return;
     }
 
@@ -52,11 +55,13 @@ const ProfilePage: React.FC = () => {
 
     if (!nickname.trim()) {
       setError("닉네임을 입력해주세요.");
+      toast.error("닉네임을 입력해주세요.");
       return;
     }
 
     if (nickname.length > 10) {
       setError("닉네임은 최대 10자까지 입력 가능합니다.");
+      toast.error("닉네임은 최대 10자까지 입력 가능합니다.");
       return;
     }
 
@@ -92,13 +97,14 @@ const ProfilePage: React.FC = () => {
       await refreshUser();
 
       // 성공 메시지 표시
-      alert("프로필이 성공적으로 업데이트되었습니다.");
+      toast.success("프로필이 성공적으로 업데이트되었습니다.");
 
       // 홈으로 리다이렉트
       navigate("/", { replace: true });
     } catch (error) {
       console.error("프로필 업데이트 중 오류가 발생했습니다:", error);
       setError("프로필 업데이트 중 오류가 발생했습니다.");
+      toast.error("프로필 업데이트 중 오류가 발생했습니다.");
     } finally {
       setIsSubmitting(false);
     }

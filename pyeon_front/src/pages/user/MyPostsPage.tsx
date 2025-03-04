@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import axiosInstance from "../../utils/axios";
 import { getRelativeTime } from "../../utils/dateUtils";
+import { PostSkeletonList } from "../../components/common/Skeleton";
 
 interface Post {
   id: number;
@@ -32,6 +33,7 @@ const MyPostsPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("전체");
+  const prevPostsCountRef = useRef<number>(10); // 이전 게시글 개수를 저장하는 ref
 
   // 게시글 데이터 가져오기
   useEffect(() => {
@@ -58,6 +60,8 @@ const MyPostsPage: React.FC = () => {
           );
         }
 
+        // 게시글 개수 저장
+        prevPostsCountRef.current = filteredPosts.length;
         setPosts(filteredPosts);
       } catch (error) {
         console.error("게시글을 불러오는 중 오류가 발생했습니다:", error);
@@ -186,9 +190,7 @@ const MyPostsPage: React.FC = () => {
         {/* 게시글 목록 */}
         <div className="space-y-3">
           {loading ? (
-            <div className="text-center py-10 text-gray-400">
-              게시글을 불러오는 중...
-            </div>
+            <PostSkeletonList count={prevPostsCountRef.current} />
           ) : error ? (
             <div className="text-center py-10 text-red-400">{error}</div>
           ) : posts.length === 0 ? (

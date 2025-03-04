@@ -5,6 +5,7 @@ import axiosInstance from "../../utils/axios";
 import { useAuth } from "../../contexts/AuthContext";
 import TextEditor from "../../components/editor/TextEditor";
 import CategorySelector from "../../components/editor/CategorySelector";
+import toast from "react-hot-toast";
 import {
   SUB_CATEGORIES,
   CATEGORY_COLORS,
@@ -58,7 +59,7 @@ const CreatePostPage: React.FC = () => {
   // 로그인 체크
   useEffect(() => {
     if (!isAuthenticated) {
-      setError("로그인이 필요합니다. 3초 후 로그인 페이지로 이동합니다.");
+      toast.error("로그인이 필요합니다. 3초 후 로그인 페이지로 이동합니다.");
       setRedirectToLogin(true);
 
       const timer = setTimeout(() => {
@@ -92,18 +93,18 @@ const CreatePostPage: React.FC = () => {
     e.preventDefault();
 
     if (!isAuthenticated) {
-      setError("로그인이 필요합니다.");
+      toast.error("로그인이 필요합니다.");
       setRedirectToLogin(true);
       return;
     }
 
     if (!title.trim()) {
-      setError("제목을 입력해주세요.");
+      toast.error("제목을 입력해주세요.");
       return;
     }
 
     if (!content.trim()) {
-      setError("내용을 입력해주세요.");
+      toast.error("내용을 입력해주세요.");
       return;
     }
 
@@ -123,6 +124,8 @@ const CreatePostPage: React.FC = () => {
 
       await axiosInstance.post(endpoint, postData);
 
+      toast.success("게시글이 성공적으로 등록되었습니다.");
+
       // 성공 시 해당 카테고리 페이지로 이동
       if (mainCategory === "구인") {
         navigate("/hire");
@@ -136,19 +139,19 @@ const CreatePostPage: React.FC = () => {
         const axiosError = error as AxiosError<ExceptionResponse>;
         if (axiosError.response) {
           if (axiosError.response.status === 401) {
-            setError("로그인 세션이 만료되었습니다. 다시 로그인해 주세요.");
+            toast.error("로그인 세션이 만료되었습니다. 다시 로그인해 주세요.");
             setRedirectToLogin(true);
           } else {
-            setError(
+            toast.error(
               axiosError.response.data?.message ||
                 "게시글 작성 중 오류가 발생했습니다."
             );
           }
         } else {
-          setError("서버와의 통신 중 오류가 발생했습니다.");
+          toast.error("서버와의 통신 중 오류가 발생했습니다.");
         }
       } else {
-        setError("알 수 없는 오류가 발생했습니다.");
+        toast.error("알 수 없는 오류가 발생했습니다.");
       }
     } finally {
       setIsSubmitting(false);
