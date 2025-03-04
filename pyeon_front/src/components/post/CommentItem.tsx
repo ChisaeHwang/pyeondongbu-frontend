@@ -1,5 +1,6 @@
 import React from "react";
 import { formatDate } from "../../utils/dateUtils";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface CommentItemProps {
   id: number;
@@ -34,8 +35,10 @@ const CommentItem: React.FC<CommentItemProps> = ({
   onEditSubmit,
   onDelete,
 }) => {
+  const { user } = useAuth();
   const isEditing = editingCommentId === id;
-  const isAuthor = currentUserEmail === memberEmail;
+  const isAuthor =
+    currentUserEmail === memberEmail || user?.authority === "ROLE_ADMIN";
 
   return (
     <div className="border-b border-[#2c2d32] pb-4 last:border-0">

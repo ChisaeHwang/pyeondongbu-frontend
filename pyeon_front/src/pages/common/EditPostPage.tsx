@@ -133,9 +133,12 @@ const EditPostPage: React.FC = () => {
 
         setUploadedImages(images);
 
-        // 작성자 확인
-        if (user?.email !== response.data.memberEmail) {
-          toast.error("게시글 작성자만 수정할 수 있습니다.");
+        // 작성자 또는 어드민 확인
+        if (
+          user?.email !== response.data.memberEmail &&
+          user?.authority !== "ROLE_ADMIN"
+        ) {
+          toast.error("게시글 작성자 또는 관리자만 수정할 수 있습니다.");
           setTimeout(() => {
             navigate(-1);
           }, 2000);
@@ -149,7 +152,7 @@ const EditPostPage: React.FC = () => {
     };
 
     fetchPost();
-  }, [postId, user?.email, navigate]);
+  }, [postId, user?.email, user?.authority, navigate]);
 
   // 로그인 체크
   useEffect(() => {
