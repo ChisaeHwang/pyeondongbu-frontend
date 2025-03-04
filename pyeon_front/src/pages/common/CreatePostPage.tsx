@@ -16,7 +16,7 @@ import {
 import { ExceptionResponse, PostFormData } from "../../types/post";
 
 // 구인/구직 게시글 기본 양식
-const HIRE_TEMPLATE = `## 신청 양식
+const HIRE_TEMPLATE = `## 참고 양식
 1) 이름/성별/나이(남성분이시면 군필 여부):
 2) 직업:
 3) 연락처:
@@ -27,7 +27,7 @@ const HIRE_TEMPLATE = `## 신청 양식
 *지원 이메일: (이메일 주소를 입력해주세요)
 `;
 
-const RECRUIT_TEMPLATE = `## 신청 양식
+const RECRUIT_TEMPLATE = `## 참고 양식
 1) 이름/성별/나이(남성분이시면 군필 여부):
 2) 직업:
 3) 연락처:
