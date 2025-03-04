@@ -55,6 +55,11 @@ const ProfilePage: React.FC = () => {
       return;
     }
 
+    if (nickname.length > 10) {
+      setError("닉네임은 최대 10자까지 입력 가능합니다.");
+      return;
+    }
+
     try {
       setIsSubmitting(true);
       setError(null);
@@ -166,10 +171,14 @@ const ProfilePage: React.FC = () => {
               type="text"
               id="nickname"
               value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
+              onChange={(e) => setNickname(e.target.value.slice(0, 10))}
               className="w-full bg-[#313338] text-white border border-[#404249] rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
               placeholder="닉네임을 입력하세요"
+              maxLength={10}
             />
+            <div className="text-right text-gray-400 text-sm mt-1">
+              {nickname.length}/10
+            </div>
           </div>
 
           {/* 이메일 (수정 불가) */}

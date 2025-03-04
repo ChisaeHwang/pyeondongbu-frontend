@@ -8,6 +8,10 @@ import PostActions from "../../components/post/PostActions";
 import CommentList from "../../components/post/CommentList";
 import axiosInstance from "../../utils/axios";
 import { Post, Comment, PostResponse } from "../../types/post";
+import {
+  PostDetailSkeleton,
+  CommentSkeletonList,
+} from "../../components/common/Skeleton";
 
 const PostDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -314,8 +318,17 @@ const PostDetailPage: React.FC = () => {
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <div className="max-w-5xl mx-auto text-center text-gray-400 py-12">
-          게시글을 불러오는 중...
+        <div className="max-w-5xl mx-auto">
+          <button
+            onClick={goBack}
+            className="text-gray-400 hover:text-gray-300 mb-6 flex items-center gap-2"
+          >
+            <FaArrowLeft className="w-4 h-4" />
+            목록으로 돌아가기
+          </button>
+
+          <PostDetailSkeleton />
+          <CommentSkeletonList />
         </div>
       </div>
     );

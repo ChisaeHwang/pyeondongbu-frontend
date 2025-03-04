@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { PiPencilSimpleLine, PiUserFill } from "react-icons/pi";
+import React, { useState, useEffect, useRef } from "react";
+import { PiPencilSimpleLine, PiBriefcaseFill } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../../components/common/SearchBar";
 import Pagination from "../../components/jobs/Pagination";
 import axiosInstance from "../../utils/axios";
 import { getRelativeTime } from "../../utils/dateUtils";
+import { PostSkeletonList } from "../../components/common/Skeleton";
 
 // 백엔드 API의 PostSummaryResponse와 일치하는 인터페이스
 interface Post {
@@ -64,6 +65,7 @@ const HirePage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("전체");
+  const prevPostsCountRef = useRef<number>(10); // 이전 게시글 개수를 저장하는 ref
 
   // 게시글 데이터 가져오기
   useEffect(() => {
@@ -83,8 +85,14 @@ const HirePage: React.FC = () => {
         });
 
         // 백엔드 API 응답 형식에 맞게 처리
-        setPosts(response.data.content);
+        const newPosts = response.data.content;
+        setPosts(newPosts);
         setTotalPages(response.data.totalPages);
+
+        // 데이터가 있을 경우 개수 저장
+        if (newPosts.length > 0) {
+          prevPostsCountRef.current = newPosts.length;
+        }
       } catch (error) {
         console.error("게시글을 불러오는 중 오류가 발생했습니다:", error);
         setError("게시글을 불러오는 중 오류가 발생했습니다.");
@@ -165,7 +173,7 @@ const HirePage: React.FC = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold text-white">구인</h1>
-            <PiUserFill className="text-2xl text-cyan-400" />
+            <PiBriefcaseFill className="text-2xl text-cyan-400" />
           </div>
           <Link to="/create?category=구인">
             <button className="flex items-center bg-[#313338] hover:bg-[#383A40] text-[#E5E7EB] pl-4 pr-3 py-2 rounded-md transition-colors duration-200">
@@ -227,9 +235,7 @@ const HirePage: React.FC = () => {
         {/* 게시글 목록 */}
         <div className="space-y-3">
           {loading ? (
-            <div className="text-center py-10 text-gray-400">
-              게시글을 불러오는 중...
-            </div>
+            <PostSkeletonList count={prevPostsCountRef.current} />
           ) : error ? (
             <div className="text-center py-10 text-red-400">{error}</div>
           ) : posts.length === 0 ? (

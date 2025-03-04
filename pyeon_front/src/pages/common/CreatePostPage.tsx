@@ -14,6 +14,27 @@ import {
 } from "../../utils/categoryUtils";
 import { ExceptionResponse, PostFormData } from "../../types/post";
 
+// 구인/구직 게시글 기본 양식
+const HIRE_TEMPLATE = `## 신청 양식
+1) 이름/성별/나이(남성분이시면 군필 여부):
+2) 직업:
+3) 연락처:
+4) 포트폴리오:
+5) 희망 페이:
+6) 비고란:
+
+*지원 이메일: (이메일 주소를 입력해주세요)
+`;
+
+const RECRUIT_TEMPLATE = `## 신청 양식
+1) 이름/성별/나이(남성분이시면 군필 여부):
+2) 직업:
+3) 연락처:
+4) 포트폴리오:
+5) 희망 페이:
+6) 비고란:
+`;
+
 const CreatePostPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,9 +71,20 @@ const CreatePostPage: React.FC = () => {
     }
   }, [isAuthenticated, navigate, location]);
 
-  // 메인 카테고리 변경 시 서브 카테고리 초기화
+  // 메인 카테고리 변경 시 서브 카테고리 초기화 및 기본 양식 설정
   useEffect(() => {
+    // 서브 카테고리 초기화
     setSubCategory(SUB_CATEGORIES[mainCategory][0]);
+
+    // 기본 양식 설정
+    if (mainCategory === "구인") {
+      setContent(HIRE_TEMPLATE);
+    } else if (mainCategory === "구직") {
+      setContent(RECRUIT_TEMPLATE);
+    } else if (mainCategory === "커뮤니티") {
+      // 커뮤니티로 변경 시 초기화
+      setContent("");
+    }
   }, [mainCategory]);
 
   // 게시글 제출
