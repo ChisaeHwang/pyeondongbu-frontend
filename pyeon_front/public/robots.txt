@@ -1,3 +1,8 @@
+# 구글 애드센스 크롤러 허용
+User-agent: Mediapartners-Google
+Allow: /
+
+# 일반 크롤러 허용
 User-agent: *
 Allow: /
 
