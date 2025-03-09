@@ -1,43 +1,11 @@
 import API_CONFIG from "./api";
-import { TokenResponse, AuthUserResponse } from "../types/auth";
+import { AuthUserResponse } from "../types/auth";
 import { tokenStorage } from "../utils/tokenStorage";
 import axiosInstance from "../utils/axios";
 
 export const authService = {
   getGoogleLoginUrl: () => {
     return `${API_CONFIG.baseURL}${API_CONFIG.endpoints.auth.googleLogin}`;
-  },
-
-  handleGoogleCallback: async (code: string): Promise<TokenResponse> => {
-    try {
-      // 쿠키 대신 응답 본문에서 토큰을 받음
-      const response = await fetch(
-        `${API_CONFIG.baseURL}${API_CONFIG.endpoints.auth.googleCallback}?code=${code}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // JWT를 로컬 스토리지에 저장하는 방식으로 변경했으므로 credentials 옵션 제거
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("구글 로그인에 실패했습니다.");
-      }
-
-      const data: TokenResponse = await response.json();
-
-      // 받은 토큰을 저장
-      if (data.accessToken) {
-        tokenStorage.setAccessToken(data.accessToken);
-      }
-
-      return data;
-    } catch (error) {
-      console.error("Google 로그인 콜백 처리 중 오류:", error);
-      throw error;
-    }
   },
 
   logout: async (): Promise<void> => {
