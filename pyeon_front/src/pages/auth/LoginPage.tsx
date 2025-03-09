@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { useAuth } from "../../contexts/AuthContext";
 
 const LoginPage: React.FC = () => {
+  const { login } = useAuth();
+
   return (
     <div className="container mx-auto max-w-5xl px-4 py-16">
       <div className="max-w-md mx-auto bg-[#25262b] rounded-lg p-8 shadow-lg">
@@ -61,10 +64,7 @@ const LoginPage: React.FC = () => {
 
           {/* 구글 로그인 버튼 */}
           <button
-            onClick={() =>
-              (window.location.href =
-                "http://localhost:8080/oauth2/authorization/google")
-            }
+            onClick={login}
             className="w-full flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-gray-800 font-medium py-3 px-4 rounded-md transition-colors duration-200"
           >
             <FcGoogle className="text-xl" />
