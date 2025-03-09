@@ -21,12 +21,14 @@ export const AuthCallback = () => {
         const token = urlParams.get("token");
 
         if (token) {
-          // URL 파라미터로 토큰이 전달된 경우
+          // URL 파라미터로 토큰이 전달된 경우 (OAuth2AuthenticationSuccessHandler에서 전달)
+          console.log("URL 파라미터로 토큰 수신됨");
           tokenStorage.setAccessToken(token);
           await refreshUser();
           navigate("/", { replace: true });
         } else if (code) {
           // 인증 코드가 있는 경우 백엔드에 토큰 요청
+          console.log("인증 코드로 토큰 요청");
           await authService.handleGoogleCallback(code);
           // 토큰이 응답 본문에 있으면 저장됨 (handleGoogleCallback 내부에서 처리)
           await refreshUser();

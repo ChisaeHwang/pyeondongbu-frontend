@@ -18,8 +18,7 @@ export const authService = {
           headers: {
             "Content-Type": "application/json",
           },
-          // credentials 옵션을 'include'로 설정하여 인증 정보를 포함
-          credentials: "include",
+          // JWT를 로컬 스토리지에 저장하는 방식으로 변경했으므로 credentials 옵션 제거
         }
       );
 
