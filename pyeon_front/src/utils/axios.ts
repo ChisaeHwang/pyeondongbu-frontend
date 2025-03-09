@@ -24,8 +24,8 @@ const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  // 백엔드 설정과 일치시키기 위해 withCredentials를 true로 설정
-  withCredentials: true,
+  // 백엔드 설정과 일치시키기 위해 withCredentials를 false로 설정
+  withCredentials: false,
 });
 
 // 요청 디버깅
