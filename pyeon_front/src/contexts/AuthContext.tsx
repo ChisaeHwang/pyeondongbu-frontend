@@ -8,7 +8,8 @@ import React, {
 } from "react";
 import { authService } from "../api/authService";
 import { AuthUserResponse } from "../types/auth";
-import API_CONFIG from "../api/api";
+import { tokenStorage } from "../utils/tokenStorage";
+import axiosInstance from "../utils/axios";
 
 interface AuthContextType {
   user: AuthUserResponse | null;
@@ -21,15 +22,11 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// 로그인 상태 키
-const LOGIN_STATUS_KEY = "is_logged_in";
-
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // 초기 상태를 한 번만 계산
-  const initialIsAuthenticated =
-    sessionStorage.getItem(LOGIN_STATUS_KEY) === "true";
+  // 초기 인증 상태는 토큰 존재 여부로 판단
+  const initialIsAuthenticated = tokenStorage.hasToken();
 
   const [user, setUser] = useState<AuthUserResponse | null>(null);
   const [isLoading, setIsLoading] = useState(initialIsAuthenticated); // 로그인된 상태일 때만 로딩 상태 활성화
@@ -44,28 +41,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const handleLogout = useCallback(() => {
     setUser(null);
     setIsAuthenticated(false);
-    sessionStorage.removeItem(LOGIN_STATUS_KEY);
+    tokenStorage.clearTokens();
   }, []);
 
   const refreshUser = useCallback(async () => {
     try {
       setIsLoading(true);
-      // auth/me 대신 members/me 엔드포인트 사용
-      const response = await fetch(`${API_CONFIG.baseURL}/api/members/me`, {
-        credentials: "include",
-      });
 
-      if (!response.ok) {
-        if (response.status === 401) {
-          handleLogout();
-          throw new Error("unauthorized");
-        }
-        throw new Error(
-          `사용자 정보를 가져오는데 실패했습니다. 상태 코드: ${response.status}`
-        );
+      // 토큰이 없으면 로그아웃 처리
+      if (!tokenStorage.hasToken()) {
+        handleLogout();
+        throw new Error("토큰이 없습니다.");
       }
 
-      const userData = await response.json();
+      // 토큰을 헤더에 포함하여 사용자 정보 요청
+      const response = await axiosInstance.get("/api/members/me");
+      const userData = response.data;
 
       // 상태 업데이트
       setUser({
@@ -76,7 +67,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         authority: userData.authority,
       });
       setIsAuthenticated(true);
-      sessionStorage.setItem(LOGIN_STATUS_KEY, "true");
     } catch (error) {
       // 401 에러 등 인증 실패 시 로그아웃 처리
       handleLogout();
@@ -102,7 +92,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [handleLogout]);
 
-  // 세션 체크 및 토큰 유효성 검증 - 최적화 버전
+  // 세션 체크 및 토큰 유효성 검증
   useEffect(() => {
     // 이미 인증 상태 확인이 완료되었다면 다시 확인하지 않음
     if (authChecked) {
@@ -110,10 +100,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
 
     const checkSession = async () => {
-      const isLoggedIn = sessionStorage.getItem(LOGIN_STATUS_KEY) === "true";
+      // 토큰이 있는지 확인
+      const hasToken = tokenStorage.hasToken();
 
-      if (isLoggedIn) {
-        // 로그인 상태라면 서버에 유효성 검증 요청
+      if (hasToken) {
+        // 토큰이 있으면 서버에 유효성 검증 요청
         try {
           await refreshUser();
         } catch (error) {
