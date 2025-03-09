@@ -18,6 +18,8 @@ export const authService = {
           headers: {
             "Content-Type": "application/json",
           },
+          // credentials 옵션을 'omit'으로 설정하여 인증 정보를 포함하지 않음
+          credentials: "omit",
         }
       );
 

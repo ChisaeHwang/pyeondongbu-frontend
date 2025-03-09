@@ -7,9 +7,8 @@ const axiosInstance = axios.create({
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
   },
-  withCredentials: true,
+  withCredentials: false,
 });
 
 axiosInstance.interceptors.request.use(
