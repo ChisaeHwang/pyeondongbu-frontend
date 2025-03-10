@@ -16,7 +16,6 @@ export const authService = {
       // 로컬 토큰 삭제
       tokenStorage.clearTokens();
     } catch (error) {
-      console.error("로그아웃 요청 중 오류 발생:", error);
       // 오류가 발생해도 로컬 토큰은 삭제
       tokenStorage.clearTokens();
       throw error;
@@ -29,7 +28,6 @@ export const authService = {
       const response = await axiosInstance.get("/api/auth/me");
       return response.data.data;
     } catch (error) {
-      console.error("사용자 정보 조회 실패:", error);
       throw error;
     }
   },

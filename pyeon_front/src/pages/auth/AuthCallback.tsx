@@ -18,7 +18,6 @@ export const AuthCallback = () => {
 
         if (token) {
           // URL 파라미터로 토큰이 전달된 경우 (OAuth2AuthenticationSuccessHandler에서 전달)
-          console.log("URL 파라미터로 토큰 수신됨");
           tokenStorage.setAccessToken(token);
           await refreshUser();
           navigate("/", { replace: true });
@@ -27,7 +26,6 @@ export const AuthCallback = () => {
           throw new Error("토큰이 없습니다.");
         }
       } catch (error) {
-        console.error("로그인 처리 중 오류 발생:", error);
         setError("로그인 처리 중 오류가 발생했습니다.");
         // 3초 후 홈으로 리다이렉트
         setTimeout(() => {

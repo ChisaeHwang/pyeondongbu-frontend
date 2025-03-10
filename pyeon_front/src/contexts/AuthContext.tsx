@@ -70,7 +70,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     } catch (error) {
       // 401 에러 등 인증 실패 시 로그아웃 처리
       handleLogout();
-      console.error("인증 정보 갱신 실패:", error);
     } finally {
       setIsLoading(false);
       setAuthChecked(true);
@@ -86,7 +85,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       await authService.logout();
       handleLogout();
     } catch (error) {
-      console.error("로그아웃 실패:", error);
       // 로그아웃 API 호출 실패해도 클라이언트에서는 로그아웃 처리
       handleLogout();
     }
