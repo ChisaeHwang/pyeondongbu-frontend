@@ -24,7 +24,6 @@ const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  // JWT 토큰을 로컬 스토리지에 저장하는 방식으로 변경했으므로 withCredentials를 false로 설정
   withCredentials: false,
 });
 

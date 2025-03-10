@@ -1,6 +1,6 @@
 const API_CONFIG = {
   // 환경 변수에서 API 기본 URL 가져오기
-  baseURL: process.env.REACT_APP_API_BASE_URL || "https://api.pyeondongbu.com",
+  baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:8080",
   env: process.env.REACT_APP_ENV || "development",
   endpoints: {
     auth: {
