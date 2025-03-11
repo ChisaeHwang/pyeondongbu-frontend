@@ -1,4 +1,5 @@
 import axiosInstance from "./axios";
+import axios from "axios";
 
 /**
  * Presigned URL을 사용하여 이미지를 업로드하는 함수
@@ -21,8 +22,8 @@ export const uploadImage = async (file: File): Promise<string> => {
 
     const { preSignedUrl, fileName } = presignedUrlResponse.data;
 
-    // 2. S3에 직접 업로드
-    await axiosInstance.put(preSignedUrl, file, {
+    // 2. S3에 직접 업로드 (기본 axios 사용, Authorization 헤더 없이)
+    await axios.put(preSignedUrl, file, {
       headers: {
         "Content-Type": file.type,
       },
