@@ -29,13 +29,8 @@ export const uploadImage = async (file: File): Promise<string> => {
       },
     });
 
-    // 3. 업로드 완료 알림
-    await axiosInstance.post(`/api/images/confirm/${fileName}`);
-
-    // 4. 이미지 URL 생성 (S3 버킷 URL + 파일명)
-    const imageUrl = `https://pyeon.s3.ap-northeast-2.amazonaws.com/images/${fileName}`;
-
-    return imageUrl;
+    // 3. 이미지 URL 생성 및 반환
+    return `https://pyeon.s3.ap-northeast-2.amazonaws.com/images/${fileName}`;
   } catch (error) {
     console.error("이미지 업로드 실패:", error);
     throw error;
