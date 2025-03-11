@@ -4,6 +4,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { FaCamera } from "react-icons/fa";
 import axiosInstance from "../../utils/axios";
 import toast from "react-hot-toast";
+import { uploadImage, validateImageFile } from "../../utils/imageUpload";
 
 const ProfilePage: React.FC = () => {
   const { user, refreshUser } = useAuth();
@@ -24,17 +25,11 @@ const ProfilePage: React.FC = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // 파일 크기 제한 (5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      setError("이미지 크기는 5MB 이하여야 합니다.");
-      toast.error("이미지 크기는 5MB 이하여야 합니다.");
-      return;
-    }
-
-    // 이미지 파일 타입 확인
-    if (!file.type.startsWith("image/")) {
-      setError("이미지 파일만 업로드 가능합니다.");
-      toast.error("이미지 파일만 업로드 가능합니다.");
+    // 파일 유효성 검사
+    const validation = validateImageFile(file, 5); // 5MB 제한
+    if (!validation.isValid) {
+      setError(validation.message || "유효하지 않은 이미지입니다.");
+      toast.error(validation.message || "유효하지 않은 이미지입니다.");
       return;
     }
 
@@ -69,22 +64,16 @@ const ProfilePage: React.FC = () => {
       setIsSubmitting(true);
       setError(null);
 
-      // 프로필 이미지가 있다면 먼저 업로드
+      // 프로필 이미지가 있다면 먼저 업로드 (Presigned URL 방식 사용)
       let newProfileImageUrl = user?.profileImageUrl;
       if (profileImage) {
-        const formData = new FormData();
-        formData.append("image", profileImage);
-
-        const imageResponse = await axiosInstance.post(
-          "/api/images",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        newProfileImageUrl = imageResponse.data.imageUrl;
+        try {
+          // 새로운 이미지 업로드 유틸리티 사용
+          newProfileImageUrl = await uploadImage(profileImage);
+        } catch (error) {
+          console.error("이미지 업로드 중 오류가 발생했습니다:", error);
+          throw new Error("이미지 업로드 중 오류가 발생했습니다.");
+        }
       }
 
       // 프로필 정보 업데이트

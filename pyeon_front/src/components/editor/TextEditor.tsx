@@ -14,7 +14,7 @@ import {
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-import axiosInstance from "../../utils/axios";
+import { uploadImage, validateImageFile } from "../../utils/imageUpload";
 import "../../styles/jobDetail.css";
 
 export const MAX_IMAGES = 5;
@@ -37,6 +37,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
+  const [isUploading, setIsUploading] = useState(false);
 
   // 텍스트 서식 적용 함수
   const applyFormat = (format: string) => {
@@ -118,23 +119,18 @@ const TextEditor: React.FC<TextEditorProps> = ({
 
     const file = files[0];
 
-    // 파일 크기 확인
-    if (file.size > MAX_IMAGE_SIZE) {
-      setError?.(`이미지 크기는 최대 5MB까지 가능합니다.`);
+    // 파일 유효성 검사
+    const validation = validateImageFile(file, 5); // 5MB 제한
+    if (!validation.isValid) {
+      setError?.(validation.message || "유효하지 않은 이미지입니다.");
       return;
     }
 
-    const formData = new FormData();
-    formData.append("image", file);
+    setIsUploading(true);
 
     try {
-      const response = await axiosInstance.post("/api/images", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      const imageUrl = response.data.imageUrl;
+      // Presigned URL 방식으로 이미지 업로드
+      const imageUrl = await uploadImage(file);
 
       // 이미지 URL 저장
       setUploadedImages((prev: string[]) => [...prev, imageUrl]);
@@ -144,6 +140,8 @@ const TextEditor: React.FC<TextEditorProps> = ({
     } catch (error) {
       console.error("이미지 업로드 실패:", error);
       setError?.("이미지 업로드에 실패했습니다.");
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -260,18 +258,26 @@ const TextEditor: React.FC<TextEditorProps> = ({
             </button>
             <label
               htmlFor="image-upload"
-              className="p-1.5 text-gray-300 hover:bg-[#383A40] rounded cursor-pointer"
-              title="이미지"
+              className={`p-1.5 text-gray-300 hover:bg-[#383A40] rounded cursor-pointer ${
+                isUploading ? "opacity-50 pointer-events-none" : ""
+              }`}
+              title="이미지 업로드"
             >
               <FaImage />
               <input
+                id="image-upload"
                 type="file"
                 accept="image/*"
-                id="image-upload"
                 className="hidden"
                 onChange={handleImageUpload}
+                disabled={isUploading}
               />
             </label>
+            {isUploading && (
+              <span className="text-xs text-gray-400 ml-2 self-center">
+                업로드 중...
+              </span>
+            )}
           </>
         )}
 
