@@ -1,6 +1,63 @@
 {
   "jobs": [
     {
+      "id": 153,
+      "title": "멍보리 유튜브 편집자 모집",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>작업량 : 협의</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/channel/UCLJBQ-NxkSGuwoW5sfL6RPA/community?lb=Ugkxr-t0KbFSyJOcxqas2U5JLrQH34uqQPFJ' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "멍보리",
+        "image": "https://ifh.cc/g/cNhyO3.jpg",
+        "platform": "Soop"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임"],
+      "publishedAt": "2025-03-23",
+      "platform": "youtube"
+    },
+    {
+      "id": 152,
+      "title": "랄로 유튜브 편집을 하실 편집자 분을 구인합니다.",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 4월 5일까지</li><li>일주일 2~3개 편집</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/channel/UCD2YO_A_PVMgMDN9jpRrpVA/community?lb=UgkxJO2mRzpbPkmVzd3qEIVBPLLJCWRuI3sj' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "랄로",
+        "image": "https://ifh.cc/g/Op3mX9.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임"],
+      "publishedAt": "2025-03-23",
+      "platform": "youtube"
+    },
+    {
+      "id": 151,
+      "title": "피아노캣 유튜브 편집자 모집",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 4월 1일까지</li><li>일주일 최소 2개 편집</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/channel/UCDyc0_OWYXI1WcaMjijHrDA/community?lb=Ugkxxk-ioLb3D6Uyv4aRlQTvjEU0vIxMZmUa' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "피아노캣",
+        "image": "https://ifh.cc/g/D4lmhb.jpg",
+        "platform": "Soop"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["게임"],
+      "publishedAt": "2025-03-23",
+      "platform": "youtube"
+    },
+    {
+      "id": 150,
+      "title": "유튜브 편집자님을 모십니다. 🙏 ",
+      "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>주 2회 이상 일반영상 및 쇼츠편집</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://x.com/yacocoS2/status/1902916832870412316' target='_blank'>구인글 바로가기</a></p>",
+      "publisher": {
+        "name": "성녀 야코코",
+        "image": "https://ifh.cc/g/7lmyxX.jpg",
+        "platform": "chzzk"
+      },
+      "skills": ["프리미어 프로"],
+      "videoType": ["버츄얼"],
+      "publishedAt": "2025-03-23",
+      "platform": "x"
+    },
+
+    {
       "id": 149,
       "title": "삐라 유튜브 편집자 모집",
       "content": "<p><strong>편집자</strong>를 구합니다.</p><ul><li>기간 : 모집 시 마감</li><li>일주일 최소 2개 편집</li><li>페이 : 협의</li></ul><p>자세한 내용은 아래 링크에서 확인해주세요:</p><p><a href='https://www.youtube.com/channel/UCw2zOqd6hXsny79qDki_Z4w/community?lb=UgkxCqbsJ1Z0seJAWn4Jvk7zz4dInAqkzjuv' target='_blank'>구인글 바로가기</a></p>",
