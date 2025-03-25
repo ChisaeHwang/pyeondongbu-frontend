@@ -171,4 +171,48 @@ export const JobSkeletonList: React.FC<{ count?: number }> = ({
   );
 };
 
+export const JobDetailSkeleton: React.FC = () => {
+  return (
+    <div className="my-8">
+      <div className="bg-[#25262b] rounded-lg p-6 border border-[#2c2d32] shadow-sm">
+        {/* 상단 정보 */}
+        <div className="flex items-start justify-between mb-6">
+          <div>
+            <Skeleton width="70%" height="32px" className="mb-2" />
+            <div className="flex flex-wrap gap-2 mt-4">
+              <Skeleton width="80px" height="28px" rounded="full" />
+              <Skeleton width="100px" height="28px" rounded="full" />
+              <Skeleton width="90px" height="28px" rounded="full" />
+            </div>
+          </div>
+          <Skeleton width="60px" height="24px" rounded="md" />
+        </div>
+
+        {/* 컨텐츠 영역 */}
+        <div className="job-content space-y-4">
+          <Skeleton width="90%" height="20px" />
+          <Skeleton width="85%" height="20px" />
+          <Skeleton width="40%" height="20px" />
+
+          <div className="mt-6">
+            <Skeleton width="100%" height="100px" />
+          </div>
+
+          <div className="mt-6 space-y-2">
+            <Skeleton width="60%" height="20px" />
+            <Skeleton width="90%" height="20px" />
+            <Skeleton width="70%" height="20px" />
+          </div>
+        </div>
+
+        {/* 하단 정보 */}
+        <div className="flex justify-between mt-8">
+          <Skeleton width="120px" height="20px" />
+          <Skeleton width="150px" height="20px" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default Skeleton;
