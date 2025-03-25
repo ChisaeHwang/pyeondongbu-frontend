@@ -13,6 +13,7 @@ export interface AuthUserResponse {
   nickname: string;
   profileImageUrl: string;
   authority: string;
+  status: string;
 }
 
 export interface ApiResponse<T> {

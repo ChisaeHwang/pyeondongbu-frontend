@@ -58,6 +58,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await axiosInstance.get("/api/members/me");
       const userData = response.data;
 
+      // 사용자 상태 확인 (비활성화된 사용자인지)
+      if (userData.status === "INACTIVE" || userData.status === "DELETED") {
+        handleLogout();
+        throw new Error("사용이 제한된 사용자이거나 탈퇴한 사용자입니다.");
+      }
+
       // 상태 업데이트
       setUser({
         id: userData.id,
@@ -65,6 +71,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         nickname: userData.nickname,
         profileImageUrl: userData.profileImageUrl,
         authority: userData.authority,
+        status: userData.status,
       });
       setIsAuthenticated(true);
     } catch (error) {

@@ -31,6 +31,21 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    // 403 에러일 경우 로그아웃 처리
+    if (error.response && error.response.status === 403) {
+      // 비활성화된 계정 관련 메시지인 경우
+      const errorMessage = error.response.data?.message || "";
+      if (
+        errorMessage.includes("사용이 제한된 사용자") ||
+        errorMessage.includes("탈퇴한 사용자")
+      ) {
+        tokenStorage.clearTokens();
+        // 로그인 페이지가 아닌 경우에만 리다이렉트
+        if (!window.location.pathname.includes("/auth")) {
+          window.location.href = "/";
+        }
+      }
+    }
     return Promise.reject(error);
   }
 );
