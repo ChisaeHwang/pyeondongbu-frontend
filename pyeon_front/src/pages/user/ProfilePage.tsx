@@ -90,10 +90,31 @@ const ProfilePage: React.FC = () => {
 
       // 홈으로 리다이렉트
       navigate("/", { replace: true });
-    } catch (error) {
-      console.error("프로필 업데이트 중 오류가 발생했습니다:", error);
-      setError("프로필 업데이트 중 오류가 발생했습니다.");
-      toast.error("프로필 업데이트 중 오류가 발생했습니다.");
+    } catch (err) {
+      console.error("프로필 업데이트 중 오류가 발생했습니다:", err);
+
+      // 에러 타입 확인
+      const error = err as any;
+
+      // 닉네임 중복 에러 처리 (409 Conflict, MEMBER_008 코드)
+      if (
+        error.response &&
+        error.response.status === 409 &&
+        error.response.data?.code === "MEMBER_008"
+      ) {
+        setError("이미 존재하는 닉네임입니다.");
+        toast.error("이미 존재하는 닉네임입니다.");
+      }
+      // 이미지 크기 초과 등 다른 유효성 오류 처리
+      else if (error.response && error.response.data?.message) {
+        setError(error.response.data.message);
+        toast.error(error.response.data.message);
+      }
+      // 기타 오류
+      else {
+        setError("프로필 업데이트 중 오류가 발생했습니다.");
+        toast.error("프로필 업데이트 중 오류가 발생했습니다.");
+      }
     } finally {
       setIsSubmitting(false);
     }
