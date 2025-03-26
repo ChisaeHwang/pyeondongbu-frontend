@@ -1,5 +1,6 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { getImageUrl } from "../../utils/imageUrl";
 
 interface OptimizedImageProps {
   src: string;
@@ -22,15 +23,19 @@ export default function OptimizedImage({
   delayTime = 500,
   threshold = 100,
 }: OptimizedImageProps) {
+  // Cloudflare Workers를 통한 최적화된 이미지 URL 생성
+  const optimizedSrc = getImageUrl(src);
+  const placeholderSrc = `${optimizedSrc}?w=50`;
+
   return (
     <LazyLoadImage
-      src={src}
+      src={optimizedSrc}
       alt={alt}
       effect="blur"
       className={className}
       threshold={threshold}
       loading={isPriority ? "eager" : "lazy"}
-      placeholderSrc={`${src}?w=50`} // 저해상도 이미지를 플레이스홀더로 사용
+      placeholderSrc={placeholderSrc}
       wrapperClassName="w-full h-full"
       visibleByDefault={visibleByDefault}
       delayMethod={delayMethod}

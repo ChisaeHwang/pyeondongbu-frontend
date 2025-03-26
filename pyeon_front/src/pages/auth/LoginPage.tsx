@@ -2,9 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../contexts/AuthContext";
+import { getImageUrl } from "../../utils/imageUrl";
 
 const LoginPage: React.FC = () => {
   const { login } = useAuth();
+  const logoUrl = getImageUrl(
+    "https://pyeon.s3.ap-northeast-2.amazonaws.com/images/%ED%8E%B8%EB%8F%99%EB%B6%80+%EB%A1%9C%EA%B3%A0+4.png"
+  );
 
   return (
     <div className="container mx-auto max-w-5xl px-4 py-16">
@@ -12,7 +16,7 @@ const LoginPage: React.FC = () => {
         <div className="flex items-center justify-center mb-8 -ml-3">
           <div className="flex items-center gap-2">
             <img
-              src="https://pyeon.s3.ap-northeast-2.amazonaws.com/images/%ED%8E%B8%EB%8F%99%EB%B6%80+%EB%A1%9C%EA%B3%A0+4.png"
+              src={logoUrl}
               alt="편동부 로고"
               className="h-10 w-10 object-contain"
             />

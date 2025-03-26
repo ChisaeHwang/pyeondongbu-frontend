@@ -1,5 +1,6 @@
 import axiosInstance from "./axios";
 import axios from "axios";
+import { getImageUrl } from "./imageUrl";
 
 /**
  * Presigned URL을 사용하여 이미지를 업로드하는 함수
@@ -29,8 +30,9 @@ export const uploadImage = async (file: File): Promise<string> => {
       },
     });
 
-    // 3. 이미지 URL 생성 및 반환
-    return `https://pyeon.s3.ap-northeast-2.amazonaws.com/images/${fileName}`;
+    // 3. 이미지 URL 생성 및 반환 (Cloudflare Workers를 통한 최적화)
+    const s3Url = `https://pyeon.s3.ap-northeast-2.amazonaws.com/images/${fileName}`;
+    return getImageUrl(s3Url);
   } catch (error) {
     console.error("이미지 업로드 실패:", error);
     throw error;
