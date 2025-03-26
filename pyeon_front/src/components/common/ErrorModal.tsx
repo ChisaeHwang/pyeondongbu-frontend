@@ -6,6 +6,7 @@ interface ErrorModalProps {
   onClose: () => void;
   title: string;
   message: string;
+  subMessage?: string;
   actionText?: string;
   actionLink?: string;
 }
@@ -15,6 +16,7 @@ const ErrorModal: React.FC<ErrorModalProps> = ({
   onClose,
   title,
   message,
+  subMessage,
   actionText = "홈으로 돌아가기",
   actionLink = "/",
 }) => {
@@ -35,9 +37,7 @@ const ErrorModal: React.FC<ErrorModalProps> = ({
         <h3 className="text-xl font-bold text-red-500 mb-2">{title}</h3>
         <div className="my-4 text-gray-300">
           <p className="mb-2">{message}</p>
-          <p className="text-sm text-gray-400">
-            문제가 지속되면 관리자에게 문의하세요.
-          </p>
+          {subMessage && <p className="text-sm text-gray-400">{subMessage}</p>}
         </div>
         <div className="flex justify-end gap-2 mt-4">
           <button

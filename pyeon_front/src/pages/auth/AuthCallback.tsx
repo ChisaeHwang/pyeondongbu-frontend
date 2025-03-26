@@ -12,6 +12,7 @@ export const AuthCallback = () => {
   const [errorInfo, setErrorInfo] = useState({
     title: "",
     message: "",
+    subMessage: "",
   });
 
   useEffect(() => {
@@ -27,12 +28,14 @@ export const AuthCallback = () => {
           if (error === "MEMBER_DEACTIVATED") {
             setErrorInfo({
               title: "계정 접근 제한",
-              message: "비활성화된 계정입니다. 관리자에게 문의해주세요.",
+              message: "사용이 제한된 사용자이거나 탈퇴한 사용자입니다.",
+              subMessage: "계정 관련 문의사항은 관리자에게 문의해주세요.",
             });
           } else {
             setErrorInfo({
               title: "로그인 실패",
               message: message || "로그인 중 오류가 발생했습니다.",
+              subMessage: "잠시 후 다시 시도해주세요.",
             });
           }
           setIsErrorModalOpen(true);
@@ -48,7 +51,8 @@ export const AuthCallback = () => {
           // 토큰이 없는 경우
           setErrorInfo({
             title: "로그인 실패",
-            message: "로그인에 실패했습니다. 다시 시도해주세요.",
+            message: "인증 정보를 받아오지 못했습니다.",
+            subMessage: "다시 로그인을 시도해주세요.",
           });
           setIsErrorModalOpen(true);
         }
@@ -56,6 +60,7 @@ export const AuthCallback = () => {
         setErrorInfo({
           title: "로그인 실패",
           message: "로그인 처리 중 오류가 발생했습니다.",
+          subMessage: "잠시 후 다시 시도해주세요.",
         });
         setIsErrorModalOpen(true);
       }
@@ -83,6 +88,7 @@ export const AuthCallback = () => {
         onClose={closeErrorModal}
         title={errorInfo.title}
         message={errorInfo.message}
+        subMessage={errorInfo.subMessage}
         actionText="로그인 페이지로 이동"
         actionLink="/login"
       />
