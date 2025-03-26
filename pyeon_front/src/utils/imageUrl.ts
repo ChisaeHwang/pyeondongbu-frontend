@@ -13,7 +13,7 @@ export function getImageUrl(imageKey: string): string {
     // S3 URL을 Cloudflare 워커 URL로 변환
     return imageKey.replace(
       "https://pyeon.s3.ap-northeast-2.amazonaws.com/images/",
-      "https://s3-images.pyeon.kr/images/"
+      "https://s3-images.pyeondongbu.com/images/"
     );
   }
 
@@ -24,5 +24,5 @@ export function getImageUrl(imageKey: string): string {
   }
 
   // 이미지 키로 Cloudflare 워커 URL 구성
-  return `https://s3-images.pyeon.kr/images/${imageKey}`;
+  return `https://s3-images.pyeondongbu.com/images/${imageKey}`;
 }
