@@ -2,13 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../contexts/AuthContext";
-import { getImageUrl } from "../../utils/imageUrl";
 
 const LoginPage: React.FC = () => {
   const { login } = useAuth();
-  const logoUrl = getImageUrl(
-    "https://pyeon.s3.ap-northeast-2.amazonaws.com/images/%ED%8E%B8%EB%8F%99%EB%B6%80+%EB%A1%9C%EA%B3%A0+4.png"
-  );
+  const logoUrl = "/images/logo.png";
 
   return (
     <div className="container mx-auto max-w-5xl px-4 py-16">
