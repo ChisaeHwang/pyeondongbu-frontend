@@ -3,12 +3,12 @@
   "short_name": "편동부",
   "icons": [
     {
-      "src": "https://s3-images.pyeondongbu.com/images/%ED%8E%B8%EB%8F%99%EB%B6%80+%EB%A1%9C%EA%B3%A0+4.png",
+      "src": "/images/logo.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://s3-images.pyeondongbu.com/images/%ED%8E%B8%EB%8F%99%EB%B6%80+%EB%A1%9C%EA%B3%A0+4.png",
+      "src": "/images/logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }
