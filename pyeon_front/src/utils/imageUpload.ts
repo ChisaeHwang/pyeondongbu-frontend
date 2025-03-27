@@ -31,10 +31,7 @@ export const uploadImage = async (file: File): Promise<string> => {
     });
 
     // 3. 이미지 URL 생성 및 반환 (Cloudflare Workers를 통한 최적화)
-    const s3BucketUrl =
-      process.env.REACT_APP_S3_BUCKET_URL ||
-      "https://pyeon.s3.ap-northeast-2.amazonaws.com/images";
-    const s3Url = `${s3BucketUrl}/${fileName}`;
+    const s3Url = `https://pyeon.s3.ap-northeast-2.amazonaws.com/images/${fileName}`;
     return getImageUrl(s3Url);
   } catch (error) {
     console.error("이미지 업로드 실패:", error);
