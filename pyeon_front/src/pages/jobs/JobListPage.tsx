@@ -26,7 +26,7 @@ const JobListPage: React.FC = () => {
         );
 
         if (!response.ok) {
-          throw new Error("데이터를 불러오는데 실패했습니다");
+          throw new Error("데이터를 불러오는데 실패했습니다.");
         }
 
         const data = await response.json();
@@ -34,7 +34,7 @@ const JobListPage: React.FC = () => {
         setJobsData(Array.isArray(data) ? data : Object.values(data) || []);
       } catch (err) {
         console.error("Error fetching jobs:", err);
-        setError("구인 정보를 불러오는데 문제가 발생했습니다");
+        setError("구인 정보를 불러오는데 문제가 발생했습니다.");
       } finally {
         setIsLoading(false);
       }
