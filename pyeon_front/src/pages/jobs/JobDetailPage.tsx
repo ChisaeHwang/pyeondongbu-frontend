@@ -17,7 +17,7 @@ const JobDetailPage: React.FC = () => {
       try {
         // Firebase Realtime Database에서 데이터 가져오기
         const response = await fetch(
-          `${process.env.REACT_APP_FIREBASE_DB_URL}/jobs.json`
+          "https://pyeon-83d6a-default-rtdb.asia-southeast1.firebasedatabase.app/jobs.json"
         );
 
         if (!response.ok) {
