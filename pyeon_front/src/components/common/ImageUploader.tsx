@@ -49,7 +49,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         maxSizeMB
       );
     } catch (err) {
-      setError("이미지 업로드 중 오류가 발생했습니다.");
+      setError("이미지 업로드 중 오류가 발생했습니다");
       setIsLoading(false);
       // 파일 입력 초기화
       if (fileInputRef.current) {
