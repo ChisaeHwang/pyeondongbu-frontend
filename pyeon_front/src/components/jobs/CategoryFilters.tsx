@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { SKILLS, VIDEO_TYPES, PLATFORMS } from "../../constants/filters";
+import SearchInput from "../common/SearchInput";
 
 interface CategoryFiltersProps {
   selectedSkills: string[];
   selectedTypes: string[];
   selectedPlatforms: string[];
+  searchQuery: string;
+  onSearch: (query: string) => void;
   onSkillChange: (skill: string) => void;
   onTypeChange: (type: string) => void;
   onPlatformChange: (platform: string) => void;
@@ -14,12 +17,40 @@ const CategoryFilters: React.FC<CategoryFiltersProps> = ({
   selectedSkills,
   selectedTypes,
   selectedPlatforms,
+  searchQuery,
+  onSearch,
   onSkillChange,
   onTypeChange,
   onPlatformChange,
 }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+  };
+
+  const handleSubmit = () => {
+    onSearch(searchTerm.trim());
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   return (
     <div className="space-y-6">
+      <div className="w-full max-w-full">
+        <SearchInput
+          value={searchTerm}
+          onChange={(e) => handleSearch(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onSubmit={handleSubmit}
+          placeholder="구인글 검색..."
+        />
+      </div>
+
       <div>
         <h3 className="text-gray-400 text-sm mb-3">편집 툴</h3>
         <div className="flex flex-wrap gap-2">

@@ -1,35 +1,39 @@
-import { FiSearch } from "react-icons/fi";
+import React, { useState } from "react";
+import { PiMagnifyingGlass } from "react-icons/pi";
 
-interface SearchInputProps {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: React.FormEvent) => void;
+interface SearchBarProps {
+  onSearch: (query: string) => void;
   placeholder?: string;
 }
 
-export const SearchInput: React.FC<SearchInputProps> = ({
-  value,
-  onChange,
-  onSubmit,
-  placeholder = "검색...",
+const SearchBar: React.FC<SearchBarProps> = ({
+  onSearch,
+  placeholder = "검색어를 입력하세요...",
 }) => {
+  const [query, setQuery] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearch(query);
+  };
+
   return (
-    <form onSubmit={onSubmit} className="flex-1 max-w-md">
-      <div className="relative">
+    <form onSubmit={handleSubmit} className="w-full">
+      <div className="relative w-80">
         <input
           type="text"
-          value={value}
-          onChange={onChange}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-[#2c2d32] text-gray-100 rounded-lg pl-4 pr-10 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+          className="w-full bg-[#1e1f22] text-gray-200 pl-10 pr-4 py-1.5 rounded-md border-2 border-[#2c2d32] focus:outline-none focus:border-[#454545] text-sm shadow-sm"
+          style={{
+            boxShadow: "0 0 0 1px rgba(255, 255, 255, 0.05)",
+          }}
         />
-        <button
-          type="submit"
-          className="absolute right-0 top-0 h-full px-3 text-gray-400 hover:text-gray-200"
-        >
-          <FiSearch size={16} />
-        </button>
+        <PiMagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
       </div>
     </form>
   );
 };
+
+export default SearchBar;
