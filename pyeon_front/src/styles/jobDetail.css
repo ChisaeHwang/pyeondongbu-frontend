@@ -46,6 +46,10 @@
   border-radius: 0.25rem;
   background-color: rgba(59, 130, 246, 0.1);
   transition: all 0.2s;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: inline-block;
+  max-width: 100%;
 }
 
 .job-content a:hover {
