@@ -10,7 +10,6 @@ import { getImageUrl } from "./imageUrl";
  */
 export const uploadImage = async (file: File): Promise<string> => {
   try {
-    // 1. Presigned URL 요청
     const presignedUrlResponse = await axiosInstance.post(
       "/api/images/presigned-url",
       null,
@@ -23,14 +22,12 @@ export const uploadImage = async (file: File): Promise<string> => {
 
     const { preSignedUrl, fileName } = presignedUrlResponse.data;
 
-    // 2. S3에 직접 업로드 (기본 axios 사용, Authorization 헤더 없이)
     await axios.put(preSignedUrl, file, {
       headers: {
         "Content-Type": file.type,
       },
     });
 
-    // 3. 이미지 URL 생성 및 반환 (Cloudflare Workers를 통한 최적화)
     const s3Url = `https://pyeon.s3.ap-northeast-2.amazonaws.com/images/${fileName}`;
     return getImageUrl(s3Url);
   } catch (error) {
