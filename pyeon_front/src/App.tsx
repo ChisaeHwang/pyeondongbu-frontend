@@ -55,9 +55,9 @@ function App() {
       <Router>
         <AnalyticsWrapper>
           <ScrollToTop />
-          <div className="min-h-screen bg-[#1a1b1e] flex flex-col">
+          <div className="flex flex-col min-h-screen bg-[#1a1b1e]">
             <Header />
-            <main className="flex-grow pb-16">
+            <main className="flex-1 bg-[#1a1b1e]">
               <Routes>
                 <Route path="/" element={<JobListPage />} />
                 <Route path="/jobs" element={<JobListPage />} />
