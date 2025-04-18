@@ -394,16 +394,6 @@ const PostDetailPage: React.FC = () => {
         />
       </div>
 
-      {/* 댓글 위 광고 */}
-      <div className="my-6">
-        <AdBanner
-          slot="3456789012"
-          format="rectangle"
-          responsive={true}
-          className="w-full min-h-[250px]"
-        />
-      </div>
-
       {/* 댓글 섹션 */}
       <CommentList
         comments={post.comments}
@@ -426,7 +416,7 @@ const PostDetailPage: React.FC = () => {
       {/* 댓글 아래 광고 */}
       <div className="mt-6">
         <AdBanner
-          slot="4567890123"
+          slot="5409996939"
           format="rectangle"
           responsive={true}
           className="w-full min-h-[250px]"

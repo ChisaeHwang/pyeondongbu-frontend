@@ -16,25 +16,21 @@ interface AdLayoutProps {
  */
 const AdLayout: React.FC<AdLayoutProps> = ({
   children,
-  leftSlotId = "1234567890", // 실제 슬롯 ID로 변경 필요
-  rightSlotId = "0987654321", // 실제 슬롯 ID로 변경 필요
+  leftSlotId = "4880348045", // 왼쪽 사이드바 슬롯 ID
+  rightSlotId = "9941103036", // 오른쪽 사이드바 슬롯 ID
   showLeftAd = true,
   showRightAd = true,
 }) => {
   return (
     <div className="container mx-auto max-w-7xl px-4 py-8 flex bg-[#1a1b1e]">
       {/* 왼쪽 사이드바 광고 */}
-      {showLeftAd && (
-        <AdSidebar slotId={leftSlotId} className="w-[160px] mr-4" />
-      )}
+      {showLeftAd && <AdSidebar slotId={leftSlotId} className="w-[160px]" />}
 
       {/* 메인 콘텐츠 */}
       <div className="flex-1 w-full max-w-5xl mx-auto">{children}</div>
 
       {/* 오른쪽 사이드바 광고 */}
-      {showRightAd && (
-        <AdSidebar slotId={rightSlotId} className="w-[160px] ml-4" />
-      )}
+      {showRightAd && <AdSidebar slotId={rightSlotId} className="w-[160px]" />}
     </div>
   );
 };

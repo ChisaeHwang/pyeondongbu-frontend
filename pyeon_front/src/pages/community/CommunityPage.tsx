@@ -301,7 +301,7 @@ const CommunityPage: React.FC = () => {
                   </div>
                   {/* 모바일에서 5개의 게시글마다 광고 삽입 */}
                   {(index + 1) % 5 === 0 && index < posts.length - 1 && (
-                    <AdInFeed slotId="8765432109" className="md:hidden" />
+                    <AdInFeed className="md:hidden" />
                   )}
                 </React.Fragment>
               ))}

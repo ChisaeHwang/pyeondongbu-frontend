@@ -106,7 +106,7 @@ const JobListPage: React.FC = () => {
 
           {/* 모바일에서만 보이는 광고 - 게시글 목록 하단에 배치 */}
           {!isLoading && currentJobs.length > 0 && (
-            <AdInFeed slotId="4321098765" className="md:hidden my-4" />
+            <AdInFeed className="my-4" />
           )}
 
           {filteredJobs.length > 0 && (

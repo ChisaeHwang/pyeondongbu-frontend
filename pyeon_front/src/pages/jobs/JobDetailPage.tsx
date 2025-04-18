@@ -75,23 +75,13 @@ const JobDetailPage: React.FC = () => {
       leftSlotId="3456789012" // 실제 슬롯 ID로 변경 필요
       rightSlotId="4567890123" // 실제 슬롯 ID로 변경 필요
     >
-      {/* 상단 광고 */}
-      <div className="mb-6">
-        <AdBanner
-          slot="1234567890"
-          format="rectangle"
-          responsive={true}
-          className="w-full min-h-[250px]"
-        />
-      </div>
-
       {/* 메인 콘텐츠 */}
       <JobContent job={job} onBack={handleBack} />
 
       {/* 하단 광고 */}
       <div className="mt-6">
         <AdBanner
-          slot="2345678901"
+          slot="5409996939"
           format="rectangle"
           responsive={true}
           className="w-full min-h-[250px]"
