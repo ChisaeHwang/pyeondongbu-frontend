@@ -2,30 +2,20 @@ import React from "react";
 import AdBanner from "./AdBanner";
 
 interface AdSidebarProps {
-  slotId: string;
   className?: string;
-  sticky?: boolean;
 }
 
-// 사이드바에 표시될 광고 컴포넌트
-const AdSidebar: React.FC<AdSidebarProps> = ({
-  slotId,
-  className = "",
-  sticky = true,
-}) => {
+const AdSidebar: React.FC<AdSidebarProps> = ({ className = "" }) => {
   return (
-    <div
-      className={`
-        hidden lg:block
-        ${sticky ? "sticky top-20" : ""}
-        ${className}
-      `}
-    >
+    <div className={`ad-sidebar ${className}`}>
       <AdBanner
-        slot={slotId}
+        adClient="ca-pub-9895707756303015"
+        adSlot="5409996939"
+        width={300}
+        height={600}
         format="vertical"
-        responsive={true}
-        className="w-full min-h-[600px]"
+        responsive={false}
+        className="mb-4"
       />
     </div>
   );

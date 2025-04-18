@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import JobContent from "../../components/jobs/JobContent";
+import AdBanner from "../../components/common/AdBanner";
 import { Job } from "../../types/job";
 import { JobDetailSkeleton } from "../../components/common/Skeleton";
-import AdLayout from "../../components/layout/AdLayout";
-import AdBanner from "../../components/common/AdBanner";
 
 const JobDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -71,23 +70,24 @@ const JobDetailPage: React.FC = () => {
   }
 
   return (
-    <AdLayout
-      leftSlotId="3456789012" // 실제 슬롯 ID로 변경 필요
-      rightSlotId="4567890123" // 실제 슬롯 ID로 변경 필요
-    >
-      {/* 메인 콘텐츠 */}
+    <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)]">
       <JobContent job={job} onBack={handleBack} />
 
-      {/* 하단 광고 */}
-      <div className="mt-6">
-        <AdBanner
-          slot="5409996939"
-          format="rectangle"
-          responsive={true}
-          className="w-full min-h-[250px]"
-        />
+      {/* 광고 배너 */}
+      <div className="mt-6 mb-4 bg-[#25262b] rounded-lg p-4 border border-[#2c2d32]">
+        <div className="flex justify-center items-center">
+          <AdBanner
+            adClient="ca-pub-9895707756303015"
+            adSlot="5409996939"
+            width={728}
+            height={90}
+            format="horizontal"
+            responsive={true}
+            className="my-2 w-full"
+          />
+        </div>
       </div>
-    </AdLayout>
+    </div>
   );
 };
 

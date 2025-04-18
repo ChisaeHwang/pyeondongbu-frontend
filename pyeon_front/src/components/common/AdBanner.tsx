@@ -1,40 +1,66 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface AdBannerProps {
-  className?: string;
-  slot: string;
-  format?: "auto" | "rectangle" | "horizontal" | "vertical";
+  adClient: string;
+  adSlot: string;
+  width?: number;
+  height?: number;
+  format?: "auto" | "fluid" | "rectangle" | "vertical" | "horizontal";
   responsive?: boolean;
-  style?: React.CSSProperties;
+  className?: string;
 }
 
 const AdBanner: React.FC<AdBannerProps> = ({
+  adClient,
+  adSlot,
+  width = 300,
+  height = 250,
+  format = "rectangle",
+  responsive = false,
   className = "",
-  slot,
-  format = "auto",
-  responsive = true,
-  style = {},
 }) => {
-  useEffect(() => {
-    try {
-      // AdSense 코드 추가
-      const adsbygoogle = window.adsbygoogle || [];
-      adsbygoogle.push({});
-    } catch (e) {
-      console.error("애드센스 광고 로드 중 오류:", e);
-    }
-  }, [slot]);
+  const adContainerRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    // 광고 로드
+    try {
+      if (window.adsbygoogle) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    } catch (e) {
+      console.error("광고 로드 중 오류가 발생했습니다:", e);
+    }
+  }, []);
+
+  if (responsive) {
+    // 반응형 광고
+    return (
+      <div ref={adContainerRef} className={`ad-container ${className}`}>
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client={adClient}
+          data-ad-slot={adSlot}
+          data-ad-format={format}
+          data-full-width-responsive="true"
+        ></ins>
+      </div>
+    );
+  }
+
+  // 고정 크기 광고
   return (
-    <div className={`ad-container ${className}`} style={style}>
+    <div ref={adContainerRef} className={`ad-container ${className}`}>
       <ins
         className="adsbygoogle"
-        style={{ display: "block", textAlign: "center" }}
-        data-ad-client="ca-pub-9895707756303015" // index.html에서 확인된 클라이언트 ID
-        data-ad-slot={slot}
-        data-ad-format={format}
-        data-full-width-responsive={responsive ? "true" : "false"}
-      />
+        style={{
+          display: "inline-block",
+          width: `${width}px`,
+          height: `${height}px`,
+        }}
+        data-ad-client={adClient}
+        data-ad-slot={adSlot}
+      ></ins>
     </div>
   );
 };
