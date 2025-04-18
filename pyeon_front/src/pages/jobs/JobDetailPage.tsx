@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import JobContent from "../../components/jobs/JobContent";
 import { Job } from "../../types/job";
 import { JobDetailSkeleton } from "../../components/common/Skeleton";
+import AdLayout from "../../components/layout/AdLayout";
+import AdBanner from "../../components/common/AdBanner";
 
 const JobDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -69,9 +71,23 @@ const JobDetailPage: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)]">
+    <AdLayout
+      leftSlotId="3456789012" // 실제 슬롯 ID로 변경 필요
+      rightSlotId="4567890123" // 실제 슬롯 ID로 변경 필요
+    >
+      {/* 메인 콘텐츠 */}
       <JobContent job={job} onBack={handleBack} />
-    </div>
+
+      {/* 하단 광고 */}
+      <div className="mt-6">
+        <AdBanner
+          slot="5409996939"
+          format="rectangle"
+          responsive={true}
+          className="w-full min-h-[250px]"
+        />
+      </div>
+    </AdLayout>
   );
 };
 
