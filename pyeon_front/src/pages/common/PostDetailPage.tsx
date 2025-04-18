@@ -13,6 +13,7 @@ import {
   CommentSkeletonList,
 } from "../../components/common/Skeleton";
 import toast from "react-hot-toast";
+import AdBanner from "../../components/common/AdBanner";
 
 const PostDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -407,6 +408,9 @@ const PostDetailPage: React.FC = () => {
         onDeleteComment={deleteComment}
         onLoginClick={goToLoginPage}
       />
+
+      {/* 하단 광고 배너 */}
+      <AdBanner />
     </div>
   );
 };

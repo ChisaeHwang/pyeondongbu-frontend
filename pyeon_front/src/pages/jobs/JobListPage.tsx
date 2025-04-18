@@ -7,6 +7,7 @@ import NoticePreviewSection from "../../components/notice/NoticePreviewSection";
 import { useJobFilters } from "../../hooks/useJobFilters";
 import { Job } from "../../types/job";
 import { JobSkeletonList } from "../../components/common/Skeleton";
+import AdBanner from "../../components/common/AdBanner";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -105,6 +106,9 @@ const JobListPage: React.FC = () => {
               onPageChange={setCurrentPage}
             />
           )}
+
+          {/* 하단 광고 배너 */}
+          <AdBanner />
         </>
       )}
     </div>
