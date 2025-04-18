@@ -245,7 +245,7 @@ const MyPostsPage: React.FC = () => {
             ))
           )}
         </div>
-        <div className="mt-6">
+        <div className="mt-9">
           <AdBanner
             slot="5409996939"
             format="rectangle"

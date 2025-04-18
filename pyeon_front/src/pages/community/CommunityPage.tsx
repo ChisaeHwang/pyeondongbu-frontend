@@ -305,7 +305,7 @@ const CommunityPage: React.FC = () => {
         />
 
         {/* 댓글 아래 광고 */}
-        <div className="mt-6">
+        <div className="mt-9">
           <AdBanner
             slot="5409996939"
             format="rectangle"
