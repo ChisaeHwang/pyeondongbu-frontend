@@ -73,8 +73,15 @@ const JobDetailPage: React.FC = () => {
     <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)]">
       <JobContent job={job} onBack={handleBack} />
 
-      {/* 하단 광고 배너 */}
-      <AdBanner />
+      {/* 댓글 아래 광고 */}
+      <div className="mt-6">
+        <AdBanner
+          slot="5409996939"
+          format="rectangle"
+          responsive={true}
+          className="w-full min-h-[250px]"
+        />
+      </div>
     </div>
   );
 };

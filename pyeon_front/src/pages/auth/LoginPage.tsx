@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../contexts/AuthContext";
+import AdBanner from "../../components/common/AdBanner";
 
 const LoginPage: React.FC = () => {
   const { login } = useAuth();
@@ -72,6 +73,15 @@ const LoginPage: React.FC = () => {
             Google로 계속하기
           </button>
         </div>
+      </div>
+      {/* 댓글 아래 광고 */}
+      <div className="mt-6">
+        <AdBanner
+          slot="5409996939"
+          format="rectangle"
+          responsive={true}
+          className="w-full min-h-[250px]"
+        />
       </div>
     </div>
   );

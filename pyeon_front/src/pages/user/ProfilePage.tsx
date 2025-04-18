@@ -5,6 +5,7 @@ import { FaCamera } from "react-icons/fa";
 import axiosInstance from "../../utils/axios";
 import toast from "react-hot-toast";
 import { uploadImage, validateImageFile } from "../../utils/imageUpload";
+import AdBanner from "../../components/common/AdBanner";
 
 const ProfilePage: React.FC = () => {
   const { user, refreshUser } = useAuth();
@@ -230,6 +231,15 @@ const ProfilePage: React.FC = () => {
             </button>
           </div>
         </form>
+      </div>
+      {/* 댓글 아래 광고 */}
+      <div className="mt-6">
+        <AdBanner
+          slot="5409996939"
+          format="rectangle"
+          responsive={true}
+          className="w-full min-h-[250px]"
+        />
       </div>
     </div>
   );

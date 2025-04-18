@@ -290,8 +290,15 @@ const RecruitPage: React.FC = () => {
           onPageChange={setCurrentPage}
         />
 
-        {/* 하단 광고 배너 */}
-        <AdBanner />
+        {/* 댓글 아래 광고 */}
+        <div className="mt-6">
+          <AdBanner
+            slot="5409996939"
+            format="rectangle"
+            responsive={true}
+            className="w-full min-h-[250px]"
+          />
+        </div>
       </div>
     </div>
   );

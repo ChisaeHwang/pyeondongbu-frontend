@@ -4,7 +4,7 @@ import Logo from "../common/Logo";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#25262b] border-t border-[#2c2d32]">
+    <footer className="bg-[#25262b] border-t border-[#2c2d32] w-full">
       <div className="container mx-auto px-4 py-8">
         {/* 메인 푸터 */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-8">
