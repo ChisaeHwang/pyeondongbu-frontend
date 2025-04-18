@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import JobContent from "../../components/jobs/JobContent";
+import AdBanner from "../../components/common/AdBanner";
 import { Job } from "../../types/job";
 import { JobDetailSkeleton } from "../../components/common/Skeleton";
 
@@ -71,6 +72,21 @@ const JobDetailPage: React.FC = () => {
   return (
     <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)]">
       <JobContent job={job} onBack={handleBack} />
+
+      {/* 광고 배너 */}
+      <div className="mt-6 mb-4 bg-[#25262b] rounded-lg p-4 border border-[#2c2d32]">
+        <div className="flex justify-center items-center">
+          <AdBanner
+            adClient="ca-pub-9895707756303015"
+            adSlot="5409996939"
+            width={728}
+            height={90}
+            format="horizontal"
+            responsive={true}
+            className="my-2 w-full"
+          />
+        </div>
+      </div>
     </div>
   );
 };

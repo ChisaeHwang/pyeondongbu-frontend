@@ -1,5 +1,5 @@
 import React from "react";
-import AdBanner from "../ads/AdBanner";
+import AdBanner from "./AdBanner";
 
 interface AdSidebarProps {
   className?: string;

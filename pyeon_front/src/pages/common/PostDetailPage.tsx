@@ -6,7 +6,7 @@ import PostHeader from "../../components/post/PostHeader";
 import PostContent from "../../components/post/PostContent";
 import PostActions from "../../components/post/PostActions";
 import CommentList from "../../components/post/CommentList";
-import AdBanner from "../../components/ads/AdBanner";
+import AdBanner from "../../components/common/AdBanner";
 import axiosInstance from "../../utils/axios";
 import { Post, Comment, PostResponse } from "../../types/post";
 import {
