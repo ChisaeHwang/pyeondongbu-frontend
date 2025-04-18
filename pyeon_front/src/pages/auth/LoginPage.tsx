@@ -26,7 +26,7 @@ const LoginPage: React.FC = () => {
         <div className="space-y-6">
           {/* 약관 안내 */}
           <div className="text-gray-400 text-sm space-y-4">
-            <p>로그인 시 아래 사항에 동의하는 것으로 간주됩니다:</p>
+            <p>로그인 시 아래 사항에 동의하는 것으로 간주됩니다</p>
             <ul className="list-disc pl-5 space-y-2">
               <li>
                 <Link
