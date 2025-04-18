@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-interface AdBannerProps {
+interface AdVertBannerProps {
   adClient: string;
   adSlot: string;
   width?: number;
@@ -10,7 +10,7 @@ interface AdBannerProps {
   className?: string;
 }
 
-const AdBanner: React.FC<AdBannerProps> = ({
+const AdVertBanner: React.FC<AdVertBannerProps> = ({
   adClient,
   adSlot,
   width = 300,
@@ -65,4 +65,4 @@ const AdBanner: React.FC<AdBannerProps> = ({
   );
 };
 
-export default AdBanner;
+export default AdVertBanner;

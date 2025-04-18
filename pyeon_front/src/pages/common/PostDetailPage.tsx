@@ -6,7 +6,7 @@ import PostHeader from "../../components/post/PostHeader";
 import PostContent from "../../components/post/PostContent";
 import PostActions from "../../components/post/PostActions";
 import CommentList from "../../components/post/CommentList";
-import AdBanner from "../../components/common/AdBanner";
+import AdVertBanner from "../../components/common/AdBanner";
 import axiosInstance from "../../utils/axios";
 import { Post, Comment, PostResponse } from "../../types/post";
 import {
@@ -393,7 +393,7 @@ const PostDetailPage: React.FC = () => {
       {/* 광고 배너 */}
       <div className="mt-6 mb-4 bg-[#25262b] rounded-lg p-4 border border-[#2c2d32]">
         <div className="flex justify-center items-center">
-          <AdBanner
+          <AdVertBanner
             adClient="ca-pub-9895707756303015"
             adSlot="5409996939"
             width={728}
