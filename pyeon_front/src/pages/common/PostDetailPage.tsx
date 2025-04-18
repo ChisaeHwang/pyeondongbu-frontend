@@ -13,6 +13,8 @@ import {
   CommentSkeletonList,
 } from "../../components/common/Skeleton";
 import toast from "react-hot-toast";
+import AdLayout from "../../components/layout/AdLayout";
+import AdBanner from "../../components/common/AdBanner";
 
 const PostDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -352,7 +354,10 @@ const PostDetailPage: React.FC = () => {
     user?.email === post.memberEmail || user?.authority === "ROLE_ADMIN";
 
   return (
-    <div className="container mx-auto px-4 max-w-5xl py-8">
+    <AdLayout
+      leftSlotId="6789012345" // 실제 슬롯 ID로 변경 필요
+      rightSlotId="7890123456" // 실제 슬롯 ID로 변경 필요
+    >
       {/* 뒤로가기 버튼 */}
       <button
         onClick={goBack}
@@ -389,6 +394,16 @@ const PostDetailPage: React.FC = () => {
         />
       </div>
 
+      {/* 댓글 위 광고 */}
+      <div className="my-6">
+        <AdBanner
+          slot="3456789012"
+          format="rectangle"
+          responsive={true}
+          className="w-full min-h-[250px]"
+        />
+      </div>
+
       {/* 댓글 섹션 */}
       <CommentList
         comments={post.comments}
@@ -407,7 +422,17 @@ const PostDetailPage: React.FC = () => {
         onDeleteComment={deleteComment}
         onLoginClick={goToLoginPage}
       />
-    </div>
+
+      {/* 댓글 아래 광고 */}
+      <div className="mt-6">
+        <AdBanner
+          slot="4567890123"
+          format="rectangle"
+          responsive={true}
+          className="w-full min-h-[250px]"
+        />
+      </div>
+    </AdLayout>
   );
 };
 
