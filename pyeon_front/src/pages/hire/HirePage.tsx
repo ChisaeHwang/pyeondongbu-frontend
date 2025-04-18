@@ -6,8 +6,6 @@ import Pagination from "../../components/jobs/Pagination";
 import axiosInstance from "../../utils/axios";
 import { getRelativeTime } from "../../utils/dateUtils";
 import { PostSkeletonList } from "../../components/common/Skeleton";
-import AdLayout from "../../components/layout/AdLayout";
-import AdInFeed from "../../components/common/AdInFeed";
 
 // 백엔드 API의 PostSummaryResponse와 일치하는 인터페이스
 interface Post {
@@ -170,10 +168,7 @@ const HirePage: React.FC = () => {
   };
 
   return (
-    <AdLayout
-      leftSlotId="1234567890" // 실제 슬롯 ID로 변경 필요
-      rightSlotId="0987654321" // 실제 슬롯 ID로 변경 필요
-    >
+    <div className="container mx-auto max-w-5xl px-4 py-8">
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -248,65 +243,53 @@ const HirePage: React.FC = () => {
               게시글이 없습니다.
             </div>
           ) : (
-            <>
-              {posts.map((post, index) => (
-                <React.Fragment key={post.id}>
-                  <div
-                    className="bg-[#25262b] rounded-lg p-4 hover:bg-[#2c2d32] transition-colors cursor-pointer"
-                    onClick={() => handlePostClick(post.id)}
-                  >
-                    <div className="flex justify-between items-start gap-4">
-                      <div className="min-w-0 flex-1">
-                        <h3 className="text-white font-medium mb-1 truncate">
-                          {post.title}
-                        </h3>
-                        <p className="text-gray-400 text-sm truncate">
-                          {post.content?.replace(/<[^>]*>/g, "")}
-                        </p>
-                        <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
-                          <span>{post.memberNickname}</span>
+            posts.map((post) => (
+              <div
+                key={post.id}
+                className="bg-[#25262b] rounded-lg p-4 hover:bg-[#2c2d32] transition-colors cursor-pointer"
+                onClick={() => handlePostClick(post.id)}
+              >
+                <div className="flex justify-between items-start gap-4">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-white font-medium mb-1 truncate">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm truncate">
+                      {post.content?.replace(/<[^>]*>/g, "")}
+                    </p>
+                    <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
+                      <span>{post.memberNickname}</span>
+                      <span>•</span>
+                      <span>{getRelativeTime(post.createdAt)}</span>
+                      {post.subCategory && (
+                        <>
                           <span>•</span>
-                          <span>{getRelativeTime(post.createdAt)}</span>
-                          {post.subCategory && (
-                            <>
-                              <span>•</span>
-                              <span className="text-cyan-400/80">
-                                {convertSubCategoryToKorean(post.subCategory)}
-                              </span>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                      <div className="text-xs text-gray-500 whitespace-nowrap shrink-0">
-                        조회 {post.viewCount} • 댓글 {post.commentCount || 0} •{" "}
-                        <span className="text-red-400">
-                          좋아요 {post.likeCount || 0}
-                        </span>
-                      </div>
+                          <span className="text-cyan-400/80">
+                            {convertSubCategoryToKorean(post.subCategory)}
+                          </span>
+                        </>
+                      )}
                     </div>
                   </div>
-                  {/* 모바일에서 5개의 게시글마다 광고 삽입 */}
-                  {(index + 1) % 5 === 0 && index < posts.length - 1 && (
-                    <AdInFeed className="md:hidden" />
-                  )}
-                </React.Fragment>
-              ))}
-            </>
+                  <div className="text-xs text-gray-500 whitespace-nowrap shrink-0">
+                    조회 {post.viewCount} • 댓글 {post.commentCount || 0} •{" "}
+                    <span className="text-red-400">
+                      좋아요 {post.likeCount || 0}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))
           )}
         </div>
 
-        {/* 페이지네이션 */}
-        {!loading && !error && posts.length > 0 && totalPages > 1 && (
-          <div className="mt-8">
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </div>
-        )}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       </div>
-    </AdLayout>
+    </div>
   );
 };
 

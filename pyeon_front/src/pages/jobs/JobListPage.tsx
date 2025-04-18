@@ -7,8 +7,6 @@ import NoticePreviewSection from "../../components/notice/NoticePreviewSection";
 import { useJobFilters } from "../../hooks/useJobFilters";
 import { Job } from "../../types/job";
 import { JobSkeletonList } from "../../components/common/Skeleton";
-import AdLayout from "../../components/layout/AdLayout";
-import AdInFeed from "../../components/common/AdInFeed";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -79,10 +77,7 @@ const JobListPage: React.FC = () => {
   }
 
   return (
-    <AdLayout
-      leftSlotId="9876543210" // 실제 슬롯 ID로 변경 필요
-      rightSlotId="0123456789" // 실제 슬롯 ID로 변경 필요
-    >
+    <div className="container mx-auto px-4 max-w-5xl">
       <JobBanner />
       <NoticePreviewSection />
       <div className="bg-[#25262b] rounded-lg p-6 my-8">
@@ -103,24 +98,16 @@ const JobListPage: React.FC = () => {
       ) : (
         <>
           <JobList jobs={currentJobs} />
-
-          {/* 모바일에서만 보이는 광고 - 게시글 목록 하단에 배치 */}
-          {!isLoading && currentJobs.length > 0 && (
-            <AdInFeed className="my-4" />
-          )}
-
           {filteredJobs.length > 0 && (
-            <div className="mt-8">
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            </div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
           )}
         </>
       )}
-    </AdLayout>
+    </div>
   );
 };
 

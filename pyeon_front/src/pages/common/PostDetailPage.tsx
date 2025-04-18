@@ -6,7 +6,6 @@ import PostHeader from "../../components/post/PostHeader";
 import PostContent from "../../components/post/PostContent";
 import PostActions from "../../components/post/PostActions";
 import CommentList from "../../components/post/CommentList";
-import AdVertBanner from "../../components/common/AdBanner";
 import axiosInstance from "../../utils/axios";
 import { Post, Comment, PostResponse } from "../../types/post";
 import {
@@ -14,8 +13,6 @@ import {
   CommentSkeletonList,
 } from "../../components/common/Skeleton";
 import toast from "react-hot-toast";
-import AdLayout from "../../components/layout/AdLayout";
-import AdBanner from "../../components/common/AdBanner";
 
 const PostDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -355,10 +352,7 @@ const PostDetailPage: React.FC = () => {
     user?.email === post.memberEmail || user?.authority === "ROLE_ADMIN";
 
   return (
-    <AdLayout
-      leftSlotId="6789012345" // 실제 슬롯 ID로 변경 필요
-      rightSlotId="7890123456" // 실제 슬롯 ID로 변경 필요
-    >
+    <div className="container mx-auto px-4 max-w-5xl py-8">
       {/* 뒤로가기 버튼 */}
       <button
         onClick={goBack}
@@ -395,21 +389,6 @@ const PostDetailPage: React.FC = () => {
         />
       </div>
 
-      {/* 광고 배너 */}
-      <div className="mt-6 mb-4 bg-[#25262b] rounded-lg p-4 border border-[#2c2d32]">
-        <div className="flex justify-center items-center">
-          <AdVertBanner
-            adClient="ca-pub-9895707756303015"
-            adSlot="5409996939"
-            width={728}
-            height={90}
-            format="horizontal"
-            responsive={true}
-            className="my-2 w-full"
-          />
-        </div>
-      </div>
-
       {/* 댓글 섹션 */}
       <CommentList
         comments={post.comments}
@@ -428,17 +407,7 @@ const PostDetailPage: React.FC = () => {
         onDeleteComment={deleteComment}
         onLoginClick={goToLoginPage}
       />
-
-      {/* 댓글 아래 광고 */}
-      <div className="mt-6">
-        <AdBanner
-          slot="5409996939"
-          format="rectangle"
-          responsive={true}
-          className="w-full min-h-[250px]"
-        />
-      </div>
-    </AdLayout>
+    </div>
   );
 };
 
