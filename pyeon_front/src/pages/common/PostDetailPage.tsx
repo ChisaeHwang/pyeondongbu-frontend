@@ -7,13 +7,13 @@ import PostContent from "../../components/post/PostContent";
 import PostActions from "../../components/post/PostActions";
 import CommentList from "../../components/post/CommentList";
 import axiosInstance from "../../utils/axios";
+import AdBanner from "../../components/common/AdBanner";
 import { Post, Comment, PostResponse } from "../../types/post";
 import {
   PostDetailSkeleton,
   CommentSkeletonList,
 } from "../../components/common/Skeleton";
 import toast from "react-hot-toast";
-import AdBanner from "../../components/common/AdBanner";
 
 const PostDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -409,8 +409,14 @@ const PostDetailPage: React.FC = () => {
         onLoginClick={goToLoginPage}
       />
 
-      {/* 하단 광고 배너 */}
-      <AdBanner width={728} height={90} className="mt-8 mb-8" />
+      <div className="mt-6">
+        <AdBanner
+          slot="5409996939"
+          format="rectangle"
+          responsive={true}
+          className="w-full min-h-[250px]"
+        />
+      </div>
     </div>
   );
 };
