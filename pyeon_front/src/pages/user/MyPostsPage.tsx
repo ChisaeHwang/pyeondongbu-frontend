@@ -195,7 +195,7 @@ const MyPostsPage: React.FC = () => {
           ) : error ? (
             <div className="text-center py-10 text-red-400">{error}</div>
           ) : posts.length === 0 ? (
-            <div className="text-center py-10 text-gray-400">
+            <div className="text-center py-48 text-gray-400">
               게시글이 없습니다.
             </div>
           ) : (
