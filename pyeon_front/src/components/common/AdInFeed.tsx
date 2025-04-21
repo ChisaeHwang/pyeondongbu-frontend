@@ -73,6 +73,33 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
           const loadTime = performance.now() - startTime;
           console.log(`광고 로딩 시간: ${loadTime}ms`);
           setIsLoaded(true);
+
+          // 광고가 로드된 후 스타일 적용
+          setTimeout(() => {
+            try {
+              // 광고 iframe을 찾아서 배경색 수정
+              const adContainer = document.getElementById("ad-container");
+              if (adContainer) {
+                const iframes = adContainer.querySelectorAll("iframe");
+                iframes.forEach((iframe) => {
+                  try {
+                    // @ts-ignore - iframe.contentDocument는 보안 정책으로 접근이 제한될 수 있음
+                    const doc = iframe.contentDocument;
+                    if (doc) {
+                      const style = document.createElement("style");
+                      style.textContent = `body { background-color: #25262b !important; }`;
+                      doc.head.appendChild(style);
+                    }
+                  } catch (e) {
+                    // 크로스 오리진 정책으로 접근 제한 가능성
+                    console.log("iframe 접근 오류");
+                  }
+                });
+              }
+            } catch (error) {
+              console.error("광고 iframe 스타일 적용 오류:", error);
+            }
+          }, 200);
         },
       });
     } catch (e) {
@@ -85,21 +112,49 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
   const adSlot = isMobile ? "7123368001" : "4688776358";
   const layoutKey = isMobile ? "-hk-1-x-dr+wr" : "-fu-3i+7j-dp+53";
 
-  // 모바일과 데스크탑에 따른 높이 설정
-  const minHeight = isMobile ? "250px" : "280px";
+  // 광고 로드 후 CSS 인젝션을 위한 스타일
+  useEffect(() => {
+    if (isLoaded) {
+      const injectStyles = () => {
+        try {
+          // 모든 adsbygoogle 관련 iframe을 찾아서 배경색 설정
+          const iframes = document.querySelectorAll("iframe[id^='aswift_']");
+          iframes.forEach((iframe) => {
+            try {
+              // @ts-ignore - iframe.contentDocument는 보안 정책으로 접근이 제한될 수 있음
+              const doc = iframe.contentDocument;
+              if (doc) {
+                const style = document.createElement("style");
+                style.textContent = `
+                  body { background-color: #25262b !important; }
+                  .adsbygoogle { background-color: #25262b !important; }
+                `;
+                doc.head.appendChild(style);
+              }
+            } catch (e) {
+              // 크로스 오리진 정책으로 접근 불가능할 수 있음
+              console.log("iframe 스타일 적용 실패");
+            }
+          });
+        } catch (e) {
+          console.error("광고 스타일 적용 오류:", e);
+        }
+      };
+
+      // 약간의 지연 후 스타일 적용 시도
+      setTimeout(injectStyles, 500);
+    }
+  }, [isLoaded]);
 
   return (
     <div
       id="ad-container"
-      className={`bg-[#25262b] rounded-lg border border-[#2c2d32] overflow-hidden hover:border-[#3a3b40] transition-colors ${className}`}
-      style={{ ...style, minHeight }}
+      className={`bg-[#25262b] rounded-lg border border-[#2c2d32] overflow-hidden hover:border-[#3a3b40] transition-colors cursor-pointer h-full ${className}`}
+      style={style}
     >
-      <div className="p-4 h-full">
+      <div className="p-4 h-full flex flex-col">
         {/* 광고 컨텐츠 */}
-        <div
-          className="w-full h-full relative"
-          style={{ minHeight: isMobile ? "200px" : "230px" }}
-        >
+        <div className="w-full h-full flex-1 relative bg-[#25262b]">
           {!isLoaded && isVisible && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="animate-pulse bg-[#2c2d32] w-full h-full rounded opacity-50"></div>
@@ -111,9 +166,9 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
               style={{
                 display: "block",
                 textAlign: "center",
-                width: "100%",
                 height: "100%",
-                minHeight: isMobile ? "200px" : "230px",
+                width: "100%",
+                backgroundColor: "#25262b",
               }}
               data-ad-format="fluid"
               data-ad-layout-key={layoutKey}
