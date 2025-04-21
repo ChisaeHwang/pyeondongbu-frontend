@@ -107,7 +107,7 @@ const JobListPage: React.FC = () => {
             />
           )}
 
-          {/* 댓글 아래 광고 */}
+          {/* 페이지네이션 아래 광고 */}
           <div className="mt-9 mb-6">
             <AdBanner
               slot="5409996939"
