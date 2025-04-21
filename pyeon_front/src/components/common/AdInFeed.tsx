@@ -16,6 +16,8 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
   style = {},
 }) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     // 모바일 여부 확인
@@ -35,14 +37,49 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
   }, []);
 
   useEffect(() => {
+    // IntersectionObserver를 사용하여 광고가 화면에 표시될 때만 로드
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const adContainer = document.getElementById("ad-container");
+    if (adContainer) {
+      observer.observe(adContainer);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    // 로딩 시작 시간 기록
+    const startTime = performance.now();
+
     try {
       // AdSense 코드 추가
       const adsbygoogle = window.adsbygoogle || [];
-      adsbygoogle.push({});
+      adsbygoogle.push({
+        callback: () => {
+          // 로딩 완료 시간 측정
+          const loadTime = performance.now() - startTime;
+          console.log(`광고 로딩 시간: ${loadTime}ms`);
+          setIsLoaded(true);
+        },
+      });
     } catch (e) {
       console.error("인피드 애드센스 광고 로드 중 오류:", e);
+      setIsLoaded(true); // 오류 발생시에도 로딩 상태 변경
     }
-  }, [slot, isMobile]);
+  }, [isVisible, slot, isMobile]);
 
   // 모바일/데스크톱에 따른 슬롯 및 레이아웃 설정
   const adSlot = isMobile ? "7123368001" : "4688776358";
@@ -50,22 +87,19 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
 
   return (
     <div
+      id="ad-container"
       className={`bg-[#25262b] rounded-lg border border-[#2c2d32] overflow-hidden hover:border-[#3a3b40] transition-colors ${className}`}
       style={style}
     >
       <div className="p-4">
         {/* 광고 컨텐츠 */}
-        <div className="flex flex-col">
-          {/* 광고 라벨 추가 */}
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-xs text-gray-500">🔹 광고</span>
-            <span className="text-xs text-gray-500 px-2 py-0.5 bg-[#1a1b1e] rounded-full">
-              Sponsored
-            </span>
-          </div>
-
-          {/* 실제 광고 내용 */}
-          <div className="w-full min-h-[90px] md:min-h-[100px]">
+        <div className="w-full min-h-[90px] md:min-h-[100px] relative">
+          {!isLoaded && isVisible && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="animate-pulse bg-[#2c2d32] w-full h-full rounded opacity-50"></div>
+            </div>
+          )}
+          {isVisible && (
             <ins
               className="adsbygoogle"
               style={{
@@ -77,8 +111,9 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
               data-ad-layout-key={layoutKey}
               data-ad-client="ca-pub-9895707756303015"
               data-ad-slot={adSlot}
+              data-adtest={process.env.NODE_ENV !== "production" ? "on" : "off"}
             />
-          </div>
+          )}
         </div>
       </div>
     </div>
