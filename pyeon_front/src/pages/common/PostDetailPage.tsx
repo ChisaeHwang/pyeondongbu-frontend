@@ -409,7 +409,7 @@ const PostDetailPage: React.FC = () => {
         onLoginClick={goToLoginPage}
       />
 
-      <div className="mt-6">
+      <div className="mt-9 mb-6">
         <AdBanner
           slot="5409996939"
           format="rectangle"

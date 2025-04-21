@@ -1,5 +1,6 @@
 import React from "react";
 import LegalLayout from "./LegalLayout";
+import AdBanner from "../../components/common/AdBanner";
 
 const ContactPage: React.FC = () => {
   const email = "pyeondongbu@gmail.com"; // 실제 이메일 주소로 변경해주세요
@@ -36,6 +37,14 @@ const ContactPage: React.FC = () => {
           </svg>
           {email}
         </button>
+      </div>
+      <div className="mt-9 mb-6">
+        <AdBanner
+          slot="5409996939"
+          format="rectangle"
+          responsive={true}
+          className="w-full min-h-[250px]"
+        />
       </div>
     </LegalLayout>
   );
