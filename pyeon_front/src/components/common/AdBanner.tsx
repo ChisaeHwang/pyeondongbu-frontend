@@ -21,16 +21,31 @@ const AdBanner: React.FC<AdBannerProps> = ({
       const adsbygoogle = window.adsbygoogle || [];
       adsbygoogle.push({});
     } catch (e) {
-      console.error("애드센스 광고 로드 중 오류:", e);
+      // 에러 발생시 조용히 실패
     }
   }, [slot]);
 
+  // 컨테이너 스타일 계산 - 원래 광고 크기인 300x250에 맞게 조정
+  const containerStyle: React.CSSProperties = {
+    width: "300px",
+    height: "250px",
+    margin: "0 auto",
+    position: "relative",
+    overflow: "hidden",
+    ...style,
+  };
+
   return (
-    <div className={`ad-container ${className}`} style={style}>
+    <div className={`ad-container ${className}`} style={containerStyle}>
       <ins
         className="adsbygoogle"
-        style={{ display: "block", textAlign: "center" }}
-        data-ad-client="ca-pub-9895707756303015" // index.html에서 확인된 클라이언트 ID
+        style={{
+          display: "block",
+          width: "300px",
+          height: "250px",
+          textAlign: "center",
+        }}
+        data-ad-client="ca-pub-9895707756303015"
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive={responsive ? "true" : "false"}

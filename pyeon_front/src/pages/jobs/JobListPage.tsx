@@ -113,7 +113,7 @@ const JobListPage: React.FC = () => {
               slot="5409996939"
               format="rectangle"
               responsive={true}
-              className="w-full min-h-[250px]"
+              className="w-full"
             />
           </div>
         </>

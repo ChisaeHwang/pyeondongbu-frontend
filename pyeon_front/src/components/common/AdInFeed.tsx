@@ -19,8 +19,8 @@ interface AdInFeedProps {
 const AdInFeed: React.FC<AdInFeedProps> = ({
   className = "",
   slot,
-  format = "rectangle",
-  responsive = false,
+  format = "auto",
+  responsive = true,
   style = {},
   id = `ad-${Math.random().toString(36).substring(2, 10)}`,
   adPosition,
@@ -30,7 +30,7 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
   const adElementRef = useRef<HTMLDivElement>(null);
   const attemptCount = useRef<number>(0);
 
-  // 디버깅 정보 표시
+  // 디버깅 정보 - 개발환경에서만 사용
   const debugInfo = useMemo(
     () => ({
       id,
@@ -39,8 +39,6 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
     }),
     [id, adPosition, isMobile]
   );
-
-  console.log(`[AdInFeed] 초기화:`, debugInfo);
 
   useEffect(() => {
     // 모바일 여부 확인
@@ -53,9 +51,11 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
 
     // 화면 크기 변경 시 다시 확인
     window.addEventListener("resize", checkIsMobile);
+    window.addEventListener("orientationchange", checkIsMobile);
 
     return () => {
       window.removeEventListener("resize", checkIsMobile);
+      window.removeEventListener("orientationchange", checkIsMobile);
     };
   }, []);
 
@@ -86,20 +86,9 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
       // 재시도 시간에 약간의 랜덤성 추가 (광고 로드 충돌 방지)
       const delay = 500 + Math.random() * 300;
 
-      console.log(`[AdInFeed] 광고 로드 시도 (${delay}ms 후):`, {
-        ...debugInfo,
-        index,
-        slot: getSlotForPosition(index),
-        attemptCount: attemptCount.current,
-      });
-
       // 광고가 로드될 때까지 약간 대기
       setTimeout(() => {
         if (!window.adsbygoogle) {
-          console.warn(
-            "[AdInFeed] 애드센스가 초기화되지 않았습니다:",
-            debugInfo
-          );
           return;
         }
 
@@ -111,12 +100,6 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
             adLoaded.current[index] = true;
             attemptCount.current++;
 
-            console.log(`[AdInFeed] 광고 푸시 성공:`, {
-              ...debugInfo,
-              index,
-              slot: getSlotForPosition(index),
-            });
-
             // 상태 확인을 위한 MutationObserver 설정
             const observer = new MutationObserver((mutations) => {
               mutations.forEach((mutation) => {
@@ -125,11 +108,6 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
                   mutation.attributeName === "data-ad-status"
                 ) {
                   const status = adElement.getAttribute("data-ad-status");
-                  console.log(`[AdInFeed] 광고 상태 변경:`, {
-                    ...debugInfo,
-                    index,
-                    status,
-                  });
 
                   if (status === "filled") {
                     observer.disconnect();
@@ -143,18 +121,8 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
             // 60초 후 자동 해제
             setTimeout(() => observer.disconnect(), 60000);
           } catch (pushError) {
-            console.error(
-              "[AdInFeed] 광고 푸시 중 오류:",
-              pushError,
-              debugInfo
-            );
+            console.error("광고 로드 중 오류 발생");
           }
-        } else {
-          console.log(`[AdInFeed] 이미 광고가 로드된 요소입니다:`, {
-            ...debugInfo,
-            index,
-            adstatus,
-          });
         }
       }, delay);
     };
@@ -164,14 +132,8 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
       const adElements =
         adElementRef.current?.querySelectorAll("ins.adsbygoogle");
       if (!adElements || adElements.length === 0) {
-        console.warn("[AdInFeed] 광고 요소를 찾을 수 없습니다:", debugInfo);
         return;
       }
-
-      console.log(`[AdInFeed] 광고 요소 찾음:`, {
-        ...debugInfo,
-        count: adElements.length,
-      });
 
       // 첫 번째 광고 항상 로드
       loadAd(0, adElements[0]);
@@ -181,23 +143,17 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
         loadAd(1, adElements[1]);
       }
     } catch (e) {
-      console.error(
-        "[AdInFeed] 인피드 애드센스 광고 로드 중 오류:",
-        e,
-        debugInfo
-      );
+      console.error("광고 로드 중 오류 발생");
     }
   }, [isMobile, id, getSlotForPosition, debugInfo]);
 
-  // iframe이 overflow 되는 것을 방지하기 위한 스타일 변수
+  // 정확한 광고 크기(300x250)에 맞춘 컨테이너 스타일
   const adContainerStyle: React.CSSProperties = {
     position: "relative",
     width: "300px",
     height: "250px",
-    overflow: "hidden", // 컨테이너를 벗어나는 요소 숨김
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    overflow: "hidden",
+    margin: "0 auto",
     ...style,
   };
 
@@ -225,6 +181,7 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
             data-ad-client="ca-pub-9895707756303015"
             data-ad-slot={getSlotForPosition(0)}
             data-ad-format={format}
+            data-full-width-responsive={responsive ? "true" : "false"}
             id={`${id}-0`}
           />
         </div>
@@ -242,6 +199,7 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
               data-ad-client="ca-pub-9895707756303015"
               data-ad-slot={getSlotForPosition(1)}
               data-ad-format={format}
+              data-full-width-responsive={responsive ? "true" : "false"}
               id={`${id}-1`}
             />
           </div>
