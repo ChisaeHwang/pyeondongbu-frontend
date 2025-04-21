@@ -108,20 +108,31 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
     }
   }, [isMobile, id, getSlotForPosition]);
 
+  // iframe이 overflow 되는 것을 방지하기 위한 스타일 변수
+  const adContainerStyle: React.CSSProperties = {
+    position: "relative",
+    width: "300px",
+    height: "250px",
+    overflow: "hidden", // 컨테이너를 벗어나는 요소 숨김
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    ...style,
+  };
+
   return (
     <div
       ref={adElementRef}
-      className={`${className} flex justify-center`}
-      style={style}
+      className={`${className} w-full flex justify-center`}
       id={id}
     >
       <div
-        className={`flex ${
-          isMobile ? "justify-center" : "justify-center gap-4"
+        className={`w-full flex ${
+          isMobile ? "justify-center px-0" : "justify-center gap-4"
         } max-w-[650px]`}
       >
         {/* 첫 번째 광고 - 항상 표시 */}
-        <div className="w-[300px] h-[250px]">
+        <div style={adContainerStyle} className="mx-auto">
           <ins
             className="adsbygoogle"
             style={{
@@ -138,7 +149,7 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
 
         {/* 두 번째 광고 - 데스크탑에서만 표시 */}
         {!isMobile && (
-          <div className="w-[300px] h-[250px]">
+          <div style={adContainerStyle}>
             <ins
               className="adsbygoogle"
               style={{
