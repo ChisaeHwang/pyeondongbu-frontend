@@ -46,8 +46,8 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
     };
   }, []);
 
-  // 광고 슬롯 정의 - 세 개의 다른 슬롯 사용 (useMemo로 감싸서 재생성 방지)
-  const adSlots = useMemo(() => ["8992096836", "4688776358", "1849233282"], []);
+  // 광고 슬롯 정의 - 사용할 두 개의 슬롯만 남김
+  const adSlots = useMemo(() => ["8992096836", "1849233282"], []);
 
   // adPosition 속성에 따라 슬롯 선택 - useCallback으로 감싸서 메모이제이션
   const getSlotForPosition = useCallback(
@@ -81,14 +81,6 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
           try {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
             adLoaded.current[index] = true;
-            console.log(
-              "애드센스 광고 로드 시도:",
-              isMobile ? "모바일" : "데스크탑",
-              "슬롯:",
-              getSlotForPosition(index),
-              "ID:",
-              `${id}-${index}`
-            );
           } catch (pushError) {
             console.error("광고 푸시 중 오류:", pushError);
           }
