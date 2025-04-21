@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 
 interface AdInFeedProps {
   className?: string;
@@ -7,18 +13,20 @@ interface AdInFeedProps {
   responsive?: boolean;
   style?: React.CSSProperties;
   id?: string;
+  adPosition?: "first" | "second"; // 어떤 위치의 광고를 표시할지 지정
 }
 
 const AdInFeed: React.FC<AdInFeedProps> = ({
   className = "",
   slot,
-  format = "fluid",
-  responsive = true,
+  format = "rectangle",
+  responsive = false,
   style = {},
   id = `ad-${Math.random().toString(36).substring(2, 10)}`,
+  adPosition,
 }) => {
   const [isMobile, setIsMobile] = useState(false);
-  const adLoaded = useRef(false);
+  const adLoaded = useRef<boolean[]>([false, false]);
   const adElementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,88 +46,121 @@ const AdInFeed: React.FC<AdInFeedProps> = ({
     };
   }, []);
 
-  useEffect(() => {
-    // 이미 로드됐으면 중복 로드 방지
-    if (adLoaded.current) return;
+  // 광고 슬롯 정의 - 세 개의 다른 슬롯 사용 (useMemo로 감싸서 재생성 방지)
+  const adSlots = useMemo(() => ["8992096836", "4688776358", "1849233282"], []);
 
+  // adPosition 속성에 따라 슬롯 선택 - useCallback으로 감싸서 메모이제이션
+  const getSlotForPosition = useCallback(
+    (position: number): string => {
+      if (adPosition === "first") return adSlots[0];
+      if (adPosition === "second") return adSlots[1];
+
+      // adPosition이 지정되지 않았으면 인덱스에 따라 결정
+      return adSlots[position % adSlots.length];
+    },
+    [adPosition, adSlots]
+  );
+
+  useEffect(() => {
     // 브라우저가 아니면 실행하지 않음
     if (typeof window === "undefined") return;
 
-    try {
+    const loadAd = (index: number, adElement: Element) => {
+      // 이미 로드됐으면 중복 로드 방지
+      if (adLoaded.current[index]) return;
+
       // 광고가 로드될 때까지 약간 대기
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         if (!window.adsbygoogle) {
           console.warn("애드센스가 초기화되지 않았습니다.");
           return;
         }
 
-        // 해당 광고 요소에 data-ad-status 속성이 있는지 확인
-        const adElement =
-          adElementRef.current?.querySelector("ins.adsbygoogle");
-        if (adElement && !adElement.getAttribute("data-ad-status")) {
+        if (!adElement.getAttribute("data-ad-status")) {
           // 광고가 아직 로드되지 않은 경우에만 로드 시도
           try {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
-            adLoaded.current = true;
+            adLoaded.current[index] = true;
             console.log(
               "애드센스 광고 로드 시도:",
               isMobile ? "모바일" : "데스크탑",
               "슬롯:",
-              isMobile ? "7123368001" : "4688776358",
+              getSlotForPosition(index),
               "ID:",
-              id
+              `${id}-${index}`
             );
           } catch (pushError) {
             console.error("광고 푸시 중 오류:", pushError);
           }
         } else {
-          console.log("이미 광고가 로드된 요소입니다:", id);
+          console.log("이미 광고가 로드된 요소입니다:", `${id}-${index}`);
         }
       }, 500);
+    };
 
-      // 컴포넌트 언마운트 시 타이머 정리
-      return () => clearTimeout(timer);
+    try {
+      // 모든 광고 요소 찾기
+      const adElements =
+        adElementRef.current?.querySelectorAll("ins.adsbygoogle");
+      if (!adElements || adElements.length === 0) return;
+
+      // 첫 번째 광고 항상 로드
+      loadAd(0, adElements[0]);
+
+      // 데스크탑에서는 두 번째 광고도 로드
+      if (!isMobile && adElements.length > 1) {
+        loadAd(1, adElements[1]);
+      }
     } catch (e) {
       console.error("인피드 애드센스 광고 로드 중 오류:", e);
     }
-  }, [isMobile, id]);
-
-  // 모바일/데스크톱에 따른 슬롯 및 레이아웃 설정
-  const adSlot = isMobile ? "7123368001" : "4688776358";
-  const layoutKey = isMobile ? "-hk-1-x-dr+wr" : "-fu-3i+7j-dp+53";
+  }, [isMobile, id, getSlotForPosition]);
 
   return (
     <div
       ref={adElementRef}
-      className={`bg-[#25262b] rounded-lg border border-[#2c2d32] overflow-hidden hover:border-[#3a3b40] transition-colors ${className}`}
+      className={`${className} flex justify-center`}
       style={style}
       id={id}
     >
-      {/* 패딩 제거하여 광고가 카드 전체를 채우도록 함 */}
-      <div className="w-full h-full">
-        {/* 광고 컨텐츠 */}
-        <div className="flex flex-col h-full">
-          {/* 광고 라벨 추가 */}
-          <div className="flex justify-between items-center mb-3"></div>
+      <div
+        className={`flex ${
+          isMobile ? "justify-center" : "justify-center gap-4"
+        } max-w-[650px]`}
+      >
+        {/* 첫 번째 광고 - 항상 표시 */}
+        <div className="w-[300px] h-[250px]">
+          <ins
+            className="adsbygoogle"
+            style={{
+              display: "block",
+              width: "300px",
+              height: "250px",
+            }}
+            data-ad-client="ca-pub-9895707756303015"
+            data-ad-slot={getSlotForPosition(0)}
+            data-ad-format={format}
+            id={`${id}-0`}
+          />
+        </div>
 
-          {/* 실제 광고 내용 */}
-          <div className="w-full min-h-[120px] md:min-h-[160px]">
+        {/* 두 번째 광고 - 데스크탑에서만 표시 */}
+        {!isMobile && (
+          <div className="w-[300px] h-[250px]">
             <ins
               className="adsbygoogle"
               style={{
                 display: "block",
-                textAlign: "center",
-                width: "100%",
-                height: "100%",
-                minHeight: "120px",
+                width: "300px",
+                height: "250px",
               }}
-              data-ad-format="fluid"
-              data-ad-layout-key={layoutKey}
               data-ad-client="ca-pub-9895707756303015"
-              data-ad-slot={adSlot}
+              data-ad-slot={getSlotForPosition(1)}
+              data-ad-format={format}
+              id={`${id}-1`}
             />
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
