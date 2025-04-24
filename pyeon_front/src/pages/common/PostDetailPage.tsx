@@ -7,7 +7,6 @@ import PostContent from "../../components/post/PostContent";
 import PostActions from "../../components/post/PostActions";
 import CommentList from "../../components/post/CommentList";
 import axiosInstance from "../../utils/axios";
-import AdBanner from "../../components/common/AdBanner";
 import { Post, Comment, PostResponse } from "../../types/post";
 import {
   PostDetailSkeleton,
@@ -409,14 +408,6 @@ const PostDetailPage: React.FC = () => {
         onLoginClick={goToLoginPage}
       />
 
-      <div className="mt-6">
-        <AdBanner
-          slot="5409996939"
-          format="rectangle"
-          responsive={true}
-          className="w-full min-h-[250px]"
-        />
-      </div>
     </div>
   );
 };

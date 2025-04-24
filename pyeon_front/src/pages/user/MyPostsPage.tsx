@@ -4,8 +4,6 @@ import { useAuth } from "../../contexts/AuthContext";
 import axiosInstance from "../../utils/axios";
 import { getRelativeTime } from "../../utils/dateUtils";
 import { PostSkeletonList } from "../../components/common/Skeleton";
-import AdBanner from "../../components/common/AdBanner";
-
 interface Post {
   id: number;
   title: string;
@@ -245,14 +243,7 @@ const MyPostsPage: React.FC = () => {
             ))
           )}
         </div>
-        <div className="mt-9">
-          <AdBanner
-            slot="5409996939"
-            format="rectangle"
-            responsive={true}
-            className="w-full min-h-[250px]"
-          />
-        </div>
+
       </div>
     </div>
   );

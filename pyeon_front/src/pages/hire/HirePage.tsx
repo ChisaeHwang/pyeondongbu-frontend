@@ -6,7 +6,6 @@ import Pagination from "../../components/jobs/Pagination";
 import axiosInstance from "../../utils/axios";
 import { getRelativeTime } from "../../utils/dateUtils";
 import { PostSkeletonList } from "../../components/common/Skeleton";
-import AdBanner from "../../components/common/AdBanner";
 
 // 백엔드 API의 PostSummaryResponse와 일치하는 인터페이스
 interface Post {
@@ -290,15 +289,6 @@ const HirePage: React.FC = () => {
           onPageChange={setCurrentPage}
         />
 
-        {/* 댓글 아래 광고 */}
-        <div className="mt-9">
-          <AdBanner
-            slot="5409996939"
-            format="rectangle"
-            responsive={true}
-            className="w-full min-h-[250px]"
-          />
-        </div>
       </div>
     </div>
   );

@@ -7,7 +7,6 @@ import NoticePreviewSection from "../../components/notice/NoticePreviewSection";
 import { useJobFilters } from "../../hooks/useJobFilters";
 import { Job } from "../../types/job";
 import { JobSkeletonList } from "../../components/common/Skeleton";
-import AdBanner from "../../components/common/AdBanner";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -107,15 +106,6 @@ const JobListPage: React.FC = () => {
             />
           )}
 
-          {/* 댓글 아래 광고 */}
-          <div className="mt-9 mb-6">
-            <AdBanner
-              slot="5409996939"
-              format="rectangle"
-              responsive={true}
-              className="w-full min-h-[250px]"
-            />
-          </div>
         </>
       )}
     </div>
