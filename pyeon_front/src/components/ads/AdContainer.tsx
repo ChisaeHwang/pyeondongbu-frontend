@@ -8,7 +8,7 @@ interface AdContainerProps {
 
 /**
  * 애드센스 광고를 표시하는 컨테이너 컴포넌트
- * 모든 페이지에서 항상 300x250 중간 광고를 표시합니다.
+ * 모든 페이지에서 반응형 광고를 표시합니다.
  * 절대 실패하지 않고 광고를 로드하도록 최적화됨
  */
 const AdContainer: React.FC<AdContainerProps> = ({
@@ -29,7 +29,7 @@ const AdContainer: React.FC<AdContainerProps> = ({
       }}
       data-ad-layout="rectangle"
     >
-      <div style={{ maxWidth: "728px", margin: "0 auto" }}>
+      <div style={{ width: "100%", margin: "0 auto" }}>
         <AdBanner />
       </div>
     </div>

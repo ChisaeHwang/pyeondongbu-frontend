@@ -83,20 +83,23 @@ const AdBanner: React.FC<AdBannerProps> = ({ className = "", style = {} }) => {
         margin: "30px auto",
         minHeight: "250px",
         position: "relative",
+        maxWidth: "100%",
         ...style,
       }}
     >
       <ins
         className="adsbygoogle"
         style={{
-          display: "inline-block",
-          width: "300px",
+          display: "block",
+          width: "100%",
           height: "250px",
           margin: "0 auto",
           background: adLoaded ? "transparent" : "#f1f1f1",
         }}
         data-ad-client="ca-pub-9895707756303015"
         data-ad-slot="5409996939"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
       />
       {!adLoaded && (
         <div
