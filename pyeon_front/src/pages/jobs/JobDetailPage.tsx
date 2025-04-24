@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import JobContent from "../../components/jobs/JobContent";
 import { Job } from "../../types/job";
 import { JobDetailSkeleton } from "../../components/common/Skeleton";
+import AdBanner from "../../components/ads/AdBanner";
 
 const JobDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -70,8 +71,10 @@ const JobDetailPage: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)]">
-      <JobContent job={job} onBack={handleBack} />
+      {/* 게시글 상단 광고 */}
+      <AdBanner />
 
+      <JobContent job={job} onBack={handleBack} />
     </div>
   );
 };

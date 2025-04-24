@@ -8,6 +8,7 @@ import PostActions from "../../components/post/PostActions";
 import CommentList from "../../components/post/CommentList";
 import axiosInstance from "../../utils/axios";
 import { Post, Comment, PostResponse } from "../../types/post";
+import AdBanner from "../../components/ads/AdBanner";
 import {
   PostDetailSkeleton,
   CommentSkeletonList,
@@ -407,7 +408,7 @@ const PostDetailPage: React.FC = () => {
         onDeleteComment={deleteComment}
         onLoginClick={goToLoginPage}
       />
-
+      <AdBanner />
     </div>
   );
 };

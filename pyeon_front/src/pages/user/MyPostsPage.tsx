@@ -4,6 +4,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import axiosInstance from "../../utils/axios";
 import { getRelativeTime } from "../../utils/dateUtils";
 import { PostSkeletonList } from "../../components/common/Skeleton";
+import AdBanner from "../../components/ads/AdBanner";
 interface Post {
   id: number;
   title: string;
@@ -140,6 +141,7 @@ const MyPostsPage: React.FC = () => {
   return (
     <div className="container mx-auto max-w-5xl px-4 py-8">
       <div className="space-y-6">
+        <AdBanner />
         <h1 className="text-2xl font-bold text-white">내가 쓴 글</h1>
 
         {/* 카테고리 필터 */}
@@ -243,7 +245,6 @@ const MyPostsPage: React.FC = () => {
             ))
           )}
         </div>
-
       </div>
     </div>
   );

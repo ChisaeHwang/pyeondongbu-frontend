@@ -5,7 +5,7 @@ import { FaCamera } from "react-icons/fa";
 import axiosInstance from "../../utils/axios";
 import toast from "react-hot-toast";
 import { uploadImage, validateImageFile } from "../../utils/imageUpload";
-
+import AdBanner from "../../components/ads/AdBanner";
 const ProfilePage: React.FC = () => {
   const { user, refreshUser } = useAuth();
   const navigate = useNavigate();
@@ -231,6 +231,7 @@ const ProfilePage: React.FC = () => {
           </div>
         </form>
       </div>
+      <AdBanner />
     </div>
   );
 };

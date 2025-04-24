@@ -6,6 +6,7 @@ import Pagination from "../../components/jobs/Pagination";
 import axiosInstance from "../../utils/axios";
 import { getRelativeTime } from "../../utils/dateUtils";
 import { PostSkeletonList } from "../../components/common/Skeleton";
+import AdBanner from "../../components/ads/AdBanner";
 
 // 백엔드 API의 PostSummaryResponse와 일치하는 인터페이스
 interface Post {
@@ -303,7 +304,7 @@ const CommunityPage: React.FC = () => {
           onPageChange={setCurrentPage}
         />
 
-      
+        <AdBanner />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import CategoryFilters from "../../components/jobs/CategoryFilters";
 import JobList from "../../components/jobs/JobList";
 import Pagination from "../../components/jobs/Pagination";
 import NoticePreviewSection from "../../components/notice/NoticePreviewSection";
+import AdBanner from "../../components/ads/AdBanner";
 import { useJobFilters } from "../../hooks/useJobFilters";
 import { Job } from "../../types/job";
 import { JobSkeletonList } from "../../components/common/Skeleton";
@@ -93,6 +94,8 @@ const JobListPage: React.FC = () => {
         />
       </div>
 
+      <AdBanner />
+
       {isLoading ? (
         <JobSkeletonList count={ITEMS_PER_PAGE} />
       ) : (
@@ -105,7 +108,6 @@ const JobListPage: React.FC = () => {
               onPageChange={setCurrentPage}
             />
           )}
-
         </>
       )}
     </div>
