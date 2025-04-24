@@ -98,6 +98,16 @@ const JobListPage: React.FC = () => {
         <JobSkeletonList count={ITEMS_PER_PAGE} />
       ) : (
         <>
+          {/* 게시글 목록 상단 광고 */}
+          <div className="mb-6">
+            <AdBanner
+              slot="2092915482"
+              format="rectangle"
+              responsive={true}
+              className="w-full min-h-[250px]"
+            />
+          </div>
+
           <JobList jobs={currentJobs} />
           {filteredJobs.length > 0 && (
             <Pagination
