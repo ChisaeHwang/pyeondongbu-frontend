@@ -105,11 +105,6 @@ const JobListPage: React.FC = () => {
         <>
           <JobList jobs={currentJobs} />
 
-          {/* 페이지네이션 바로 위 광고 배치 */}
-          <div className="my-6">
-            <AdBanner />
-          </div>
-
           {filteredJobs.length > 0 && (
             <Pagination
               currentPage={currentPage}
