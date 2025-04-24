@@ -94,13 +94,22 @@ const JobListPage: React.FC = () => {
         />
       </div>
 
-      <AdBanner />
+      {/* 카테고리 필터 바로 아래 광고 배치 */}
+      <div className="my-6">
+        <AdBanner />
+      </div>
 
       {isLoading ? (
         <JobSkeletonList count={ITEMS_PER_PAGE} />
       ) : (
         <>
           <JobList jobs={currentJobs} />
+
+          {/* 페이지네이션 바로 위 광고 배치 */}
+          <div className="my-6">
+            <AdBanner />
+          </div>
+
           {filteredJobs.length > 0 && (
             <Pagination
               currentPage={currentPage}
