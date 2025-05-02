@@ -9,16 +9,48 @@ declare global {
 interface AdBannerProps {
   className?: string;
   style?: React.CSSProperties;
+  position?:
+    | "content-top"
+    | "content-middle"
+    | "content-bottom"
+    | "sidebar"
+    | "inline";
 }
 
 /**
  * 구글 애드센스 광고 컴포넌트 (확실한 로딩 방식)
  */
-const AdBanner: React.FC<AdBannerProps> = ({ className = "", style = {} }) => {
+const AdBanner: React.FC<AdBannerProps> = ({
+  className = "",
+  style = {},
+  position = "content-top",
+}) => {
   const [adLoaded, setAdLoaded] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(
+    typeof window !== "undefined" ? window.innerWidth >= 768 : true
+  );
 
   useEffect(() => {
+    // 화면 크기 변경 감지
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // 컴포넌트 언마운트시 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    // 모바일에서 사이드바 광고인 경우 로드하지 않음
+    if (position === "sidebar" && !isDesktop) {
+      return;
+    }
+
     // 광고 로드 시도 최대 횟수 (최대 30초까지 시도)
     const maxAttempts = 20;
     let mounted = true;
@@ -65,7 +97,7 @@ const AdBanner: React.FC<AdBannerProps> = ({ className = "", style = {} }) => {
       mounted = false;
       clearTimeout(timer);
     };
-  }, [retryCount]);
+  }, [retryCount, position, isDesktop]);
 
   // 로딩 중 표시 메시지
   const getLoadingMessage = () => {
@@ -75,29 +107,103 @@ const AdBanner: React.FC<AdBannerProps> = ({ className = "", style = {} }) => {
     return "광고를 불러오는 중입니다...";
   };
 
+  // 위치에 따른 스타일 결정
+  const getPositionStyle = () => {
+    const baseStyle: React.CSSProperties = {
+      textAlign: "center",
+      margin: "30px auto",
+      minHeight: "250px",
+      position: "relative",
+      maxWidth: "100%",
+      ...style,
+    };
+
+    switch (position) {
+      case "content-top":
+        return {
+          ...baseStyle,
+          marginTop: "5px",
+          marginBottom: "20px",
+        } as React.CSSProperties;
+      case "content-middle":
+        return {
+          ...baseStyle,
+          margin: "25px auto",
+          border: adLoaded ? "none" : "1px solid rgba(255, 255, 255, 0.1)",
+          borderRadius: "4px",
+        } as React.CSSProperties;
+      case "content-bottom":
+        return {
+          ...baseStyle,
+          marginTop: "20px",
+          marginBottom: "5px",
+        } as React.CSSProperties;
+      case "sidebar":
+        return {
+          ...baseStyle,
+          minHeight: "600px",
+          margin: "10px auto",
+        } as React.CSSProperties;
+      case "inline":
+        return {
+          ...baseStyle,
+          float: "left",
+          marginRight: "15px",
+          marginBottom: "15px",
+          marginTop: "5px",
+          maxWidth: "336px",
+        } as React.CSSProperties;
+      default:
+        return baseStyle;
+    }
+  };
+
+  // 위치에 따른 광고 스타일 결정
+  const getAdStyle = () => {
+    const baseStyle: React.CSSProperties = {
+      display: "block",
+      width: "100%",
+      height: position === "sidebar" ? "600px" : "250px",
+      margin: "0 auto",
+      background: adLoaded ? "transparent" : "#f1f1f1",
+    };
+
+    return baseStyle;
+  };
+
+  // 위치에 따른 광고 슬롯 ID 결정
+  const getAdSlot = () => {
+    switch (position) {
+      case "content-top":
+        return "8758922843"; // 편동부_콘텐츠상단
+      case "content-middle":
+        return "3805979063"; // 편동부_콘텐츠중간
+      case "inline":
+        return "1179815725"; // 인라인 광고
+      case "content-bottom":
+        return "7445841176"; // 편동부_콘텐츠하단
+      case "sidebar":
+        return "1426986483"; // 사이드바 광고
+      default:
+        return "5409996939"; // 기존 슬롯 ID
+    }
+  };
+
+  // 모바일에서 사이드바 광고 표시하지 않음
+  if (position === "sidebar" && !isDesktop) {
+    return null;
+  }
+
   return (
     <div
-      className={`ad-container ${className}`}
-      style={{
-        textAlign: "center",
-        margin: "30px auto",
-        minHeight: "250px",
-        position: "relative",
-        maxWidth: "100%",
-        ...style,
-      }}
+      className={`ad-container ${className} ad-position-${position}`}
+      style={getPositionStyle()}
     >
       <ins
         className="adsbygoogle"
-        style={{
-          display: "block",
-          width: "100%",
-          height: "250px",
-          margin: "0 auto",
-          background: adLoaded ? "transparent" : "#f1f1f1",
-        }}
+        style={getAdStyle()}
         data-ad-client="ca-pub-9895707756303015"
-        data-ad-slot="5409996939"
+        data-ad-slot={getAdSlot()}
         data-ad-format="auto"
         data-full-width-responsive="true"
       />
