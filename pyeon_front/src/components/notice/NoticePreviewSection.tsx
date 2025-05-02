@@ -20,7 +20,7 @@ const NoticePreviewSection: React.FC = () => {
   }
 
   return (
-    <div className="mb-8">
+    <div className="my-8">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold text-gray-100">공지사항</h2>
         <button
@@ -30,11 +30,13 @@ const NoticePreviewSection: React.FC = () => {
           더보기
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {notices.map((notice, index) => (
           <div
             key={notice.id}
-            className={`${index >= 2 ? "hidden md:block" : ""}`}
+            className={`${index >= 2 && index < 4 ? "hidden sm:block" : ""} ${
+              index >= 4 ? "hidden lg:block" : ""
+            }`}
           >
             <NoticePreviewCard notice={notice} />
           </div>
