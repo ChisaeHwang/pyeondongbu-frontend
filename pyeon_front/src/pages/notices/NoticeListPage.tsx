@@ -13,29 +13,29 @@ const NoticeListPage: React.FC = () => {
     <div className="container mx-auto px-4 max-w-5xl mt-8">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-100 mb-6">공지사항</h1>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {notices.length > 0 ? (
             notices.map((notice) => (
               <div
                 key={notice.id}
                 onClick={() => navigate(`/notices/${notice.id}`)}
-                className="bg-[#25262b] rounded-lg p-6 cursor-pointer border border-[#2c2d32] hover:border-[#3a3b40] transition-colors"
+                className="bg-[#25262b] rounded-lg p-4 cursor-pointer border border-[#2c2d32] hover:border-[#3a3b40] transition-colors min-h-[80px] flex flex-col sm:flex-row sm:items-center"
               >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2 sm:mb-0">
                     {notice.important && (
-                      <span className="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-sm">
+                      <span className="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-xs">
                         중요
                       </span>
                     )}
-                    <h2 className="text-lg font-bold text-gray-100">
+                    <h2 className="text-base font-bold text-gray-100">
                       {notice.title}
                     </h2>
                   </div>
-                  <span className="text-sm text-gray-400">
-                    {new Date(notice.publishedAt).toLocaleDateString()}
-                  </span>
                 </div>
+                <span className="text-xs text-gray-400 mt-2 sm:mt-0">
+                  {new Date(notice.publishedAt).toLocaleDateString()}
+                </span>
               </div>
             ))
           ) : (
