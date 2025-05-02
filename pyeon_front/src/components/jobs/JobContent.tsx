@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { Job } from "../../types/job";
 import "../../styles/jobDetail.css";
+import AdBanner from "../ads/AdBanner";
 
 interface JobContentProps {
   job: Job;
@@ -11,6 +12,21 @@ const JobContent = memo(({ job, onBack }: JobContentProps) => {
   const handleBackClick = () => {
     onBack();
   };
+
+  // 첫 번째 단락과 나머지 콘텐츠를 분리
+  const splitContent = () => {
+    const paragraphs = job.content.split("\n\n");
+    if (paragraphs.length <= 1) {
+      return { firstParagraph: job.content, remainingContent: "" };
+    }
+
+    const firstParagraph = paragraphs[0];
+    const remainingContent = paragraphs.slice(1).join("\n\n");
+
+    return { firstParagraph, remainingContent };
+  };
+
+  const { firstParagraph, remainingContent } = splitContent();
 
   return (
     <div className="my-8">
@@ -59,12 +75,30 @@ const JobContent = memo(({ job, onBack }: JobContentProps) => {
 
         {/* 컨텐츠 영역 */}
         <div className="job-content">
+          {/* 첫 번째 단락 */}
           <div
-            className="text-gray-300 min-h-[200px]"
+            className="text-gray-300 mb-4"
             dangerouslySetInnerHTML={{
-              __html: job.content.replace(/\n/g, "<br>"),
+              __html: firstParagraph.replace(/\n/g, "<br>"),
             }}
           />
+
+          {/* 첫 번째 단락 후에 인라인 광고 삽입 */}
+          {remainingContent && (
+            <div className="my-4">
+              <AdBanner position="inline" />
+            </div>
+          )}
+
+          {/* 나머지 콘텐츠 */}
+          {remainingContent && (
+            <div
+              className="text-gray-300 mt-4"
+              dangerouslySetInnerHTML={{
+                __html: remainingContent.replace(/\n/g, "<br>"),
+              }}
+            />
+          )}
         </div>
 
         {/* 하단 정보 */}

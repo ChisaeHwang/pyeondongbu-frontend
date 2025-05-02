@@ -4,6 +4,12 @@ import AdBanner from "./AdBanner";
 interface AdContainerProps {
   className?: string;
   style?: React.CSSProperties;
+  position?:
+    | "content-top"
+    | "content-middle"
+    | "content-bottom"
+    | "sidebar"
+    | "inline";
 }
 
 /**
@@ -14,6 +20,7 @@ interface AdContainerProps {
 const AdContainer: React.FC<AdContainerProps> = ({
   className = "",
   style = {},
+  position = "content-top",
 }) => {
   return (
     <div
@@ -30,7 +37,7 @@ const AdContainer: React.FC<AdContainerProps> = ({
       data-ad-layout="rectangle"
     >
       <div style={{ width: "100%", margin: "0 auto" }}>
-        <AdBanner />
+        <AdBanner position={position} />
       </div>
     </div>
   );
