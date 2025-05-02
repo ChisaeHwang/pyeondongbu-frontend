@@ -47,7 +47,7 @@ const JobDetailPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)]">
+      <div className="container mx-auto px-0 max-w-full min-h-[calc(100vh-3.5rem)]">
         <JobDetailSkeleton />
       </div>
     );
@@ -55,7 +55,7 @@ const JobDetailPage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)] flex items-center justify-center">
+      <div className="container mx-auto px-0 max-w-full min-h-[calc(100vh-3.5rem)] flex items-center justify-center">
         <div className="text-gray-200">{error}</div>
       </div>
     );
@@ -63,14 +63,14 @@ const JobDetailPage: React.FC = () => {
 
   if (!job) {
     return (
-      <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)] flex items-center justify-center">
+      <div className="container mx-auto px-0 max-w-full min-h-[calc(100vh-3.5rem)] flex items-center justify-center">
         <div className="text-gray-200">찾을 수 없는 구인 공고입니다.</div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)]">
+    <div className="container mx-auto px-0 max-w-full min-h-[calc(100vh-3.5rem)]">
       {/* 게시글 상단 광고 */}
       <div className="my-6">
         <AdBanner position="content-top" />

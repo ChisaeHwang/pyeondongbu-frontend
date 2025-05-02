@@ -82,7 +82,7 @@ const JobListPage: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 max-w-5xl">
+    <div className="container mx-auto px-0 max-w-full">
       <JobBanner />
       <NoticePreviewSection />
       <div className="bg-[#25262b] rounded-lg p-6 my-8">
