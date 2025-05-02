@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../contexts/AuthContext";
+import AdBanner from "../../components/ads/AdBanner";
 
 const LoginPage: React.FC = () => {
   const { login } = useAuth();
@@ -73,7 +74,11 @@ const LoginPage: React.FC = () => {
           </button>
         </div>
       </div>
-     
+
+      {/* 하단 배너 광고 */}
+      <div className="mt-10">
+        <AdBanner position="content-bottom" />
+      </div>
     </div>
   );
 };

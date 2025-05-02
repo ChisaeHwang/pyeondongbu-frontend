@@ -31,6 +31,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import ProfilePage from "./pages/user/ProfilePage";
 import MyPostsPage from "./pages/user/MyPostsPage";
 import EditPostPage from "./pages/common/EditPostPage";
+import PageLayout from "./components/layout/PageLayout";
 
 // Analytics wrapper component
 const AnalyticsWrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -58,38 +59,43 @@ function App() {
           <div className="min-h-screen bg-[#1a1b1e] flex flex-col">
             <Header />
             <main className="flex-grow pb-16">
-              <Routes>
-                <Route path="/" element={<JobListPage />} />
-                <Route path="/jobs" element={<JobListPage />} />
-                <Route path="/jobs/:id" element={<JobDetailPage />} />
-                <Route path="/hire" element={<HirePage />} />
-                <Route path="/hire/posts/:id" element={<HireDetailPage />} />
-                <Route path="/recruit" element={<RecruitPage />} />
-                <Route
-                  path="/recruit/posts/:id"
-                  element={<RecruitDetailPage />}
-                />
-                <Route path="/community" element={<CommunityPage />} />
-                <Route
-                  path="/community/posts/:id"
-                  element={<CommunityDetailPage />}
-                />
-                <Route path="/create" element={<CreatePostPage />} />
-                <Route path="/edit/hire/:id" element={<EditPostPage />} />
-                <Route path="/edit/recruit/:id" element={<EditPostPage />} />
-                <Route path="/edit/community/:id" element={<EditPostPage />} />
-                <Route path="/edit/:id" element={<EditPostPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/my-posts" element={<MyPostsPage />} />
-                <Route path="/notices" element={<NoticeListPage />} />
-                <Route path="/notices/:id" element={<NoticeDetailPage />} />
-                <Route path="/terms" element={<TermsPage />} />
-                <Route path="/privacy" element={<PrivacyPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/auth/callback" element={<AuthCallback />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
+              <PageLayout>
+                <Routes>
+                  <Route path="/" element={<JobListPage />} />
+                  <Route path="/jobs" element={<JobListPage />} />
+                  <Route path="/jobs/:id" element={<JobDetailPage />} />
+                  <Route path="/hire" element={<HirePage />} />
+                  <Route path="/hire/posts/:id" element={<HireDetailPage />} />
+                  <Route path="/recruit" element={<RecruitPage />} />
+                  <Route
+                    path="/recruit/posts/:id"
+                    element={<RecruitDetailPage />}
+                  />
+                  <Route path="/community" element={<CommunityPage />} />
+                  <Route
+                    path="/community/posts/:id"
+                    element={<CommunityDetailPage />}
+                  />
+                  <Route path="/create" element={<CreatePostPage />} />
+                  <Route path="/edit/hire/:id" element={<EditPostPage />} />
+                  <Route path="/edit/recruit/:id" element={<EditPostPage />} />
+                  <Route
+                    path="/edit/community/:id"
+                    element={<EditPostPage />}
+                  />
+                  <Route path="/edit/:id" element={<EditPostPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/my-posts" element={<MyPostsPage />} />
+                  <Route path="/notices" element={<NoticeListPage />} />
+                  <Route path="/notices/:id" element={<NoticeDetailPage />} />
+                  <Route path="/terms" element={<TermsPage />} />
+                  <Route path="/privacy" element={<PrivacyPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/auth/callback" element={<AuthCallback />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+              </PageLayout>
             </main>
             <Footer />
           </div>
