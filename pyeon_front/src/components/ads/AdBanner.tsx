@@ -173,20 +173,8 @@ const AdBanner: React.FC<AdBannerProps> = ({
 
   // 위치에 따른 광고 슬롯 ID 결정
   const getAdSlot = () => {
-    switch (position) {
-      case "content-top":
-        return "8758922843"; // 편동부_콘텐츠상단
-      case "content-middle":
-        return "3805979063"; // 편동부_콘텐츠중간
-      case "inline":
-        return "1179815725"; // 인라인 광고
-      case "content-bottom":
-        return "7445841176"; // 편동부_콘텐츠하단
-      case "sidebar":
-        return "1426986483"; // 사이드바 광고
-      default:
-        return "5409996939"; // 기존 슬롯 ID
-    }
+    // 모든 위치에서 동일한 슬롯 ID 사용
+    return "5409996939"; // 기존 슬롯 ID
   };
 
   // 모바일에서 사이드바 광고 표시하지 않음

@@ -69,10 +69,6 @@ const JobListPage: React.FC = () => {
     currentPage * ITEMS_PER_PAGE
   );
 
-  // 필터링된 잡 리스트를 절반으로 나누기 (중간에 광고 삽입을 위함)
-  const firstHalfJobs = currentJobs.slice(0, Math.ceil(currentJobs.length / 2));
-  const secondHalfJobs = currentJobs.slice(Math.ceil(currentJobs.length / 2));
-
   if (error) {
     return (
       <div className="container mx-auto px-4 max-w-5xl min-h-[calc(100vh-3.5rem)] flex items-center justify-center">
@@ -107,19 +103,7 @@ const JobListPage: React.FC = () => {
         <JobSkeletonList count={ITEMS_PER_PAGE} />
       ) : (
         <>
-          {firstHalfJobs.length > 0 && <JobList jobs={firstHalfJobs} />}
-
-          {/* 리스트 중간에 광고 배치 */}
-          <div className="my-8">
-            <AdBanner position="content-middle" />
-          </div>
-
-          {secondHalfJobs.length > 0 && <JobList jobs={secondHalfJobs} />}
-
-          {/* 리스트 하단에 광고 배치 */}
-          <div className="my-8">
-            <AdBanner position="content-bottom" />
-          </div>
+          {currentJobs.length > 0 && <JobList jobs={currentJobs} />}
 
           {filteredJobs.length > 0 && (
             <Pagination
@@ -130,6 +114,11 @@ const JobListPage: React.FC = () => {
           )}
         </>
       )}
+
+      {/* 하단 광고 배치 */}
+      <div className="my-6">
+        <AdBanner position="content-bottom" />
+      </div>
     </div>
   );
 };
