@@ -77,11 +77,6 @@ const JobDetailPage: React.FC = () => {
       </div>
 
       <JobContent job={job} onBack={handleBack} />
-
-      {/* 게시글 하단 광고 */}
-      <div className="my-6">
-        <AdBanner position="content-bottom" />
-      </div>
     </div>
   );
 };
