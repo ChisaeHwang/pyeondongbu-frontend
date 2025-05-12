@@ -57,12 +57,11 @@ const Pagination: React.FC<PaginationProps> = ({
         .filter((page) => {
           // 모바일에서는 표시할 페이지 수를 줄임
           return (
-            page === 1 ||
-            page === totalPages ||
-            Math.abs(currentPage - page) <= (isMobile ? 1 : 2)
+            page === 1 || Math.abs(currentPage - page) <= (isMobile ? 1 : 2)
           );
         })
         .map((page, index, array) => {
+          // 왼쪽에만 생략 부호를 표시하고, 오른쪽에는 표시하지 않음
           if (index > 0 && page - array[index - 1] > 1) {
             return (
               <span
