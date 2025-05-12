@@ -173,14 +173,8 @@ const AdBanner: React.FC<AdBannerProps> = ({
 
   // 위치에 따른 광고 슬롯 ID 결정
   const getAdSlot = () => {
-    // 모든 위치에서 동일한 슬롯 ID 사용
     return "5409996939"; // 기존 슬롯 ID
   };
-
-  // 모바일에서 사이드바 광고 표시하지 않음
-  if (position === "sidebar" && !isDesktop) {
-    return null;
-  }
 
   return (
     <div
