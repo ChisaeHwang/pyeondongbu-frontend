@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import noticesData from "../../assets/data/notices.json";
+import AdBanner from "../../components/ads/AdBanner";
 
 const NoticeDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -57,6 +58,11 @@ const NoticeDetailPage: React.FC = () => {
           className="prose prose-invert max-w-none text-gray-100"
           dangerouslySetInnerHTML={{ __html: notice.content }}
         />
+      </div>
+
+      {/* 하단 배너 광고 */}
+      <div className="mt-10">
+        <AdBanner position="content-bottom" />
       </div>
     </div>
   );
