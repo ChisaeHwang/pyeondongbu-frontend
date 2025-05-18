@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import noticesData from "../../assets/data/notices.json";
+import AdBanner from "../../components/ads/AdBanner";
 
 const NoticeListPage: React.FC = () => {
   const navigate = useNavigate();
@@ -43,6 +44,11 @@ const NoticeListPage: React.FC = () => {
               등록된 공지사항이 없습니다.
             </div>
           )}
+        </div>
+
+        {/* 하단 배너 광고 */}
+        <div className="mt-10">
+          <AdBanner position="content-bottom" />
         </div>
       </div>
     </div>
