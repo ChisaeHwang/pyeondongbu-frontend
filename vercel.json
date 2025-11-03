@@ -1,5 +1,0 @@
-{
-  "buildCommand": "cd pyeon_front/my-app && npm run build",
-  "devCommand": "cd pyeon_front/my-app && npm run dev",
-  "installCommand": "cd pyeon_front/my-app && npm install"
-}
