@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm --prefix pyeon_front/my-app run build",
+  "devCommand": "npm --prefix pyeon_front/my-app run dev",
+  "installCommand": "npm --prefix pyeon_front/my-app install"
+}
